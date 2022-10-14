@@ -1,0 +1,5 @@
+packages:
+  - "script"
+  - "packages/mosaic-ui"
+  - "packages/mosaic-ui-docs"
+  - "packages/mosaic-ui-mobile-example"
