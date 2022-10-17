@@ -6,10 +6,10 @@ jobs:
   Lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.1.0
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
         with:
-          version: 7.2.1
+          version: latest
       - name: Install modules
         run: pnpm install
       - name: Run Lint components
@@ -17,10 +17,10 @@ jobs:
   UnitTest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.1.0
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
         with:
-          version: 7.2.1
+          version: latest
       - name: Install modules
         run: pnpm install
       - name: Run Test Components
@@ -28,10 +28,10 @@ jobs:
   PreBuild:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.1.0
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
         with:
-          version: 7.2.1
+          version: latest
       - name: Install modules
         run: pnpm install
       - name: Run Build Components
