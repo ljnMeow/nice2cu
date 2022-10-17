@@ -6,10 +6,10 @@
 	"scripts": {
 		"lint:comp": "pnpm run --filter ./packages/nice2cu-ui lint",
 		"format:comp": "pnpm run --filter ./packages/nice2cu-ui format",
+		"build:comp": "gulp -f packages/nice2cu-ui/build/gulpfile.ts",
 		"publish:comp": "pnpm run --filter ./packages/nice2cu-ui publish",
 		"test": "pnpm run --filter ./packages/nice2cu-ui test",
 		"coverage": "pnpm run --filter ./packages/nice2cu-ui coverage",
-		"build:comp": "gulp -f packages/nice2cu-ui/build/gulpfile.ts",
 		"example": "pnpm run --filter ./packages/nice2cu-ui-mobile-example dev"
 	},
 	"keywords": [],
