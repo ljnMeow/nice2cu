@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonJS", // 打包模块类型ESNext
+    "module": "commonJS", // 打包模块类型commonJS
     "declaration": false, // 默认不要声明文件 
     "noImplicitAny": true, // 支持类型不标注可以默认any
     "removeComments": true, // 删除注释
