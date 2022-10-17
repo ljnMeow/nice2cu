@@ -1,9 +1,0 @@
-// Vitest Snapshot v1
-
-exports[`test Icon Props > test Icon badge 1`] = `"<div class=\\"m-icon--badge\\"></div>"`;
-
-exports[`test Icon Props > test Icon badge Number 1`] = `"<div class=\\"m-icon--badge\\">10</div>"`;
-
-exports[`test Icon Props > test Icon badge String 1`] = `"<div class=\\"m-icon--badge\\">10</div>"`;
-
-exports[`test Icon Props > test Icon multicolor 1`] = `"<i class=\\"m-icon\\"><span class=\\"svg-content\\"><svg class=\\"m-icon--svg\\"><use xlink:href=\\"#m-alarm-sharp\\"></use></svg><!--v-if--></span></i>"`;

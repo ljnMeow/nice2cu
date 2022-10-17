@@ -1,0 +1,40 @@
+@import url('../../../theme-chalk/mixins/font.less');
+@import url('../../../theme-chalk/mixins/variable.less');
+
+.n-icon {
+	position: relative;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	font-size: @icon-size-xs;
+	font-style: normal;
+	color: @color-text;
+	cursor: pointer;
+
+	.n-icon--svg {
+		width: @icon-size-xs;
+		height: @icon-size-xs;
+		object-fit: cover;
+
+		.svg-content {
+			position: relative;
+		}
+	}
+
+	.n-icon--badge {
+		position: absolute;
+		min-width: @badge-dot-size;
+		min-height: @badge-dot-size;
+    padding: @badge-padding;
+    box-sizing: border-box;
+		background-color: @badge-dot-color;
+    color: @badge-dot-text-color;
+    font-size: @font-size-sm;
+    text-align: center;
+    line-height: 1.2;
+		border-radius: 999999999px;
+		top: 0;
+		right: 0;
+		transform: translate(50%, -50%);
+	}
+}

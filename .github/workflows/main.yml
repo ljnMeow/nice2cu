@@ -13,7 +13,7 @@ jobs:
       - name: Install modules
         run: pnpm install
       - name: Run Lint components
-        run: cd packages/mosaic-ui && pnpm run lint
+        run: cd packages/nice2cu-ui && pnpm run lint
   UnitTest:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +24,7 @@ jobs:
       - name: Install modules
         run: pnpm install
       - name: Run Test Components
-        run: cd packages/mosaic-ui && pnpm run test
+        run: cd packages/nice2cu-ui && pnpm run test
   PreBuild:
     runs-on: ubuntu-latest
     steps:
@@ -35,4 +35,4 @@ jobs:
       - name: Install modules
         run: pnpm install
       - name: Run Build Components
-        run: cd packages/mosaic-ui && pnpm run build
+        run: cd packages/nice2cu-ui && pnpm run build

@@ -19,7 +19,7 @@
     "forceConsistentCasingInFileNames": true, // 强制区分大小写
     "resolveJsonModule": true, // 解析json模块
     "strict": true, // 是否启动严格模式
-    "rootDirs": ["./", "packages/mosaic-ui"],
+    "rootDirs": ["./", "packages/nice2cu-ui"],
     "skipLibCheck": true // 跳过类库检测
   },
   "exclude": [ // 排除掉哪些类库
