@@ -11,7 +11,7 @@ export const IconProps = {
 	},
 	margin: [String, Number] as PropType<string | number>,
 	badge: [Boolean, Number, String] as PropType<boolean | number | string>,
-	multicolor: Boolean,
+	svg: Boolean,
 	color: String,
 	size: [String, Number] as PropType<string | number>,
 } as const;

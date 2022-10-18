@@ -1,14 +1,14 @@
 import _icon from './Icon.vue';
 import { withInstall } from '../../utils/withInstall';
 
-const mIcon = withInstall(_icon);
+const nIcon = withInstall(_icon);
 
-export default mIcon;
+export default nIcon;
 
-export { mIcon };
+export { nIcon };
 
 declare module 'vue' {
 	export interface GlobalComponents {
-		mIcon: typeof mIcon;
+		nIcon: typeof nIcon;
 	}
 }

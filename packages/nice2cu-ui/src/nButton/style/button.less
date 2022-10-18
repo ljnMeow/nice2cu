@@ -1,0 +1,150 @@
+@import url('../../../theme-chalk/mixins/variable.less');
+
+.n-button {
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	outline: none;
+	border: none;
+	user-select: none;
+	cursor: pointer;
+	font-family: inherit;
+	transition: box-shadow 0.2s, background-color 0.25s;
+	will-change: box-shadow;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	white-space: nowrap;
+
+	&:active {
+		box-shadow: 0 3px 5px -1px @shadow-umbra, 0 5px 8px 0 @shadow-penumbra, 0 1px 14px 0 @shadow-ambient;
+	}
+
+	&__content {
+		display: flex;
+		align-items: center;
+    justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	&--default {
+		background-color: @button-default-bg;
+	}
+
+	&--primary {
+		color: #ffffff;
+		background-color: @button-primary-bg;
+	}
+
+	&--success {
+		color: #ffffff;
+		background-color: @button-success-bg;
+	}
+
+	&--info {
+		color: #ffffff;
+		background-color: @button-info-bg;
+	}
+
+	&--warning {
+		color: #ffffff;
+		background-color: @button-warning-bg;
+	}
+
+	&--danger {
+		color: #ffffff;
+		background-color: @button-danger-bg;
+	}
+
+	&--normal {
+		height: @button-normal-height;
+		padding: @button-normal-padding;
+		font-size: @font-size-md;
+	}
+
+	&--mini {
+		height: @button-mini-height;
+		padding: @button-mini-padding;
+		font-size: @font-size-xs;
+	}
+
+	&--small {
+		height: @button-small-height;
+		padding: @button-small-padding;
+		font-size: @font-size-sm;
+	}
+
+	&--large {
+		height: @button-large-height;
+		padding: @button-large-padding;
+		font-size: @font-size-lg;
+	}
+
+	&--border-default {
+		border: thin solid;
+		background-color: transparent;
+	}
+
+	&--border-primary {
+		color: @button-primary-bg;
+		border: thin solid @button-primary-bg;
+		background-color: transparent;
+	}
+
+	&--border-success {
+		color: @button-success-bg;
+		border: thin solid @button-success-bg;
+		background-color: transparent;
+	}
+
+	&--border-info {
+		color: @button-info-bg;
+		border: thin solid @button-info-bg;
+		background-color: transparent;
+	}
+
+	&--border-warning {
+		color: @button-warning-bg;
+		border: thin solid @button-warning-bg;
+		background-color: transparent;
+	}
+
+	&--border-danger {
+		color: @button-danger-bg;
+		border: thin solid @button-danger-bg;
+		background-color: transparent;
+	}
+
+	&--radius {
+		border-radius: @button-border-radius;
+	}
+
+	&--square {
+		border-radius: 0;
+	}
+
+	&--round {
+		border-radius: 999px;
+	}
+
+  &--disabled {
+    background-color: @button-disabled-color;
+    color: @color-text-disabled;
+    cursor: not-allowed;
+    box-shadow: none !important;
+  
+    &.n-button--border-default,
+    &.n-button--border-primary,
+    &.n-button--border-success,
+    &.n-button--border-info,
+    &.n-button--border-warning,
+    &.n-button--border-danger {
+      border: thin solid @button-disabled-color;
+      color: @color-text-disabled;
+      background-color: transparent;
+    }
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+}
