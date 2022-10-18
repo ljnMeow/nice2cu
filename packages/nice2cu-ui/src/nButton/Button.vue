@@ -1,5 +1,6 @@
 <template>
 	<button
+		v-ripple
 		:class="[
 			bem.b(),
 			bem.m(propsData.type),
@@ -21,10 +22,12 @@
 import { defineComponent } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { ButtonProps } from './ButtonProps';
+import Ripple from '../../directives/ripple';
 import './style/button.less';
 
 export default defineComponent({
 	name: 'NButton',
+	directives: { Ripple },
 	props: ButtonProps,
 	setup(props: ButtonProps) {
 		const bem = createNamespace('button');

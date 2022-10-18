@@ -34,8 +34,8 @@
 		<section>
 			<div class="title">图标徽章（badge）</div>
 			<div class="content">
-				<n-icon icon="n-grape" multicolor size="2rem" badge margin="0 6px 0 0"></n-icon>
-				<n-icon icon="n-mushroom" multicolor size="2rem" badge="9" margin="0 6px 0 0"></n-icon>
+				<n-icon icon="n-grape" svg size="2rem" badge margin="0 6px 0 0"></n-icon>
+				<n-icon icon="n-mushroom" svg size="2rem" badge="9" margin="0 6px 0 0"></n-icon>
 			</div>
 		</section>
 	</div>
