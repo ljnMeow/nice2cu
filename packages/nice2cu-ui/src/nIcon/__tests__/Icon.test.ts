@@ -83,7 +83,7 @@ describe('test Icon Props', () => {
 				badge: true,
 			},
 		});
-		expect(wrapper.find('.n-icon--badge').html()).toMatchSnapshot();
+		expect(wrapper.find('.n-icon__badge').html()).toMatchSnapshot();
 		wrapper.unmount();
 	});
 
@@ -94,7 +94,7 @@ describe('test Icon Props', () => {
 				badge: '10',
 			},
 		});
-		expect(wrapper.find('.n-icon--badge').html()).toMatchSnapshot();
+		expect(wrapper.find('.n-icon__badge').html()).toMatchSnapshot();
 		wrapper.unmount();
 	});
 
@@ -105,15 +105,15 @@ describe('test Icon Props', () => {
 				badge: 10,
 			},
 		});
-		expect(wrapper.find('.n-icon--badge').html()).toMatchSnapshot();
+		expect(wrapper.find('.n-icon__badge').html()).toMatchSnapshot();
 		wrapper.unmount();
 	});
 
-	test('test Icon multicolor', () => {
+	test('test Icon svg', () => {
 		const wrapper = shallowMount(mIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
-				multicolor: true,
+				svg: true,
 			},
 		});
 		expect(wrapper.find('.n-icon').html()).toMatchSnapshot();
