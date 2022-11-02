@@ -35,6 +35,10 @@ export const ButtonProps = {
 		type: Boolean,
 		default: false,
 	},
+	isRipple: {
+		type: Boolean,
+		default: false,
+	},
 };
 
 export type ButtonProps = ExtractPropTypes<typeof ButtonProps>;

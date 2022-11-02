@@ -96,6 +96,26 @@
 				</div>
 			</div>
 		</section>
+		<section>
+			<div class="title">水波纹按钮（is-ripple）</div>
+			<div class="content">
+				<div class="item">
+					<n-button type="primary" is-ripple>主要按钮</n-button>
+				</div>
+				<div class="item">
+					<n-button type="success" is-ripple>成功按钮</n-button>
+				</div>
+				<div class="item">
+					<n-button type="info" border is-ripple>信息按钮</n-button>
+				</div>
+				<div class="item">
+					<n-button type="warning" border is-ripple>提示按钮</n-button>
+				</div>
+				<div class="item">
+					<n-button type="primary" disabled is-ripple>禁用状态</n-button>
+				</div>
+			</div>
+		</section>
 	</div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
 	<button
-		v-ripple
+		v-ripple="{ disabled: propsData.disabled, isRipple: propsData.isRipple }"
 		:class="[
 			bem.b(),
 			bem.m(propsData.type),

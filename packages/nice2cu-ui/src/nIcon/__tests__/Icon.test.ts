@@ -4,16 +4,16 @@ import { createApp } from 'vue';
 
 document.body.innerHTML = '<script></script>';
 
-import mIcon from '../index';
+import nIcon from '../index';
 
 test('test icon plugin', () => {
-	const app = createApp({}).use(mIcon);
-	expect(app.component(mIcon.name)).toBeTruthy();
+	const app = createApp({}).use(nIcon);
+	expect(app.component(nIcon.name)).toBeTruthy();
 });
 
 test('test icon onClick', () => {
 	const onClick = vi.fn();
-	const wrapper = shallowMount(mIcon, {
+	const wrapper = shallowMount(nIcon, {
 		props: {
 			icon: 'n-alarm-sharp',
 			onClick,
@@ -26,7 +26,7 @@ test('test icon onClick', () => {
 
 describe('test Icon Props', () => {
 	test('test Icon icon', () => {
-		const wrapper = shallowMount(mIcon, {
+		const wrapper = shallowMount(nIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
 			},
@@ -36,7 +36,7 @@ describe('test Icon Props', () => {
 	});
 
 	test('test Icon Size', async () => {
-		const wrapper = shallowMount(mIcon, {
+		const wrapper = shallowMount(nIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
 				size: 16,
@@ -55,7 +55,7 @@ describe('test Icon Props', () => {
 	});
 
 	test('test Icon Color', () => {
-		const wrapper = shallowMount(mIcon, {
+		const wrapper = shallowMount(nIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
 				color: '#e2e2e2',
@@ -66,7 +66,7 @@ describe('test Icon Props', () => {
 	});
 
 	test('test Icon Margin', () => {
-		const wrapper = shallowMount(mIcon, {
+		const wrapper = shallowMount(nIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
 				margin: 10,
@@ -77,7 +77,7 @@ describe('test Icon Props', () => {
 	});
 
 	test('test Icon badge', () => {
-		const wrapper = shallowMount(mIcon, {
+		const wrapper = shallowMount(nIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
 				badge: true,
@@ -88,7 +88,7 @@ describe('test Icon Props', () => {
 	});
 
 	test('test Icon badge String', () => {
-		const wrapper = shallowMount(mIcon, {
+		const wrapper = shallowMount(nIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
 				badge: '10',
@@ -99,7 +99,7 @@ describe('test Icon Props', () => {
 	});
 
 	test('test Icon badge Number', () => {
-		const wrapper = shallowMount(mIcon, {
+		const wrapper = shallowMount(nIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
 				badge: 10,
@@ -110,7 +110,7 @@ describe('test Icon Props', () => {
 	});
 
 	test('test Icon svg', () => {
-		const wrapper = shallowMount(mIcon, {
+		const wrapper = shallowMount(nIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
 				svg: true,
@@ -121,7 +121,7 @@ describe('test Icon Props', () => {
 	});
 
 	test('test Icon ClassPrefix', () => {
-		const wrapper = shallowMount(mIcon, {
+		const wrapper = shallowMount(nIcon, {
 			props: {
 				icon: 'n-alarm-sharp',
 				classPrefix: 'xxx-icon',
