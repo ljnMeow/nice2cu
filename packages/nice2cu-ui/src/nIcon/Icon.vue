@@ -1,16 +1,16 @@
 <template>
-	<i v-if="propsData.svg" :class="bem.b()" :style="{ margin: style.margin }">
+	<i v-if="svg" :class="bem.b()" :style="{ margin: style.margin }">
 		<span class="svg-content">
 			<svg :class="bem.e('svg')" :style="{ ...style, margin: 0 }">
-				<use :xlink:href="`#${propsData.icon}`"></use>
+				<use :xlink:href="`#${icon}`"></use>
 			</svg>
-			<div v-if="propsData.badge" :class="bem.e('badge')">{{ typeof propsData.badge === 'boolean' ? '' : propsData.badge }}</div>
+			<div v-if="badge" :class="bem.e('badge')">{{ typeof badge === 'boolean' ? '' : badge }}</div>
 		</span>
 		<slot></slot>
 	</i>
 	<i v-else :class="className" :style="style">
 		<slot></slot>
-		<div v-if="propsData.badge" :class="bem.e('badge')">{{ typeof propsData.badge === 'boolean' ? '' : propsData.badge }}</div>
+		<div v-if="badge" :class="bem.e('badge')">{{ typeof badge === 'boolean' ? '' : badge }}</div>
 	</i>
 </template>
 
@@ -27,7 +27,6 @@ export default defineComponent({
 	props: IconProps,
 	setup(props: IconProps) {
 		const bem = createNamespace('icon');
-		const propsData = { ...props };
 		const className: ComputedRef<string[]> = computed(() => {
 			return [bem.b(), props.classPrefix, props.icon];
 		});
@@ -46,7 +45,7 @@ export default defineComponent({
 				};
 			}
 		});
-		return { propsData, bem, className, style };
+		return { bem, className, style };
 	},
 });
 </script>

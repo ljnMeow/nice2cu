@@ -16,3 +16,11 @@ export const handleUnit = (size: string | number) => {
 		}
 	}
 };
+/**
+ * @function delay
+ * @description 配合async await使用，让后面函数等待多长时间执行
+ * @param time
+ * @returns
+ */
+
+export const delay = (time: number) => new Promise((resolve) => setTimeout(resolve, time));

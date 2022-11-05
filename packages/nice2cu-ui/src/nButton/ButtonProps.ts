@@ -39,6 +39,19 @@ export const ButtonProps = {
 		type: Boolean,
 		default: false,
 	},
+	loading: {
+		type: Boolean,
+		default: false,
+	},
+	bgColor: {
+		type: String,
+	},
+	textColor: {
+		type: String,
+	},
+	onClick: {
+		type: Function as PropType<(e: Event) => void | Promise<any>>,
+	},
 };
 
 export type ButtonProps = ExtractPropTypes<typeof ButtonProps>;

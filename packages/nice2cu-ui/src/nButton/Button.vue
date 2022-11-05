@@ -1,16 +1,21 @@
 <template>
 	<button
-		v-ripple="{ disabled: propsData.disabled, isRipple: propsData.isRipple }"
+		v-ripple="{ disabled: disabled, isRipple: isRipple }"
 		:class="[
 			bem.b(),
-			bem.m(propsData.type),
-			bem.m(propsData.size),
-			propsData.border ? bem.m(`border-${propsData.type}`) : '',
-			propsData.disabled ? bem.m(`disabled`) : '',
-			propsData.block ? bem.m('block') : '',
-			bem.m(propsData.shape),
+			bem.m(type),
+			bem.m(size),
+			border ? bem.m(`border-${type}`) : '',
+			disabled ? bem.m(`disabled`) : '',
+			block ? bem.m('block') : '',
+			bem.m(shape),
 		]"
-		:disabled="propsData.disabled"
+		:style="{
+			color: textColor,
+			background: bgColor,
+		}"
+		:disabled="disabled"
+		@click="buttonclick"
 	>
 		<div :class="bem.e('content')">
 			<slot></slot>
@@ -31,8 +36,16 @@ export default defineComponent({
 	props: ButtonProps,
 	setup(props: ButtonProps) {
 		const bem = createNamespace('button');
-		const propsData = { ...props };
-		return { propsData, bem };
+
+		const buttonclick = (e: Event) => {
+			const { disabled, loading, onClick } = props;
+
+			if (disabled || loading || !onClick) return;
+
+			onClick(e);
+		};
+
+		return { bem, buttonclick };
 	},
 });
 </script>

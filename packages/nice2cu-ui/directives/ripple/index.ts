@@ -74,6 +74,15 @@ const Ripple: Directive & Plugin = {
 		el.addEventListener('mouseup', removeRipple, { passive: true });
 		el.addEventListener('contextmenu', preventContextMenu);
 	},
+	updated(el: RippleHTMLElement, binding: DirectiveBinding) {
+		const newbinding = {
+			disabled: binding.value.disabled,
+			isRipple: binding.value.isRipple,
+		};
+		el._ripple = {
+			...newbinding,
+		};
+	},
 	unmounted(el: RippleHTMLElement) {
 		el.removeEventListener('mousedown', createRipple);
 		el.removeEventListener('mouseup', removeRipple);

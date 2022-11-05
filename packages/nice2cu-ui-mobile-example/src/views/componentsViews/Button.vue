@@ -116,6 +116,17 @@
 				</div>
 			</div>
 		</section>
+		<section>
+			<div class="title">自定义背景色和文件颜色（bgcColor/textColor）</div>
+			<div class="content">
+				<div class="item">
+					<n-button bg-color="#e77c8e" text-color="#2e317c">背景/文字</n-button>
+				</div>
+				<div class="item">
+					<n-button bg-color="linear-gradient(135deg, #00DBDE 0%, #FC00FF 50%, #131150 89%)" text-color="#ffffff">渐变背景</n-button>
+				</div>
+			</div>
+		</section>
 	</div>
 </template>
 
