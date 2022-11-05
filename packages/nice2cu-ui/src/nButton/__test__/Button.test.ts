@@ -112,22 +112,20 @@ describe('test Button props', () => {
 	test('test Button isRipple', async () => {
 		const wrapper = shallowMount(nButtonVue, {
 			props: {
-				isRipple: false,
+				isRipple: true,
 			},
 		});
 
 		wrapper.trigger('mousedown');
-		expect(wrapper.find('.n-ripple').exists()).toBe(false);
-
-		await delay(300);
-
-		await wrapper.setProps({ isRipple: true });
-		wrapper.trigger('mousedown');
 		const startTime = performance.now();
 		expect(wrapper.find('.n-ripple').exists()).toBe(true);
 		wrapper.trigger('mouseup');
-		const endTime = 300 - performance.now() + startTime + 300;
+		const endTime = 300 - performance.now() + startTime + 310;
 		await delay(endTime);
+		expect(wrapper.find('.n-ripple').exists()).toBe(false);
+
+		await wrapper.setProps({ isRipple: false });
+		wrapper.trigger('mousedown');
 		expect(wrapper.find('.n-ripple').exists()).toBe(false);
 
 		wrapper.unmount();
