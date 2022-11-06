@@ -6,5 +6,8 @@
 		<div>
 			<router-link to="/icon">Icon</router-link>
 		</div>
+		<div>
+			<router-link to="/loading">Loading</router-link>
+		</div>
 	</div>
 </template>

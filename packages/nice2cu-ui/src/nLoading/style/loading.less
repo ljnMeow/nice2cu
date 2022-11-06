@@ -1,0 +1,23 @@
+.n-loading-container {
+    display: flex;
+    align-items: center;
+
+    .n-loading-container-circle {
+        animation: circle 1s linear infinite;
+    }
+
+    .n-loading-container-text {
+        margin-left: 4px;
+        font-size: 14px;
+    }
+}
+
+@keyframes circle {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}

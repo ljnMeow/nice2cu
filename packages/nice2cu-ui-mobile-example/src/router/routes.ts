@@ -14,6 +14,14 @@ export default [
 		},
 	},
 	{
+		path: '/icon',
+		name: 'Icon',
+		component: () => import(/* webpackChunkName: "Icon" */ '@views/componentsViews/Icon.vue'),
+		meta: {
+			title: '图标',
+		},
+	},
+	{
 		path: '/button',
 		name: 'Button',
 		component: () => import(/* webpackChunkName: "Button" */ '@views/componentsViews/Button.vue'),
@@ -22,11 +30,11 @@ export default [
 		},
 	},
 	{
-		path: '/icon',
-		name: 'Icon',
-		component: () => import(/* webpackChunkName: "Icon" */ '@views/componentsViews/Icon.vue'),
+		path: '/loading',
+		name: 'Loading',
+		component: () => import(/* webpackChunkName: "Loading" */ '@views/componentsViews/Loading.vue'),
 		meta: {
-			title: '图标',
+			title: 'Loading',
 		},
 	},
 ];

@@ -1,5 +1,5 @@
 <template>
-	<div class="button-container">
+	<div class="container">
 		<section>
 			<div class="title">按钮类型（type）</div>
 			<div class="content">
@@ -129,24 +129,3 @@
 		</section>
 	</div>
 </template>
-
-<style lang="less" scoped>
-.button-container {
-	margin: 0.6rem;
-	section {
-		margin-bottom: 1.4rem;
-		.title {
-			font-size: 0.9rem;
-			color: #aaaaaa;
-		}
-		.content {
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: flex-start;
-			.item {
-				margin: 0.8rem 0.4rem 0.4rem 0;
-			}
-		}
-	}
-}
-</style>

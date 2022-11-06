@@ -1,5 +1,5 @@
 <template>
-	<div class="icon-container">
+	<div class="container">
 		<section>
 			<div class="title">图标尺寸（size）</div>
 			<div class="content">
@@ -40,19 +40,3 @@
 		</section>
 	</div>
 </template>
-
-<style lang="less" scoped>
-.icon-container {
-	margin: 0.6rem;
-	section {
-		margin-bottom: 1.4rem;
-		.title {
-			font-size: 0.9rem;
-			color: #aaaaaa;
-		}
-		.content {
-			margin: 0.8rem 0;
-		}
-	}
-}
-</style>
