@@ -35,6 +35,11 @@
 			margin: 0.8rem 0;
 			.item {
 				margin: 0.8rem 0.4rem 0.4rem 0;
+
+				&.item-align-center {
+					display: flex;
+					align-items: center;
+				}
 			}
 		}
 	}

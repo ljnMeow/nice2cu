@@ -1,14 +1,16 @@
 import { ExtractPropTypes, PropType } from 'vue';
 
-export type LoadingType = 'circle';
-
 export function typeValidator(type: string): boolean {
-	return ['circle'].includes(type);
+	return ['circle', 'time', 'wave'].includes(type);
+}
+
+export function sizeValidator(type: string): boolean {
+	return ['mini', 'normal', 'small', 'large'].includes(type);
 }
 
 export const LoadingProps = {
 	type: {
-		type: String as PropType<LoadingType>,
+		type: String as PropType<'circle' | 'time' | 'wave'>,
 		default: 'circle',
 		validator: typeValidator,
 	},
@@ -17,14 +19,19 @@ export const LoadingProps = {
 	},
 	loading: {
 		type: Boolean,
-		default: false,
+		default: true,
 	},
 	size: {
-		type: [String, Number],
-		default: 20,
+		type: String as PropType<'mini' | 'normal' | 'small' | 'large'>,
+		default: 'normal',
 	},
 	text: {
 		type: String,
+		default: '',
+	},
+	parallel: {
+		type: Boolean,
+		default: false,
 	},
 };
 

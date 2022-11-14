@@ -1,23 +1,133 @@
-.n-loading-container {
-    display: flex;
-    align-items: center;
+.n-loading {
+	position: relative;
 
-    .n-loading-container-circle {
-        animation: circle 1s linear infinite;
-    }
+	.n-loading-container {
+		&--parallel {
+			display: flex;
+		}
 
-    .n-loading-container-text {
-        margin-left: 4px;
-        font-size: 14px;
-    }
+		&--absolute {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		align-items: center;
+		text-align: center;
+
+		.n-loading-text {
+			margin: 4px;
+			font-size: 14px;
+		}
+	}
+
+	.n-loading-mask {
+		opacity: 0.4;
+	}
+}
+
+.n-loading-circle {
+	animation: circle 1s linear infinite;
+
+	&--normal {
+		font-size: 26px;
+	}
+
+	&--mini {
+		font-size: 16px;
+	}
+
+	&--small {
+		font-size: 22px;
+	}
+
+	&--large {
+		font-size: 30px;
+	}
 }
 
 @keyframes circle {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
+	0% {
+		transform: rotate(0deg);
+	}
 
-    to {
-        -webkit-transform: rotate(360deg);
-    }
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.n-loading-time {
+	background-color: transparent;
+	border: 2px solid currentColor;
+	border-radius: 50%;
+	position: relative;
+	margin: 0 auto;
+
+	&:after,
+	&:before {
+		content: '';
+		position: absolute;
+		background-color: currentColor;
+	}
+
+	&:after {
+		width: 40%;
+		height: 2px;
+		top: 46%;
+		left: 46%;
+		transform-origin: 1px 1px;
+		animation: minhand 2s linear infinite;
+	}
+
+	&:before {
+		width: 30%;
+		height: 2px;
+		top: 46%;
+		left: 46%;
+		transform-origin: 1px 1px;
+		animation: hrhand 8s linear infinite;
+	}
+
+	&--normal {
+		width: 22px;
+		height: 22px;
+	}
+
+	&--mini {
+		width: 14px;
+		height: 14px;
+	}
+
+	&--small {
+		width: 18px;
+		height: 18px;
+	}
+
+	&--large {
+		width: 24px;
+		height: 24px;
+	}
+}
+
+@keyframes minhand {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes hrhand {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.n-loading-wave {
+	
 }

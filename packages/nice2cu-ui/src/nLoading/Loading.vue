@@ -1,12 +1,30 @@
 <template>
 	<div :class="[bem.b()]">
-		<n-icon v-if="type === 'circle'" icon="n-loading" :class="bem.b('circle')" :size="size" :color="color"></n-icon>
-		<span :class="[bem.b('text')]" :style="style">{{ text }}</span>
+		<div
+			v-if="loading"
+			:class="[bem.b('container'), parallel ? bem.bm('container', 'parallel') : '', slotDefault ? bem.bm('container', 'absolute') : '']"
+		>
+			<n-icon v-if="type === 'circle'" icon="n-loading-circle" :class="[bem.b('circle'), bem.bm('circle', size)]" :color="color"></n-icon>
+			<div v-if="type === 'time'" :class="[bem.b('time'), bem.bm('time', size)]" :style="{ color: color }"></div>
+			<p
+				:class="[bem.b('text')]"
+				:style="[
+					{
+						color: color,
+					},
+				]"
+			>
+				{{ text }}
+			</p>
+		</div>
+		<div :class="slotDefault && loading ? bem.b('mask') : ''">
+			<slot />
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { defineComponent, useSlots } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { LoadingProps } from './LoadingProps';
 import NIcon from '../nIcon';
@@ -17,15 +35,10 @@ export default defineComponent({
 	components: { NIcon },
 	props: LoadingProps,
 	setup(props: LoadingProps) {
-		const bem = createNamespace('loading-container');
+		const bem = createNamespace('loading');
+		const slotDefault = !!useSlots().default;
 
-		const style = computed(() => {
-			return {
-				...(props.color ? { color: props.color } : {}),
-			};
-		});
-
-		return { bem, style };
+		return { bem, slotDefault };
 	},
 });
 </script>
