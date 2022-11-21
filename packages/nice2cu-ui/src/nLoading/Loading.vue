@@ -6,6 +6,13 @@
 		>
 			<n-icon v-if="type === 'circle'" icon="n-loading-circle" :class="[bem.b('circle'), bem.bm('circle', size)]" :color="color"></n-icon>
 			<div v-if="type === 'time'" :class="[bem.b('time'), bem.bm('time', size)]" :style="{ color: color }"></div>
+			<div v-if="!['circle', 'time'].includes(type)" :class="[bem.b(type), bem.bm(type, size)]" :style="{ color: color }">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
 			<p
 				:class="[bem.b('text')]"
 				:style="[
