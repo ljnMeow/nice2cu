@@ -8,6 +8,10 @@ function sizeValidator(size: string): boolean {
 	return ['normal', 'mini', 'small', 'large'].includes(size);
 }
 
+function loadingTypeValidator(type: string): boolean {
+	return ['circle', 'time', 'wave', 'point', 'rever', 'bounce', 'battery'].includes(type);
+}
+
 export const ButtonProps = {
 	type: {
 		type: String as PropType<'default' | 'primary' | 'info' | 'success' | 'warning' | 'danger'>,
@@ -42,6 +46,20 @@ export const ButtonProps = {
 	loading: {
 		type: Boolean,
 		default: false,
+	},
+	loadingText: {
+		type: String,
+		default: '',
+	},
+	loadingSize: {
+		type: String as PropType<'normal' | 'mini' | 'small' | 'large'>,
+		default: 'small',
+		validator: sizeValidator,
+	},
+	loadingType: {
+		type: String as PropType<'circle' | 'time' | 'wave' | 'point' | 'rever' | 'bounce' | 'battery'>,
+		default: 'circle',
+		validator: loadingTypeValidator,
 	},
 	bgColor: {
 		type: String,

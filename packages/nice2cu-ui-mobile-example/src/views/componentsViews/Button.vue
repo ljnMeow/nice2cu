@@ -89,6 +89,38 @@
 			</div>
 		</section>
 		<section>
+			<div class="title">加载状态（loading）</div>
+			<div class="content">
+				<div class="item">
+					<n-button type="primary" loading></n-button>
+				</div>
+				<div class="item">
+					<n-button type="primary" loading loading-type="time"></n-button>
+				</div>
+				<div class="item">
+					<n-button type="primary" loading loading-type="wave"></n-button>
+				</div>
+				<div class="item">
+					<n-button type="primary" loading loading-type="point"></n-button>
+				</div>
+				<div class="item">
+					<n-button type="primary" loading loading-type="rever"></n-button>
+				</div>
+				<div class="item">
+					<n-button type="primary" loading loading-type="bounce"></n-button>
+				</div>
+				<div class="item">
+					<n-button type="primary" loading loading-type="battery"></n-button>
+				</div>
+				<div class="item">
+					<n-button type="primary" loading loading-text="加载中..."></n-button>
+				</div>
+				<div class="item">
+					<n-button type="primary" :loading="loading" loading-text="加载中..." @click="startLoading">点击加载</n-button>
+				</div>
+			</div>
+		</section>
+		<section>
 			<div class="title">块级按钮（block）</div>
 			<div class="content">
 				<div class="item" style="flex: 1">
@@ -129,3 +161,17 @@
 		</section>
 	</div>
 </template>
+
+<script lang="ts" setup>
+import { ref } from 'vue';
+
+let loading = ref(false);
+
+const startLoading = () => {
+	console.log('213123');
+	loading.value = true;
+	setTimeout(() => {
+		loading.value = false;
+	}, 2000);
+};
+</script>

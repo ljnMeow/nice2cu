@@ -1,7 +1,7 @@
 import { ExtractPropTypes, PropType } from 'vue';
 
 export function typeValidator(type: string): boolean {
-	return ['circle', 'time', 'wave', 'point'].includes(type);
+	return ['circle', 'time', 'wave', 'point', 'rever', 'bounce', 'battery'].includes(type);
 }
 
 export function sizeValidator(type: string): boolean {
@@ -10,7 +10,7 @@ export function sizeValidator(type: string): boolean {
 
 export const LoadingProps = {
 	type: {
-		type: String as PropType<'circle' | 'time' | 'wave' | 'point'>,
+		type: String as PropType<'circle' | 'time' | 'wave' | 'point' | 'rever' | 'bounce' | 'battery'>,
 		default: 'circle',
 		validator: typeValidator,
 	},
@@ -32,6 +32,14 @@ export const LoadingProps = {
 	parallel: {
 		type: Boolean,
 		default: false,
+	},
+	loadingAbsolute: {
+		type: Boolean,
+		default: true,
+	},
+	showMask: {
+		type: Boolean,
+		default: true,
 	},
 };
 

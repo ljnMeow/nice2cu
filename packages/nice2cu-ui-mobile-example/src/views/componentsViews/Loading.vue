@@ -2,7 +2,7 @@
  * @Author: 林进南 linjinnan1998@sina.com
  * @Date: 2022-11-14 09:57:18
  * @LastEditors: 林进南 linjinnan1998@sina.com
- * @LastEditTime: 2022-11-21 17:55:52
+ * @LastEditTime: 2022-11-22 10:55:26
  * @FilePath: \nice2cu\packages\nice2cu-ui-mobile-example\src\views\componentsViews\Loading.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -17,7 +17,7 @@
 			</div>
 		</section>
 		<section>
-			<div class="title">平行内容</div>
+			<div class="title">平行内容（parallel）</div>
 			<div class="content">
 				<div class="item">
 					<n-loading color="#2196f3" parallel text="加载中..."></n-loading>
@@ -25,7 +25,7 @@
 			</div>
 		</section>
 		<section>
-			<div class="title">大小</div>
+			<div class="title">大小（size）</div>
 			<div class="content">
 				<div class="item item-align-center">
 					<n-loading color="#2196f3" size="mini"></n-loading>
@@ -42,8 +42,8 @@
 			</div>
 		</section>
 		<section>
-			<div class="title">其他样式</div>
-			<div class="content">
+			<div class="title">其他样式（type）</div>
+			<div class="content space-between">
 				<div class="item item-align-center">
 					<n-loading color="#2196f3" type="time"></n-loading>
 				</div>
@@ -52,6 +52,15 @@
 				</div>
 				<div class="item item-align-center">
 					<n-loading color="#2196f3" type="point"></n-loading>
+				</div>
+				<div class="item item-align-center">
+					<n-loading color="#2196f3" type="rever"></n-loading>
+				</div>
+				<div class="item item-align-center">
+					<n-loading color="#2196f3" type="bounce"></n-loading>
+				</div>
+				<div class="item item-align-center">
+					<n-loading color="#2196f3" type="battery"></n-loading>
 				</div>
 			</div>
 		</section>

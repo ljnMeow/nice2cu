@@ -33,6 +33,11 @@
 			flex-flow: row wrap;
 			justify-content: flex-start;
 			margin: 0.8rem 0;
+
+			&.space-between {
+				justify-content: space-between;
+			}
+
 			.item {
 				margin: 0.8rem 0.4rem 0.4rem 0;
 
