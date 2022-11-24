@@ -1,7 +1,9 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { describe, expect, test, vi } from 'vitest';
 import { createApp } from 'vue';
 import { delay } from '../../../utils/tools';
+
+document.body.innerHTML = '<script></script>';
 
 import nButton from '../index';
 import nButtonVue from '../Button.vue';
@@ -13,14 +15,14 @@ test('test Button plugin', () => {
 
 describe('test Button event', () => {
 	test('test button onClick null callback', () => {
-		const wrapper = shallowMount(nButtonVue);
+		const wrapper = mount(nButtonVue);
 		wrapper.trigger('click');
 		wrapper.unmount();
 	});
 
 	test('test Button onclick', () => {
 		const onClick = vi.fn();
-		const wrapper = shallowMount(nButtonVue, {
+		const wrapper = mount(nButtonVue, {
 			props: {
 				onClick,
 			},
@@ -35,7 +37,7 @@ describe('test Button props', () => {
 	test('test Button type', () => {
 		const typeArr: string[] = ['default', 'primary', 'info', 'success', 'warning', 'danger'];
 		typeArr.forEach((item) => {
-			const wrapper = shallowMount(nButtonVue, {
+			const wrapper = mount(nButtonVue, {
 				props: {
 					type: item,
 				},
@@ -48,7 +50,7 @@ describe('test Button props', () => {
 	test('test Button size', () => {
 		const sizeArr: string[] = ['normal', 'mini', 'small', 'large'];
 		sizeArr.forEach((item) => {
-			const wrapper = shallowMount(nButtonVue, {
+			const wrapper = mount(nButtonVue, {
 				props: {
 					size: item,
 				},
@@ -59,7 +61,7 @@ describe('test Button props', () => {
 	});
 
 	test('test Button border', async () => {
-		const wrapper = shallowMount(nButtonVue, {
+		const wrapper = mount(nButtonVue, {
 			props: {
 				border: true,
 			},
@@ -73,7 +75,7 @@ describe('test Button props', () => {
 	test('test Button shape', () => {
 		const shapeArr: string[] = ['round', 'square', 'radius'];
 		shapeArr.forEach((item) => {
-			const wrapper = shallowMount(nButtonVue, {
+			const wrapper = mount(nButtonVue, {
 				props: {
 					shape: item,
 				},
@@ -85,7 +87,7 @@ describe('test Button props', () => {
 
 	test('test Button disabled', async () => {
 		const onClick = vi.fn();
-		const wrapper = shallowMount(nButtonVue, {
+		const wrapper = mount(nButtonVue, {
 			props: {
 				onClick,
 				disabled: true,
@@ -98,7 +100,7 @@ describe('test Button props', () => {
 	});
 
 	test('test Button block', async () => {
-		const wrapper = shallowMount(nButtonVue, {
+		const wrapper = mount(nButtonVue, {
 			props: {
 				block: true,
 			},
@@ -110,7 +112,7 @@ describe('test Button props', () => {
 	});
 
 	test('test Button isRipple', async () => {
-		const wrapper = shallowMount(nButtonVue, {
+		const wrapper = mount(nButtonVue, {
 			props: {
 				isRipple: true,
 			},
@@ -132,7 +134,7 @@ describe('test Button props', () => {
 	});
 
 	test('test Button bgColor', () => {
-		const wrapper = shallowMount(nButtonVue, {
+		const wrapper = mount(nButtonVue, {
 			props: {
 				bgColor: '#e2e2e2',
 			},
@@ -142,12 +144,64 @@ describe('test Button props', () => {
 	});
 
 	test('test Button textColor', () => {
-		const wrapper = shallowMount(nButtonVue, {
+		const wrapper = mount(nButtonVue, {
 			props: {
 				textColor: '#2e317c',
 			},
 		});
 		expect(wrapper.attributes('style')).toMatch('color: #2e317c');
 		wrapper.unmount();
+	});
+
+	test('test Button loading', async () => {
+		const onClick = vi.fn();
+		const wrapper = mount(nButtonVue, {
+			props: {
+				loading: true,
+			},
+		});
+		await wrapper.trigger('click');
+		expect(wrapper.find('.n-button__loading').exists()).toBe(true);
+		expect(onClick).toHaveBeenCalledTimes(0);
+		wrapper.unmount();
+	});
+
+	test('test Button loadingText', () => {
+		const wrapper = mount(nButtonVue, {
+			props: {
+				loading: true,
+				loadingText: '加载中...',
+			},
+		});
+		expect(wrapper.find('.n-loading-text').html()).toContain('加载中...');
+		wrapper.unmount();
+	});
+
+	test('test Button loadingType', () => {
+		const loadingTypeArr: string[] = ['circle', 'time', 'wave', 'point', 'rever', 'bounce', 'battery'];
+		loadingTypeArr.forEach((item) => {
+			const wrapper = mount(nButtonVue, {
+				props: {
+					loading: true,
+					loadingType: item,
+				},
+			});
+			expect(wrapper.find(`.n-loading-${item}`).exists()).toBe(true);
+			wrapper.unmount();
+		});
+	});
+
+	test('test Button loadingSize', () => {
+		const loadingSizeArr: string[] = ['normal', 'mini', 'small', 'large'];
+		loadingSizeArr.forEach((item) => {
+			const wrapper = mount(nButtonVue, {
+				props: {
+					loading: true,
+					loadingSize: item,
+				},
+			});
+			expect(wrapper.find(`.n-loading--${item}`).exists()).toBe(true);
+			wrapper.unmount();
+		});
 	});
 });

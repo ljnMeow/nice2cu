@@ -18,6 +18,8 @@
 		@click="buttonclick"
 	>
 		<n-loading
+			ref="nLoading"
+			:class="loading ? bem.e('loading') : ''"
 			:color="textColor"
 			parallel
 			:type="loadingType"
@@ -27,15 +29,15 @@
 			:loading-absolute="false"
 			:show-mask="false"
 		>
-			<div v-if="!loading" :class="bem.e('content')">
-				<slot></slot>
-			</div>
 		</n-loading>
+		<div :class="[bem.e('content'), loading ? bem.em('content', 'loading') : '']">
+			<slot></slot>
+		</div>
 	</button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { ButtonProps } from './ButtonProps';
 import Ripple from '../../directives/ripple';
@@ -49,6 +51,7 @@ export default defineComponent({
 	props: ButtonProps,
 	setup(props: ButtonProps) {
 		const bem = createNamespace('button');
+		const nLoading = ref();
 
 		const buttonclick = (e: Event) => {
 			const { disabled, loading, onClick } = props;
@@ -58,7 +61,7 @@ export default defineComponent({
 			onClick(e);
 		};
 
-		return { bem, buttonclick };
+		return { bem, nLoading, buttonclick };
 	},
 });
 </script>

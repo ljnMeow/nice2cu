@@ -168,7 +168,6 @@ import { ref } from 'vue';
 let loading = ref(false);
 
 const startLoading = () => {
-	console.log('213123');
 	loading.value = true;
 	setTimeout(() => {
 		loading.value = false;

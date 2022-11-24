@@ -1,6 +1,181 @@
 .n-loading {
 	position: relative;
 
+	&--normal {
+		.n-loading-circle {
+			font-size: 26px;
+		}
+		.n-loading-time {
+			width: 22px;
+			height: 22px;
+		}
+		.n-loading-wave {
+			height: 18px;
+			span {
+				width: 4px;
+			}
+		}
+		.n-loading-point {
+			span {
+				width: 12px;
+				height: 12px;
+			}
+		}
+		.n-loading-rever {
+			width: 22px;
+			height: 22px;
+		}
+		.n-loading-bounce {
+			width: 26px;
+			height: 26px;
+		}
+		.n-loading-battery {
+			width: 26px;
+			height: 13px;
+
+			&::after {
+				width: 3px;
+				height: 7px;
+				right: -4px;
+			}
+		}
+		.n-loading-text {
+			font-size: 16px;
+		}
+	}
+
+	&--mini {
+		.n-loading-circle {
+			font-size: 16px;
+		}
+		.n-loading-time {
+			width: 14px;
+			height: 14px;
+		}
+		.n-loading-wave {
+			height: 10px;
+
+			span {
+				width: 2px;
+			}
+		}
+		.n-loading-point {
+			span {
+				width: 6px;
+				height: 6px;
+			}
+		}
+		.n-loading-rever {
+			width: 14px;
+			height: 14px;
+		}
+		.n-loading-bounce {
+			width: 18px;
+			height: 18px;
+		}
+		.n-loading-battery {
+			width: 18px;
+			height: 9px;
+
+			&::after {
+				width: 2px;
+				height: 4px;
+				right: -3px;
+			}
+		}
+		.n-loading-text {
+			font-size: 10px;
+		}
+	}
+
+	&--small {
+		.n-loading-circle {
+			font-size: 22px;
+		}
+		.n-loading-time {
+			width: 18px;
+			height: 18px;
+		}
+		.n-loading-wave {
+			height: 14px;
+
+			span {
+				width: 3px;
+			}
+		}
+		.n-loading-point {
+			span {
+				width: 10px;
+				height: 10px;
+			}
+		}
+		.n-loading-rever {
+			width: 18px;
+			height: 18px;
+		}
+		.n-loading-bounce {
+			width: 22px;
+			height: 22px;
+		}
+		.n-loading-battery {
+			width: 22px;
+			height: 11px;
+
+			&::after {
+				width: 3px;
+				height: 4px;
+				right: -4px;
+			}
+		}
+		.n-loading-text {
+			font-size: 14px;
+		}
+	}
+
+	&--large {
+		.n-loading-circle {
+			font-size: 30px;
+		}
+		.n-loading-time {
+			width: 24px;
+			height: 24px;
+		}
+		.n-loading-wave {
+			height: 22px;
+
+			span {
+				width: 4px;
+			}
+		}
+		.n-loading-point {
+			span {
+				width: 16px;
+				height: 16px;
+			}
+		}
+		.n-loading-rever {
+			width: 26px;
+			height: 26px;
+		}
+		.n-loading-bounce {
+			width: 32px;
+			height: 32px;
+		}
+		.n-loading-battery {
+			width: 32px;
+			height: 16px;
+
+			&::after {
+				width: 4px;
+				height: 6px;
+				right: -5px;
+			}
+		}
+		.n-loading-text {
+			font-size: 20px;
+		}
+	}
+
 	.n-loading-container {
 		&--parallel {
 			display: flex;
@@ -18,22 +193,7 @@
 
 		.n-loading-text {
 			margin: 4px;
-
-			&--normal {
-				font-size: 16px;
-			}
-
-			&--mini {
-				font-size: 10px;
-			}
-
-			&--small {
-				font-size: 14px;
-			}
-
-			&--large {
-				font-size: 20px;
-			}
+			color: currentColor;
 		}
 	}
 	.slot-content {
@@ -53,22 +213,6 @@
 
 .n-loading-circle {
 	animation: circle 1s linear infinite;
-
-	&--normal {
-		font-size: 26px;
-	}
-
-	&--mini {
-		font-size: 16px;
-	}
-
-	&--small {
-		font-size: 22px;
-	}
-
-	&--large {
-		font-size: 30px;
-	}
 }
 
 @keyframes circle {
@@ -111,26 +255,6 @@
 		left: 46%;
 		transform-origin: 1px 1px;
 		animation: hrhand 8s linear infinite;
-	}
-
-	&--normal {
-		width: 22px;
-		height: 22px;
-	}
-
-	&--mini {
-		width: 14px;
-		height: 14px;
-	}
-
-	&--small {
-		width: 18px;
-		height: 18px;
-	}
-
-	&--large {
-		width: 24px;
-		height: 24px;
 	}
 }
 
@@ -181,38 +305,6 @@
 			animation-delay: 0.8s;
 		}
 	}
-
-	&--normal {
-		height: 18px;
-
-		span {
-			width: 4px;
-		}
-	}
-
-	&--mini {
-		height: 10px;
-
-		span {
-			width: 2px;
-		}
-	}
-
-	&--small {
-		height: 14px;
-
-		span {
-			width: 3px;
-		}
-	}
-
-	&--large {
-		height: 22px;
-
-		span {
-			width: 4px;
-		}
-	}
 }
 
 @keyframes wave {
@@ -255,34 +347,6 @@
 			animation-delay: 0.65s;
 		}
 	}
-
-	&--normal {
-		span {
-			width: 12px;
-			height: 12px;
-		}
-	}
-
-	&--mini {
-		span {
-			width: 6px;
-			height: 6px;
-		}
-	}
-
-	&--small {
-		span {
-			width: 10px;
-			height: 10px;
-		}
-	}
-
-	&--large {
-		span {
-			width: 16px;
-			height: 16px;
-		}
-	}
 }
 
 @keyframes point {
@@ -297,26 +361,6 @@
 .n-loading-rever {
 	background-color: currentColor;
 	animation: rever 1.2s infinite ease-in-out;
-
-	&--normal {
-		width: 22px;
-		height: 22px;
-	}
-
-	&--mini {
-		width: 14px;
-		height: 14px;
-	}
-
-	&--small {
-		width: 18px;
-		height: 18px;
-	}
-
-	&--large {
-		width: 26px;
-		height: 26px;
-	}
 }
 
 @keyframes rever {
@@ -350,26 +394,6 @@
 			animation-delay: -1s;
 		}
 	}
-
-	&--normal {
-		width: 26px;
-		height: 26px;
-	}
-
-	&--mini {
-		width: 18px;
-		height: 18px;
-	}
-
-	&--small {
-		width: 22px;
-		height: 22px;
-	}
-
-	&--large {
-		width: 32px;
-		height: 32px;
-	}
 }
 
 @keyframes bounce {
@@ -395,50 +419,6 @@
 		content: '';
 		background-color: currentColor;
 		border-radius: 0px 1px 1px 0px;
-	}
-
-	&--normal {
-		width: 26px;
-		height: 13px;
-
-		&::after {
-			width: 3px;
-			height: 7px;
-			right: -4px;
-		}
-	}
-
-	&--mini {
-		width: 18px;
-		height: 9px;
-
-		&::after {
-			width: 2px;
-			height: 4px;
-			right: -3px;
-		}
-	}
-
-	&--small {
-		width: 22px;
-		height: 11px;
-
-		&::after {
-			width: 3px;
-			height: 4px;
-			right: -4px;
-		}
-	}
-
-	&--large {
-		width: 32px;
-		height: 16px;
-
-		&::after {
-			width: 4px;
-			height: 6px;
-			right: -5px;
-		}
 	}
 }
 

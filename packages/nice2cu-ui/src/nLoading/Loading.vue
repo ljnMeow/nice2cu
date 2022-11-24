@@ -4,36 +4,26 @@
 			v-if="loading"
 			:class="[
 				bem.b('container'),
+				bem.m(size),
 				parallel ? bem.bm('container', 'parallel') : '',
 				slotDefault && loadingAbsolute ? bem.bm('container', 'absolute') : '',
 			]"
+			:style="{ color: color }"
 		>
-			<n-icon v-if="type === 'circle'" icon="n-loading-circle" :class="[bem.b('circle'), bem.bm('circle', size)]" :color="color"></n-icon>
-			<div v-if="['time', 'rever', 'battery'].includes(type)" :class="[bem.b(type), bem.bm(type, size)]" :style="{ color: color }"></div>
-			<div v-if="type === 'bounce'" :class="[bem.b('bounce'), bem.bm('bounce', size)]" :style="{ color: color }">
+			<n-icon v-if="type === 'circle'" icon="n-loading-circle" :class="bem.b('circle')"></n-icon>
+			<div v-if="['time', 'rever', 'battery'].includes(type)" :class="bem.b(type)"></div>
+			<div v-if="type === 'bounce'" :class="bem.b('bounce')">
 				<span></span>
 				<span></span>
 			</div>
-			<div
-				v-if="!['circle', 'time', 'rever', 'bounce', 'battery'].includes(type)"
-				:class="[bem.b(type), bem.bm(type, size)]"
-				:style="{ color: color }"
-			>
+			<div v-if="!['circle', 'time', 'rever', 'bounce', 'battery'].includes(type)" :class="bem.b(type)">
 				<span></span>
 				<span></span>
 				<span></span>
 				<span></span>
 				<span></span>
 			</div>
-			<p
-				v-if="text"
-				:class="[bem.b('text'), bem.bm('text', size)]"
-				:style="[
-					{
-						color: color,
-					},
-				]"
-			>
+			<p v-if="text" :class="bem.b('text')">
 				{{ text }}
 			</p>
 		</div>
