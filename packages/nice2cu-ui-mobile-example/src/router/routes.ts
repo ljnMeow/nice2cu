@@ -37,4 +37,12 @@ export default [
 			title: 'Loading',
 		},
 	},
+	{
+		path: '/cell',
+		name: 'cell',
+		component: () => import(/* webpackChunkName: "Loading" */ '@views/componentsViews/Cell.vue'),
+		meta: {
+			title: '单元格',
+		},
+	},
 ];

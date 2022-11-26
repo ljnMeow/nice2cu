@@ -50,4 +50,63 @@ describe('test Loading props', () => {
 		expect(wrapper.find('.n-loading-container').exists()).toBe(false);
 		wrapper.unmount();
 	});
+
+	test('test Loading size', () => {
+		const sizeArr: string[] = ['mini', 'normal', 'small', 'large'];
+		sizeArr.forEach((item) => {
+			const wrapper = mount(nLoadingVue, {
+				props: {
+					size: item,
+				},
+			});
+			expect(wrapper.find(`.n-loading--${item}`).exists()).toBe(true);
+			wrapper.unmount();
+		});
+	});
+
+	test('test Loading text', () => {
+		const wrapper = mount(nLoadingVue, {
+			props: {
+				text: '加载中...',
+			},
+		});
+		expect(wrapper.find('.n-loading-text').html()).toContain('加载中...');
+		wrapper.unmount();
+	});
+
+	test('test Loading parallel', () => {
+		const wrapper = mount(nLoadingVue, {
+			props: {
+				parallel: true,
+			},
+		});
+		expect(wrapper.find('.n-loading-container--parallel').exists()).toBe(true);
+		wrapper.unmount();
+	});
+
+	test('test Loading loadingAbsolute', () => {
+		const wrapper = mount(nLoadingVue, {
+			props: {
+				loadingAbsolute: true,
+			},
+			slots: {
+				default: () => 'default slots',
+			},
+		});
+		expect(wrapper.find('.n-loading-container--absolute').exists()).toBe(true);
+		wrapper.unmount();
+	});
+
+	test('test Loading showMask', () => {
+		const wrapper = mount(nLoadingVue, {
+			props: {
+				showMask: true,
+			},
+			slots: {
+				default: () => 'default slots',
+			},
+		});
+		expect(wrapper.find('.n-loading-mask').exists()).toBe(true);
+		wrapper.unmount();
+	});
 });
