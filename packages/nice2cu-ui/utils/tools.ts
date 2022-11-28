@@ -9,7 +9,7 @@ export const handleUnit = (size: string | number) => {
 		return `${size}px`;
 	}
 	if (typeof size === 'string') {
-		if (size.includes('px') || size.includes('rem') || size.includes('em') || size.includes('vw')) {
+		if (size.includes('px') || size.includes('rem') || size.includes('em') || size.includes('vw') || size.includes('%')) {
 			return size;
 		} else {
 			return `${size}px`;
