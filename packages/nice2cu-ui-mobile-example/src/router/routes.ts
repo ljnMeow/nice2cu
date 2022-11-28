@@ -40,9 +40,17 @@ export default [
 	{
 		path: '/cell',
 		name: 'cell',
-		component: () => import(/* webpackChunkName: "Loading" */ '@views/componentsViews/Cell.vue'),
+		component: () => import(/* webpackChunkName: "Cell" */ '@views/componentsViews/Cell.vue'),
 		meta: {
 			title: '单元格',
+		},
+	},
+	{
+		path: '/image',
+		name: 'Image',
+		component: () => import(/* webpackChunkName: "Image" */ '@views/componentsViews/Image.vue'),
+		meta: {
+			title: '图片',
 		},
 	},
 ];
