@@ -24,3 +24,34 @@ export const handleUnit = (size: string | number) => {
  */
 
 export const delay = (time: number) => new Promise((resolve) => setTimeout(resolve, time));
+
+/**
+ * @function throttle
+ * @description 节流函数
+ * @param fn 回调函数
+ * @param delay 时间
+ * @returns
+ */
+
+export const throttle = (fn: any, delay: number) => {
+	let timeout = 0;
+	let lastRun = 0;
+	return function (this: void) {
+		if (timeout) {
+			return;
+		}
+		const elapsed = Date.now() - lastRun;
+		const self = this;
+		const args = arguments;
+		const runCallback = function () {
+			lastRun = Date.now();
+			timeout = 0;
+			fn.apply(self, args);
+		};
+		if (elapsed >= delay) {
+			runCallback();
+		} else {
+			timeout = window.setTimeout(runCallback, delay);
+		}
+	};
+};

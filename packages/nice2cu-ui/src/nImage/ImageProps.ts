@@ -1,7 +1,7 @@
 import { ExtractPropTypes, PropType } from 'vue';
 
 const fitValidator = (type: string) => {
-	return ['fill', 'contain', 'cover', 'none', 'scale', 'down'].includes(type);
+	return ['fill', 'contain', 'cover', 'none', 'scale-down'].includes(type);
 };
 
 export const ImageProps = {

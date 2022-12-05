@@ -37,5 +37,13 @@ module.exports = {
 		// vue
 		'vue/html-self-closing': 'off', // 执行自闭合的风格
 		'vue/multi-word-component-names': 'off', // 文件命名强制驼峰
+		'prefer-rest-params': 0,
+		'@typescript-eslint/no-this-alias': [
+			'error',
+			{
+				allowDestructuring: false,
+				allowedNames: ['self'],
+			},
+		],
 	},
 };
