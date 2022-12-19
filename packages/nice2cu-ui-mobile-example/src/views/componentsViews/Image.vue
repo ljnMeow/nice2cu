@@ -50,15 +50,6 @@
 	</div>
 </template>
 
-<script lang="ts" setup>
-const imageLoad = (e: Event) => {
-	console.log(234234, e);
-};
-const imageError = (e: Event) => {
-	console.log(123123, e);
-};
-</script>
-
 <style lang="less" scoped>
 .content {
 	margin: 0 !important;
