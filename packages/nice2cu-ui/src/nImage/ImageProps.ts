@@ -33,6 +33,24 @@ export const ImageProps = {
 		type: Boolean,
 		default: false,
 	},
+	lazy: {
+		type: Boolean,
+		default: false,
+	},
+	loading: {
+		type: String,
+		default: null,
+	},
+	error: {
+		type: String,
+		default: null,
+	},
+	onLoad: {
+		type: Function as PropType<(e: Event) => void | Promise<any>>,
+	},
+	onError: {
+		type: Function as PropType<(e: Event) => void | Promise<any>>,
+	},
 	fit: {
 		type: String as PropType<'fill' | 'contain' | 'cover' | 'none' | 'scale-down'>,
 		default: 'fill',

@@ -39,8 +39,25 @@
 				</div>
 			</div>
 		</section>
+		<section>
+			<div class="title">懒加载（lazy）</div>
+			<div class="content">
+				<div class="item">
+					<n-image src="https://picsum.photos/536/354" lazy></n-image>
+				</div>
+			</div>
+		</section>
 	</div>
 </template>
+
+<script lang="ts" setup>
+const imageLoad = (e: Event) => {
+	console.log(234234, e);
+};
+const imageError = (e: Event) => {
+	console.log(123123, e);
+};
+</script>
 
 <style lang="less" scoped>
 .content {
