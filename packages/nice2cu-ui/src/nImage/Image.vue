@@ -31,15 +31,15 @@ export default defineComponent({
 	props: ImageProps,
 	setup(props: ImageProps) {
 		const bem = createNamespace('image');
-		const imgSrc = ref(defaultLoadingImg);
+		const imgSrc = ref(props.loading ?? defaultLoadingImg);
 
 		const imageLoad = () => {
-			const { lazy, src, onLoad, onError } = props;
+			const { lazy, src, error, onLoad, onError } = props;
 			if (!lazy) {
 				let image = new Image();
 				image.src = src;
 				image.onerror = (e: Event | string) => {
-					imgSrc.value = defaultLoadingError;
+					imgSrc.value = error ?? defaultLoadingError;
 					if (onError) onError(e as Event);
 				};
 				image.onload = (e: Event | string) => {
