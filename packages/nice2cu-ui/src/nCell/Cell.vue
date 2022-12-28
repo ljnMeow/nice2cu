@@ -54,7 +54,6 @@ export default defineComponent({
 				route();
 			}
 			if (!onClick) return;
-			console.log('1312');
 			onClick(e);
 		};
 

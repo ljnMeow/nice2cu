@@ -4,7 +4,7 @@
 			<div class="title">基础用法</div>
 			<div class="content">
 				<div class="item" style="flex: 1">
-					<n-image src="https://varlet.gitee.io/varlet-ui/cat.jpg"></n-image>
+					<n-image src="https://varlet.gitee.io/varlet-ui/cat.jpg" @load="onload" @error="onerror"></n-image>
 				</div>
 			</div>
 		</section>
@@ -49,6 +49,15 @@
 		</section>
 	</div>
 </template>
+
+<script lang="ts" setup>
+const onload = () => {
+	console.log(1111);
+};
+const onerror = () => {
+	console.log(2222);
+};
+</script>
 
 <style lang="less" scoped>
 .content {

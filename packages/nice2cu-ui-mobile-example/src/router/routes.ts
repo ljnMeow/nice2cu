@@ -53,4 +53,12 @@ export default [
 			title: '图片',
 		},
 	},
+	{
+		path: '/layout',
+		name: 'Layout',
+		component: () => import(/* webpackChunkName: "Layout" */ '@views/componentsViews/Layout.vue'),
+		meta: {
+			title: '布局',
+		},
+	},
 ];
