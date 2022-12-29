@@ -11,7 +11,7 @@ export type ColSizeDescriptor = {
 	offset?: number | string;
 };
 
-export const RowProps = {
+export const ColProps = {
 	span: {
 		type: [String, Number],
 		default: 24,
@@ -42,4 +42,4 @@ export const RowProps = {
 	},
 };
 
-export type RowProps = ExtractPropTypes<typeof RowProps>;
+export type ColProps = ExtractPropTypes<typeof ColProps>;

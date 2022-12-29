@@ -1,4 +1,26 @@
-.n-row {
-  display: flex;
-  flex-wrap: wrap;
+.n-col {
+	transition: all 0.25s;
+	display: flex !important;
+  overflow: hidden;
+
+  &-0 {
+		display: none !important;
+	}
+}
+
+@width: 100%;
+
+.total-nums(24);
+
+.total-nums(@n, @i: 1) when (@i =< @n) {
+	.n-col-@{i} {
+		flex: 0 0 calc(@width / (24 / @i));
+    max-width: calc(@width / (24 / @i));
+	}
+
+	.n-col-offset-@{i} {
+		margin-left: calc(@width / (24 / @i)) !important;
+	}
+
+	.total-nums(@n, (@i + 1));
 }

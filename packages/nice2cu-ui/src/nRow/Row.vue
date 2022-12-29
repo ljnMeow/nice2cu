@@ -1,47 +1,39 @@
 <template>
-	<div :class="[bem.b()]">
+	<div ref="row" :class="[bem.b()]" :style="style">
 		<slot />
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, ComponentInternalInstance, VNode, isVNode, reactive, provide, computed } from 'vue';
+import { computed, CSSProperties, defineComponent, provide } from 'vue';
 import { createNamespace } from '../../utils/create';
+import { RowProps } from './RowProps';
 import './style/row.less';
-
-function flatVNodes(subTree: any) {
-	const vNodes: VNode[] = [];
-	const flat = (subTree: any) => {
-		if (subTree?.component) {
-			flat(subTree?.component.subTree);
-			return;
-		}
-		if (Array.isArray(subTree?.children)) {
-			subTree.children.forEach((child: any) => {
-				if (isVNode(child)) {
-					vNodes.push(child);
-					flat(child);
-				}
-			});
-		}
-	};
-	flat(subTree);
-	return vNodes;
-}
 
 export default defineComponent({
 	name: 'NRow',
-	setup() {
+	props: RowProps,
+	setup(props: RowProps) {
 		const bem = createNamespace('row');
+		const gutter = computed(() => props.gutter);
 
-		onMounted(() => {
-			const instances: ComponentInternalInstance[] = reactive([]);
-			const parentInstance: ComponentInternalInstance = getCurrentInstance() as ComponentInternalInstance;
-			const vNodes: any[] = flatVNodes(parentInstance.subTree);
-			console.log('row', vNodes);
+		provide(Symbol('rowContextKey'), {
+			gutter,
 		});
 
-		return { bem };
+		const style = computed(() => {
+			const styles: CSSProperties = {
+				justifyContent: props.justify,
+				alignItems: props.align,
+			};
+			if (!props.gutter) {
+				return styles;
+			}
+			styles.marginRight = styles.marginLeft = `-${Number(props.gutter) / 2}px`;
+			return styles;
+		});
+
+		return { bem, style };
 	},
 });
 </script>
