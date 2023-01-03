@@ -1,9 +1,9 @@
 .n-col {
 	transition: all 0.25s;
 	display: flex !important;
-  overflow: hidden;
+	overflow: hidden;
 
-  &-0 {
+	&-0 {
 		display: none !important;
 	}
 }
@@ -15,7 +15,8 @@
 .total-nums(@n, @i: 1) when (@i =< @n) {
 	.n-col-@{i} {
 		flex: 0 0 calc(@width / (24 / @i));
-    max-width: calc(@width / (24 / @i));
+		max-width: calc(@width / (24 / @i));
+		display: block;
 	}
 
 	.n-col-offset-@{i} {

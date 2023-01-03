@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<section>
+		<!-- <section>
 			<div class="title">基础用法</div>
 			<div class="content">
 				<div class="item" style="flex: 1">
@@ -14,12 +14,12 @@
 					</n-row>
 				</div>
 			</div>
-		</section>
+		</section> -->
 		<section>
 			<div class="title">列间距（gutter）</div>
 			<div class="content">
 				<div class="item" style="flex: 1">
-					<n-row :gutter="10">
+					<n-row :gutter="20">
 						<n-col :span="8"> span-8 </n-col>
 						<n-col :span="8"> span-8 </n-col>
 						<n-col :span="8"> span-8 </n-col>
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 		</section>
-		<section>
+		<!-- <section>
 			<div class="title">列宽（span）</div>
 			<div class="content">
 				<div class="item" style="flex: 1">
@@ -84,7 +84,7 @@
 					</n-row>
 				</div>
 			</div>
-		</section>
+		</section> -->
 	</div>
 </template>
 
