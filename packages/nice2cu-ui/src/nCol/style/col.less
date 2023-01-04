@@ -1,6 +1,7 @@
 .n-col {
 	transition: all 0.25s;
 	display: flex !important;
+	box-sizing: border-box;
 	overflow: hidden;
 
 	&-0 {
@@ -16,7 +17,6 @@
 	.n-col-@{i} {
 		flex: 0 0 calc(@width / (24 / @i));
 		max-width: calc(@width / (24 / @i));
-		display: block;
 	}
 
 	.n-col-offset-@{i} {

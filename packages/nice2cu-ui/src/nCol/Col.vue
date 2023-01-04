@@ -1,11 +1,11 @@
 <template>
-	<div :class="[bem.b(), bem.b(`${span}`), bem.b(`offset-${offset}`)]" :style="style">
+	<div ref="col" :class="colClasses" :style="style">
 		<slot />
 	</div>
 </template>
 
 <script lang="ts">
-import { computed, CSSProperties, defineComponent, inject } from 'vue';
+import { computed, inject, CSSProperties, defineComponent } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { ColProps } from './ColProps';
 import './style/col.less';
@@ -15,7 +15,10 @@ export default defineComponent({
 	props: ColProps,
 	setup(props: ColProps) {
 		const bem = createNamespace('col');
-		const { gutter } = inject('rowOptions', { gutter: computed(() => 0) });
+
+		const { gutter } = inject('rowProps', { gutter: computed(() => 0) });
+
+		const colClasses = computed(() => [bem.b(), bem.b(`${props.span}`), bem.b(`offset-${props.offset}`)]);
 
 		const style = computed(() => {
 			const styles: CSSProperties = {
@@ -23,12 +26,13 @@ export default defineComponent({
 			};
 
 			if (gutter.value) {
-				styles.marginLeft = styles.marginRight = `${Number(gutter.value) / 2}px`;
+				styles.paddingLeft = styles.paddingRight = `${gutter.value / 2}px`;
 			}
+
 			return styles;
 		});
 
-		return { bem, style };
+		return { bem, colClasses, style };
 	},
 });
 </script>
