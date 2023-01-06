@@ -1,6 +1,6 @@
 import type { Directive, Plugin, App, DirectiveBinding } from 'vue';
 import { createNamespace } from '../../utils/create';
-import './style.less';
+import '../../theme-chalk/ripple.less';
 
 interface RippleOptions {
 	disabled: boolean;
