@@ -25,21 +25,6 @@ export const ColProps = {
 		default: 'row',
 		validator: directionValidator,
 	},
-	xs: {
-		type: [Object as ColSizeDescriptor, Number, String] as PropType<string | number | ColSizeDescriptor | undefined>,
-	},
-	sm: {
-		type: [Object as ColSizeDescriptor, Number, String] as PropType<string | number | ColSizeDescriptor | undefined>,
-	},
-	md: {
-		type: [Object as ColSizeDescriptor, Number, String] as PropType<string | number | ColSizeDescriptor | undefined>,
-	},
-	lg: {
-		type: [Object as ColSizeDescriptor, Number, String] as PropType<string | number | ColSizeDescriptor | undefined>,
-	},
-	xl: {
-		type: [Object as ColSizeDescriptor, Number, String] as PropType<string | number | ColSizeDescriptor | undefined>,
-	},
 };
 
 export type ColProps = ExtractPropTypes<typeof ColProps>;

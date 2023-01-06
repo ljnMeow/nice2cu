@@ -26,7 +26,7 @@ describe('test Row props', () => {
 				gutter: 20,
 			},
 			slots: {
-				default: [8, 8, 8].map((span) => h(nColVue, { span })),
+				default: [8].map((span) => h(nColVue, { span })),
 			},
 		});
 		const colElm20 = wrapper.findComponent(nColVue).element as HTMLElement;
@@ -46,7 +46,7 @@ describe('test Row props', () => {
 					justify,
 				},
 				slots: {
-					default: () => [8, 8, 8].map((span) => h(nColVue, { span })),
+					default: () => [8].map((span) => h(nColVue, { span })),
 				},
 			});
 			expect(wrapper.attributes('style')).toMatch(`justify-content: ${justify}`);
@@ -61,10 +61,55 @@ describe('test Row props', () => {
 					align,
 				},
 				slots: {
-					default: () => [8, 8, 8].map((span) => h(nColVue, { span })),
+					default: () => [8].map((span) => h(nColVue, { span })),
 				},
 			});
 			expect(wrapper.attributes('style')).toMatch(`align-items: ${align}`);
+			wrapper.unmount();
+		});
+	});
+});
+
+describe('test Col props', () => {
+	test('test Col span', () => {
+		const wrapper = mount(nRowVue, {
+			props: {
+				gutter: 20,
+			},
+			slots: {
+				default: () => [12].map((span) => h(nColVue, { span })),
+			},
+		});
+		const colEle = wrapper.findComponent(nColVue);
+		expect(colEle.classes().includes('n-col-12')).toBe(true);
+		wrapper.unmount();
+	});
+	test('test Col offset', () => {
+		const wrapper = mount(nRowVue, {
+			props: {
+				gutter: 20,
+			},
+			slots: {
+				default: () => [12].map((span) => h(nColVue, { span, offset: 4 })),
+			},
+		});
+		const colEle = wrapper.findComponent(nColVue);
+		expect(colEle.classes().includes('n-col-offset-4')).toBe(true);
+		wrapper.unmount();
+	});
+	test('test Col direction', () => {
+		const directionList: string[] = ['row', 'column'];
+		directionList.forEach((direction) => {
+			const wrapper = mount(nRowVue, {
+				props: {
+					gutter: 20,
+				},
+				slots: {
+					default: () => [12].map((span) => h(nColVue, { span, direction })),
+				},
+			});
+			const colElm = wrapper.findComponent(nColVue).element as HTMLElement;
+			expect(colElm.style.flexDirection === direction).toBe(true);
 			wrapper.unmount();
 		});
 	});
