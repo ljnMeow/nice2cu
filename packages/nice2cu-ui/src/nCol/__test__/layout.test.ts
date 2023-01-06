@@ -9,12 +9,9 @@ import nCol from '../index';
 import nColVue from '../Col.vue';
 
 describe('test Layout plugin', () => {
-	test('test Row plugin', () => {
-		const app = createApp({}).use(nRow);
+	test('test Row and Col plugin', () => {
+		const app = createApp({}).use(nRow).use(nCol);
 		expect(app.component((nRow as { name: string }).name)).toBeTruthy();
-	});
-	test('test Col plugin', () => {
-		const app = createApp({}).use(nCol);
 		expect(app.component((nCol as { name: string }).name)).toBeTruthy();
 	});
 });
