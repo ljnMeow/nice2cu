@@ -1,6 +1,6 @@
 {
 	"name": "nice2cu-ui",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"title": "Nice2cu UI",
 	"description": "A Material UI design and Vue3-Typescript-based implementation",
 	"keywords": [
