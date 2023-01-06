@@ -5,3 +5,4 @@ export * from './nCell';
 export * from './nImage';
 export * from './nRow';
 export * from './nCol';
+export * from './nBadge';

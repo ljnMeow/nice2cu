@@ -61,4 +61,12 @@ export default [
 			title: '布局',
 		},
 	},
+	{
+		path: '/badge',
+		name: 'Badge',
+		component: () => import(/* webpackChunkName: "Badge" */ '@views/componentsViews/Badge.vue'),
+		meta: {
+			title: '微标',
+		},
+	},
 ];
