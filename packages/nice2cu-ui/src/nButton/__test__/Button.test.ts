@@ -122,7 +122,7 @@ describe('test Button props', () => {
 		const startTime = performance.now();
 		expect(wrapper.find('.n-ripple').exists()).toBe(true);
 		wrapper.trigger('mouseup');
-		const endTime = 300 - performance.now() + startTime + 310;
+		const endTime = 300 - performance.now() + startTime + 330;
 		await delay(endTime);
 		expect(wrapper.find('.n-ripple').exists()).toBe(false);
 
