@@ -6,7 +6,7 @@
 				bem.b('container'),
 				bem.m(size),
 				parallel ? bem.bm('container', 'parallel') : '',
-				slotDefault && loadingAbsolute ? bem.bm('container', 'absolute') : '',
+				useSlots().default && loadingAbsolute ? bem.bm('container', 'absolute') : '',
 			]"
 			:style="{ color: color }"
 		>
@@ -28,7 +28,7 @@
 			</p>
 		</div>
 		<div class="slot-content">
-			<div v-if="showMask" :class="slotDefault && loading ? bem.b('mask') : ''"></div>
+			<div v-if="showMask" :class="useSlots().default && loading ? bem.b('mask') : ''"></div>
 			<slot />
 		</div>
 	</div>
@@ -47,9 +47,8 @@ export default defineComponent({
 	props: LoadingProps,
 	setup() {
 		const bem = createNamespace('loading');
-		const slotDefault = !!useSlots().default;
 
-		return { bem, slotDefault };
+		return { bem, useSlots };
 	},
 });
 </script>

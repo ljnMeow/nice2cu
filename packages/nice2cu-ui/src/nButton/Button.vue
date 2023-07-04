@@ -39,7 +39,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { createNamespace } from '../../utils/create';
-import { ButtonProps } from './ButtonProps';
+import { ButtonProps, ButtonPropsType } from './ButtonProps';
 import Ripple from '../../directives/ripple';
 import NLoading from '../nLoading';
 import './style/button.less';
@@ -49,7 +49,7 @@ export default defineComponent({
 	directives: { Ripple },
 	components: { NLoading },
 	props: ButtonProps,
-	setup(props: ButtonProps) {
+	setup(props: ButtonPropsType) {
 		const bem = createNamespace('button');
 		const nLoading = ref();
 

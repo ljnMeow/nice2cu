@@ -16,4 +16,4 @@ export const IconProps = {
 	size: [String, Number] as PropType<string | number>,
 } as const;
 
-export type IconProps = ExtractPropTypes<typeof IconProps>;
+export type IconPropsType = ExtractPropTypes<typeof IconProps>;

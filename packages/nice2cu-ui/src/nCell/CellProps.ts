@@ -71,4 +71,4 @@ export const CellProps = {
 	},
 };
 
-export type CellProps = ExtractPropTypes<typeof CellProps>;
+export type CellPropsType = ExtractPropTypes<typeof CellProps>;

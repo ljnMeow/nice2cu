@@ -69,4 +69,12 @@ export default [
 			title: '微标',
 		},
 	},
+	{
+		path: '/navbar',
+		name: 'NavBar',
+		component: () => import(/* webpackChunkName: "Badge" */ '@views/componentsViews/NavBar.vue'),
+		meta: {
+			title: '导航栏',
+		},
+	},
 ];

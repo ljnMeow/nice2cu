@@ -25,4 +25,4 @@ export const RowProps = {
 	},
 };
 
-export type RowProps = ExtractPropTypes<typeof RowProps>;
+export type RowPropsType = ExtractPropTypes<typeof RowProps>;

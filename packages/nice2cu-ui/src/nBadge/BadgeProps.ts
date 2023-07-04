@@ -32,4 +32,4 @@ export const BadgeProps = {
 	},
 };
 
-export type BadgeProps = ExtractPropTypes<typeof BadgeProps>;
+export type BadgePropsType = ExtractPropTypes<typeof BadgeProps>;

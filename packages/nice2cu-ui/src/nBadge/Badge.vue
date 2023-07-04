@@ -12,14 +12,14 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { createNamespace } from '../../utils/create';
-import { BadgeProps } from './BadgeProps';
+import { BadgeProps, BadgePropsType } from './BadgeProps';
 import { toNumber } from '../../utils/tools';
 import './style/badge.less';
 
 export default defineComponent({
 	name: 'NBadge',
 	props: BadgeProps,
-	setup(props: BadgeProps, { slots }) {
+	setup(props: BadgePropsType, { slots }) {
 		const bem = createNamespace('badge');
 
 		const contentClasses = computed(() => {

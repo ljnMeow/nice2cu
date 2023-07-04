@@ -7,13 +7,13 @@
 <script lang="ts">
 import { computed, inject, CSSProperties, defineComponent } from 'vue';
 import { createNamespace } from '../../utils/create';
-import { ColProps } from './ColProps';
+import { ColProps, ColPropsType } from './ColProps';
 import './style/col.less';
 
 export default defineComponent({
 	name: 'NCol',
 	props: ColProps,
-	setup(props: ColProps) {
+	setup(props: ColPropsType) {
 		const bem = createNamespace('col');
 
 		const { gutter } = inject('rowProps', { gutter: computed(() => 0) });

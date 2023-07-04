@@ -18,14 +18,14 @@
 import { defineComponent, computed, ComputedRef } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { handleUnit } from '../../utils/tools';
-import { IconProps } from './IconProps';
+import { IconProps, IconPropsType } from './IconProps';
 import './style/icon.less';
 import './assets/font';
 
 export default defineComponent({
 	name: 'NIcon',
 	props: IconProps,
-	setup(props: IconProps) {
+	setup(props: IconPropsType) {
 		const bem = createNamespace('icon');
 		const className: ComputedRef<string[]> = computed(() => {
 			return [bem.b(), props.classPrefix, props.icon];

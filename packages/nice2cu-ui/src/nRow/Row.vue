@@ -15,14 +15,14 @@
 <script lang="ts">
 import { defineComponent, computed, provide, useSlots, VNode } from 'vue';
 import { createNamespace } from '../../utils/create';
-import { RowProps } from './RowProps';
+import { RowProps, RowPropsType } from './RowProps';
 import Col from '../nCol/Col.vue';
 import './style/row.less';
 
 export default defineComponent({
 	name: 'NRow',
 	props: RowProps,
-	setup(props: RowProps) {
+	setup(props: RowPropsType) {
 		const bem = createNamespace('row');
 		const gutter = computed(() => props.gutter);
 		const slots = useSlots();

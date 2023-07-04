@@ -72,4 +72,4 @@ export const ButtonProps = {
 	},
 };
 
-export type ButtonProps = ExtractPropTypes<typeof ButtonProps>;
+export type ButtonPropsType = ExtractPropTypes<typeof ButtonProps>;

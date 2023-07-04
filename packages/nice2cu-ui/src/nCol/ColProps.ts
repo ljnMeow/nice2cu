@@ -27,4 +27,4 @@ export const ColProps = {
 	},
 };
 
-export type ColProps = ExtractPropTypes<typeof ColProps>;
+export type ColPropsType = ExtractPropTypes<typeof ColProps>;

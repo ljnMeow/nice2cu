@@ -5,6 +5,9 @@
 </template>
 
 <style lang="less">
+html {
+	background-color: #eff2f5;
+}
 @media (max-width: 479px) {
 	html {
 		font-size: 16px;
@@ -48,5 +51,8 @@
 			}
 		}
 	}
+}
+.unflex {
+	display: block !important;
 }
 </style>

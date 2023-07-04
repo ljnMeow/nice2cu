@@ -58,4 +58,4 @@ export const ImageProps = {
 	},
 };
 
-export type ImageProps = ExtractPropTypes<typeof ImageProps>;
+export type ImagePropsType = ExtractPropTypes<typeof ImageProps>;

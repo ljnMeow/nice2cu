@@ -22,14 +22,14 @@ import { handleUnit } from '../../utils/tools';
 import Lazy from '../../directives/lazy';
 import { LazyEventOptions } from '../../directives/lazy';
 import { defaultLoadingImg, defaultLoadingError } from '../../directives/lazy/defaultImg';
-import { ImageProps } from './ImageProps';
+import { ImageProps, ImagePropsType } from './ImageProps';
 import './style/image.less';
 
 export default defineComponent({
 	name: 'NImage',
 	directives: { Lazy },
 	props: ImageProps,
-	setup(props: ImageProps) {
+	setup(props: ImagePropsType) {
 		const bem = createNamespace('image');
 		const imgSrc = ref(props.loading ?? defaultLoadingImg);
 

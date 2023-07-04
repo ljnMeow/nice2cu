@@ -7,5 +7,6 @@
 		<n-cell title="Image 图片" link="image"></n-cell>
 		<n-cell title="Layout 布局" link="layout"></n-cell>
 		<n-cell title="Badge 微标" link="badge"></n-cell>
+		<n-cell title="NavBar 导航栏" link="navbar"></n-cell>
 	</div>
 </template>
