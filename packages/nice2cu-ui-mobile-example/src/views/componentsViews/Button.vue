@@ -1,5 +1,6 @@
 <template>
 	<div class="container">
+		<n-nav-bar title="Button 按钮" show-left left-text="" :shadow-buttom="true" fixed-top placeholder></n-nav-bar>
 		<section>
 			<div class="title">按钮类型（type）</div>
 			<div class="content">

@@ -33,13 +33,13 @@ export const NavBarProps = {
 		type: String,
 		default: '返回',
 	},
-	showRight: {
-		type: Boolean,
-		default: false,
-	},
 	leftIcon: {
 		type: String,
 		default: 'n-left',
+	},
+	showRight: {
+		type: Boolean,
+		default: false,
 	},
 	rightText: {
 		type: String,

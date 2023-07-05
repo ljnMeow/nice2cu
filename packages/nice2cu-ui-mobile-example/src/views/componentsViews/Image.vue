@@ -1,5 +1,6 @@
 <template>
 	<div class="container">
+		<n-nav-bar title="Image 图片" show-left left-text="" :shadow-buttom="true" fixed-top placeholder></n-nav-bar>
 		<section>
 			<div class="title">基础用法</div>
 			<div class="content">

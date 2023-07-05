@@ -74,7 +74,7 @@ describe('test Badge Props', () => {
 				backgroundColor: '#cccccc',
 				borderRadius: ' 4px',
 			};
-			const wrapper = mount(nBadgeVue, {
+			const wrapper = mount(nBadgeVue as any, {
 				props: {
 					content: 10,
 					position,

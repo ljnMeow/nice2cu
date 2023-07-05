@@ -37,7 +37,7 @@ describe('test Button props', () => {
 	test('test Button type', () => {
 		const typeArr: string[] = ['default', 'primary', 'info', 'success', 'warning', 'danger'];
 		typeArr.forEach((item) => {
-			const wrapper = mount(nButtonVue, {
+			const wrapper = mount(nButtonVue as any, {
 				props: {
 					type: item,
 				},
@@ -50,7 +50,7 @@ describe('test Button props', () => {
 	test('test Button size', () => {
 		const sizeArr: string[] = ['normal', 'mini', 'small', 'large'];
 		sizeArr.forEach((item) => {
-			const wrapper = mount(nButtonVue, {
+			const wrapper = mount(nButtonVue as any, {
 				props: {
 					size: item,
 				},
@@ -75,7 +75,7 @@ describe('test Button props', () => {
 	test('test Button shape', () => {
 		const shapeArr: string[] = ['round', 'square', 'radius'];
 		shapeArr.forEach((item) => {
-			const wrapper = mount(nButtonVue, {
+			const wrapper = mount(nButtonVue as any, {
 				props: {
 					shape: item,
 				},
@@ -180,7 +180,7 @@ describe('test Button props', () => {
 	test('test Button loadingType', () => {
 		const loadingTypeArr: string[] = ['circle', 'time', 'wave', 'point', 'rever', 'bounce', 'battery'];
 		loadingTypeArr.forEach((item) => {
-			const wrapper = mount(nButtonVue, {
+			const wrapper = mount(nButtonVue as any, {
 				props: {
 					loading: true,
 					loadingType: item,
@@ -194,7 +194,7 @@ describe('test Button props', () => {
 	test('test Button loadingSize', () => {
 		const loadingSizeArr: string[] = ['normal', 'mini', 'small', 'large'];
 		loadingSizeArr.forEach((item) => {
-			const wrapper = mount(nButtonVue, {
+			const wrapper = mount(nButtonVue as any, {
 				props: {
 					loading: true,
 					loadingSize: item,

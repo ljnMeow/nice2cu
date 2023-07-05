@@ -99,7 +99,7 @@ describe('test Loading props', () => {
 	test('test Cell showArrow', () => {
 		const arrowDirectionArr: string[] = ['up', 'right', 'down'];
 		arrowDirectionArr.forEach((item) => {
-			const wrapper = mount(nCellVue, {
+			const wrapper = mount(nCellVue as any, {
 				props: {
 					showArrow: item,
 				},

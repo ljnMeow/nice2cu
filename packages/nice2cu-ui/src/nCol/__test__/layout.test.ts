@@ -38,7 +38,7 @@ describe('test Row props', () => {
 	test('test Row justify', () => {
 		const justifyList: string[] = ['flex-start', 'flex-end', 'center', 'space-between', 'space-around'];
 		justifyList.forEach((justify) => {
-			const wrapper = mount(nRowVue, {
+			const wrapper = mount(nRowVue as any, {
 				props: {
 					justify,
 				},
@@ -53,7 +53,7 @@ describe('test Row props', () => {
 	test('test Row align', () => {
 		const alignList: string[] = ['flex-start', 'center', 'flex-end'];
 		alignList.forEach((align) => {
-			const wrapper = mount(nRowVue, {
+			const wrapper = mount(nRowVue as any, {
 				props: {
 					align,
 				},
@@ -102,7 +102,7 @@ describe('test Col props', () => {
 					gutter: 20,
 				},
 				slots: {
-					default: () => [12].map((span) => h(nColVue, { span, direction })),
+					default: () => [12].map((span) => h(nColVue as any, { span, direction })),
 				},
 			});
 			const colElm = wrapper.findComponent(nColVue).element as HTMLElement;

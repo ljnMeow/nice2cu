@@ -16,7 +16,7 @@ describe('test Loading props', () => {
 	test('test Loading type', () => {
 		const typeArr: string[] = ['circle', 'time', 'wave', 'point', 'rever', 'bounce', 'battery'];
 		typeArr.forEach((item) => {
-			const wrapper = mount(nLoadingVue, {
+			const wrapper = mount(nLoadingVue as any, {
 				props: {
 					type: item,
 				},
@@ -54,7 +54,7 @@ describe('test Loading props', () => {
 	test('test Loading size', () => {
 		const sizeArr: string[] = ['mini', 'normal', 'small', 'large'];
 		sizeArr.forEach((item) => {
-			const wrapper = mount(nLoadingVue, {
+			const wrapper = mount(nLoadingVue as any, {
 				props: {
 					size: item,
 				},

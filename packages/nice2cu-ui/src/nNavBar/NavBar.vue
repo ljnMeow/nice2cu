@@ -23,7 +23,7 @@
 				<slot name="right" />
 			</div>
 		</div>
-		<div v-if="placeholder" :class="bem.e('content-placeholder')" :style="{ height: height }"></div>
+		<div v-if="fixedTop && placeholder" :class="bem.e('content-placeholder')" :style="{ height: height }"></div>
 	</div>
 </template>
 
