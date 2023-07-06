@@ -65,6 +65,10 @@ export const NavBarProps = {
 		type: Boolean,
 		default: false,
 	},
+	safeAreaInsetTop: {
+		type: Boolean,
+		default: false,
+	},
 	leftClick: {
 		type: Function as PropType<(e: Event) => void | Promise<any>>,
 	},

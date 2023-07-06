@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<n-nav-bar title="Icon 图标" show-left left-text="" :shadow-buttom="true" fixed-top placeholder></n-nav-bar>
+		<n-nav-bar title="Icon 图标" show-left left-text="" :shadow-buttom="true" fixed-top safe-area-inset-top placeholder></n-nav-bar>
 		<section>
 			<div class="title">图标尺寸（size）</div>
 			<div class="content">

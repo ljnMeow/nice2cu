@@ -145,6 +145,15 @@ describe('test NavBar props', () => {
 		expect(wrapper.find('.n-nav-bar__content-placeholder').exists()).toBe(true);
 		wrapper.unmount();
 	});
+	test('test NavBar safeAreaInsetTop', () => {
+		const wrapper = mount(nNavBarVue, {
+			props: {
+				safeAreaInsetTop: true,
+			},
+		});
+		expect(wrapper.find('.n-nav-bar--safe-top').exists()).toBe(true);
+		wrapper.unmount();
+	});
 });
 
 describe('test NavBar event', () => {
