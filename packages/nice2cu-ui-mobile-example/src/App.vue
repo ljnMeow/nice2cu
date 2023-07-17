@@ -55,4 +55,7 @@ html {
 .unflex {
 	display: block !important;
 }
+.text-center {
+	text-align: center;
+}
 </style>

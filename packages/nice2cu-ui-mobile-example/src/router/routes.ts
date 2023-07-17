@@ -72,9 +72,40 @@ export default [
 	{
 		path: '/navbar',
 		name: 'NavBar',
-		component: () => import(/* webpackChunkName: "Badge" */ '@views/componentsViews/NavBar.vue'),
+		component: () => import(/* webpackChunkName: "NavBar" */ '@views/componentsViews/NavBar.vue'),
 		meta: {
 			title: '导航栏',
+		},
+	},
+	{
+		path: '/bottomNavBar',
+		redirect: '/bottomNavBar/page1',
+		name: 'BottomNavBar',
+		component: () => import(/* webpackChunkName: "BottomNavBar" */ '@views/componentsViews/BottomNavBar.vue'),
+		children: [
+			{
+				path: 'page1',
+				component: () => import(/* webpackChunkName: "Page1" */ '@views/componentsViews/BottomNavBarJumpPage/Page1.vue'),
+			},
+			{
+				path: 'page2',
+				component: () => import(/* webpackChunkName: "Page1" */ '@views/componentsViews/BottomNavBarJumpPage/Page2.vue'),
+			},
+			{
+				path: 'page3',
+				component: () => import(/* webpackChunkName: "Page1" */ '@views/componentsViews/BottomNavBarJumpPage/Page3.vue'),
+			},
+			{
+				path: 'page4',
+				component: () => import(/* webpackChunkName: "Page1" */ '@views/componentsViews/BottomNavBarJumpPage/Page4.vue'),
+			},
+			{
+				path: 'page5',
+				component: () => import(/* webpackChunkName: "Page1" */ '@views/componentsViews/BottomNavBarJumpPage/Page5.vue'),
+			},
+		],
+		meta: {
+			title: '底部导航栏',
 		},
 	},
 ];

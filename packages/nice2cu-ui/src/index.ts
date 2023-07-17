@@ -7,3 +7,5 @@ export * from './nRow';
 export * from './nCol';
 export * from './nBadge';
 export * from './nNavBar';
+export * from './nBottomNavBar';
+export * from './nBottomNavBarItem';

@@ -1,0 +1,47 @@
+@import url('../../../theme-chalk/mixins/variable.less');
+
+.n-bottom-navbar-item {
+    position: relative;
+    display: inline-flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-top: 10px;
+    color: #000000;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    transition: color 250ms, margin 250ms;
+    color: @color-tint;
+
+    &-label {
+        font-size: @font-size-sm;
+        transition: font-size 0.2s ease 0.1s;
+        white-space: nowrap;
+    }
+
+    &:active {
+        background-color: transparent;
+        outline: none;
+    }
+
+    &--active {
+        color: @color-primary;
+    }
+
+    .n-icon {
+        position: relative;
+    }
+
+    &__badge {
+        // position: absolute;
+        // top: -50%;
+        // right: -50%;
+    }
+}

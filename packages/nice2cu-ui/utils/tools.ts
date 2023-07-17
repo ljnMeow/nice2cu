@@ -1,3 +1,4 @@
+import { VNode } from 'vue';
 /**
  * @param val
  * @description 类型判断函数
@@ -13,6 +14,8 @@ export const isNumber = (val: unknown): val is number => typeof val === 'number'
 export const isObject = (val: unknown): val is Record<string, any> => typeof val === 'object' && val !== null;
 
 export const isArray = (val: unknown): val is Array<any> => Array.isArray(val);
+
+export const isSameVNodeType = (node1: VNode, node2: VNode) => node1.type === node2.type && node1.key === node2.key;
 
 /**
  * @function handleUnit
