@@ -35,6 +35,10 @@ export const BottomNavBarProps = {
 		type: Boolean,
 		default: false,
 	},
+	scroll: {
+		type: Boolean,
+		default: false,
+	},
 } as const;
 
 export type BottomNavBarPropsType = ExtractPropTypes<typeof BottomNavBarProps>;

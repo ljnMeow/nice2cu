@@ -1,7 +1,8 @@
 <template>
 	<button
+		ref="bottomNavbarItem"
 		v-ripple="{ disabled: false, isRipple: true }"
-		:class="[bem.b(), active === itemIndexOrName ? bem.m('active') : '']"
+		:class="[bem.b(), active === itemIndexOrName ? bem.m('active') : '', scroll ? bem.m('scroll') : '']"
 		:style="{
 			color: computeColorStyle(),
 		}"
@@ -14,7 +15,8 @@
 			:class="bem.e('badge')"
 			:color="badgeColor"
 		>
-			<n-icon :icon="icon" :class-prefix="classPrefix" :size="iconSize"> </n-icon>
+			<n-icon v-if="!useSlots().icon" :icon="icon" :class-prefix="classPrefix" :size="iconSize"> </n-icon>
+			<slot name="icon" />
 			<div :class="[bem.b('label')]">
 				<slot />
 			</div>
@@ -23,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, inject, getCurrentInstance, ComponentInternalInstance } from 'vue';
+import { defineComponent, ref, Ref, inject, getCurrentInstance, ComponentInternalInstance, useSlots } from 'vue';
 import { BottomNavBarItemProps, BottomNavBarItemPropsType, BottomNavBarItemPropsProvide } from './BottomNavBarItemProps';
 import { createNamespace } from '../../utils/create';
 import { isBoolean, isNumber } from '../../utils/tools';
@@ -41,7 +43,7 @@ export default defineComponent({
 		const bem = createNamespace('bottom-navbar-item');
 		const bottomNavBarItem: ComponentInternalInstance = getCurrentInstance() as ComponentInternalInstance;
 		const bottomNavBarItemProvide: BottomNavBarItemPropsProvide | undefined = inject('bottomNavBarItemProvide');
-		const { active, activeColor, defaultColor, bottomNavBarItemProxys, changeNavBar } = bottomNavBarItemProvide!;
+		const { active, scroll, activeColor, defaultColor, bottomNavBarItemProxys, changeNavBar } = bottomNavBarItemProvide!;
 		const itemIndexOrName: Ref<number | string | undefined> = ref(active.value);
 
 		if (bottomNavBarItem.proxy) {
@@ -68,7 +70,7 @@ export default defineComponent({
 			}
 		}
 
-		return { bem, active, itemIndexOrName, computeColorStyle, clickHandler, isBoolean, isNumber };
+		return { bem, active, scroll, itemIndexOrName, computeColorStyle, clickHandler, isBoolean, isNumber, useSlots };
 	},
 });
 </script>

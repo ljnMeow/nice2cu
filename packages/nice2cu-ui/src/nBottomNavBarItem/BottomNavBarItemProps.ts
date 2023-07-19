@@ -35,6 +35,7 @@ export type BottomNavBarItemPropsProvide = {
 	active: ComputedRef<string | number | undefined>;
 	activeColor: ComputedRef<string | undefined>;
 	defaultColor: ComputedRef<string | undefined>;
+	scroll: ComputedRef<boolean>;
 	bottomNavBarItemProxys: Ref<ComponentInternalInstance['proxy'][]>;
 	changeNavBar: (indexOrName: number | string, comp: ComponentInternalInstance) => void;
 };

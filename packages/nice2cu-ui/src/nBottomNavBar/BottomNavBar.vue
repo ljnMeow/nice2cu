@@ -1,8 +1,8 @@
 <template>
-	<div :class="[bem.b('placeholder')]" :style="{ height: `${placeholderHeight}px` }"></div>
+	<div v-if="placeholder" :class="[bem.b('placeholder')]" :style="{ height: `${placeholderHeight}px` }"></div>
 	<div
 		ref="bottomNavbar"
-		:class="[bem.b(), fixedBottom ? bem.m('fixed-bottom') : '', safeAreaInsetBottom ? bem.m('safe-bottom') : '']"
+		:class="[bem.b(), fixedBottom ? bem.m('fixed-bottom') : '', safeAreaInsetBottom ? bem.m('safe-bottom') : '', scroll ? bem.m('scroll') : '']"
 		:style="{
 			background: background,
 			boxShadow: shadowTop ? `0px -2px 4px 0px ${shadowColor}` : '',
@@ -44,6 +44,7 @@ export default defineComponent({
 		const slots = useSlots();
 
 		const active: ComputedRef<number | string | undefined> = computed(() => props.active);
+		const scroll: ComputedRef<boolean> = computed(() => props.scroll);
 		const activeColor: ComputedRef<string | undefined> = computed(() => props.activeColor);
 		const defaultColor: ComputedRef<string | undefined> = computed(() => props.defaultColor);
 		const bottomNavBarItems: ComputedRef<VNode[]> = computed(() => {
@@ -82,7 +83,22 @@ export default defineComponent({
 			}
 		};
 
+		const scrollHandler = (comp: ComponentInternalInstance) => {
+			if (props.scroll) {
+				const bottomNavbarDom = proxy?.$refs.bottomNavbar as HTMLElement;
+				const bottomNavbarDomRect: DOMRect = bottomNavbarDom.getBoundingClientRect();
+				const itemDom: HTMLElement = comp.refs ? comp.refs.bottomNavbarItem : (comp as any).$refs.bottomNavbarItem;
+				const itemDomRect: DOMRect = itemDom.getBoundingClientRect();
+
+				const scrollLeft: number =
+					bottomNavbarDom.scrollLeft + itemDomRect.left - bottomNavbarDomRect.left - (bottomNavbarDomRect.width - itemDomRect.width) / 2;
+				bottomNavbarDom.scrollLeft = scrollLeft;
+			}
+		};
+
 		const changeNavBar = (indexOrName: number | string, comp: ComponentInternalInstance) => {
+			scrollHandler(comp);
+
 			context.emit('update:active', indexOrName);
 			context.emit('switch', indexOrName, comp);
 		};
@@ -91,6 +107,7 @@ export default defineComponent({
 			active,
 			activeColor,
 			defaultColor,
+			scroll,
 			bottomNavBarItemProxys,
 			changeNavBar,
 		});
@@ -104,11 +121,22 @@ export default defineComponent({
 		);
 
 		onMounted(() => {
-			if (props.fixedBottom && props.placeholder) {
-				nextTick(() => {
-					placeholderHeight.value = (proxy?.$refs.bottomNavbar as HTMLElement).getBoundingClientRect().height;
-				});
-			}
+			nextTick(() => {
+				const bottomNavbarDom = proxy?.$refs.bottomNavbar as HTMLElement;
+
+				if (props.fixedBottom && props.placeholder) {
+					placeholderHeight.value = bottomNavbarDom.getBoundingClientRect().height;
+				}
+
+				if (scroll.value) {
+					const itemList = bottomNavBarItemProxys.value;
+					itemList.forEach((item: any, index) => {
+						if (active.value === index || active.value === item.name) {
+							scrollHandler(item as any);
+						}
+					});
+				}
+			});
 		});
 
 		return { bem, placeholderHeight };
