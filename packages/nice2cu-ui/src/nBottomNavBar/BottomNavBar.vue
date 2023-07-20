@@ -5,7 +5,7 @@
 		:class="[bem.b(), fixedBottom ? bem.m('fixed-bottom') : '', safeAreaInsetBottom ? bem.m('safe-bottom') : '', scroll ? bem.m('scroll') : '']"
 		:style="{
 			background: background,
-			boxShadow: shadowTop ? `0px -2px 4px 0px ${shadowColor}` : '',
+			boxShadow: shadowTop ? `0px 0px 4px 0px ${shadowColor}` : '',
 		}"
 	>
 		<slot />
@@ -30,7 +30,7 @@ import {
 	nextTick,
 } from 'vue';
 import { createNamespace } from '../../utils/create';
-import { isNumber } from '../../utils/tools';
+import { isNumber, isBoolean, isPromise } from '../../utils/tools';
 import { BottomNavBarProps, BottomNavBarPropsType } from './BottomNavBarProps';
 import { BottomNavBarItemPropsProvide } from '../nBottomNavBarItem/BottomNavBarItemProps';
 import './style/buttonNavBar.less';
@@ -86,9 +86,11 @@ export default defineComponent({
 		const scrollHandler = (comp: ComponentInternalInstance) => {
 			if (props.scroll) {
 				const bottomNavbarDom = proxy?.$refs.bottomNavbar as HTMLElement;
-				const bottomNavbarDomRect: DOMRect = bottomNavbarDom.getBoundingClientRect();
+				const bottomNavbarDomRect: DOMRect = bottomNavbarDom && bottomNavbarDom.getBoundingClientRect();
 				const itemDom: HTMLElement = comp.refs ? comp.refs.bottomNavbarItem : (comp as any).$refs.bottomNavbarItem;
-				const itemDomRect: DOMRect = itemDom.getBoundingClientRect();
+				const itemDomRect: DOMRect = itemDom && itemDom.getBoundingClientRect();
+
+				if (!bottomNavbarDom || !itemDom) return;
 
 				const scrollLeft: number =
 					bottomNavbarDom.scrollLeft + itemDomRect.left - bottomNavbarDomRect.left - (bottomNavbarDomRect.width - itemDomRect.width) / 2;
@@ -103,13 +105,35 @@ export default defineComponent({
 			context.emit('switch', indexOrName, comp);
 		};
 
+		const onBeforeChangeHandler = (value: string | number, comp: ComponentInternalInstance) => {
+			const result = props.onBeforeChange && props.onBeforeChange(value);
+
+			if (isBoolean(result)) {
+				if (result) changeNavBar(value, comp);
+			} else if (isPromise(result)) {
+				result
+					.then(() => {
+						changeNavBar(value, comp);
+					})
+					.catch(() => {
+						return '';
+					});
+			}
+		};
+
+		const toggleHandler = (value: string | number, comp: ComponentInternalInstance) => {
+			if (active.value === value) return;
+
+			props.onBeforeChange ? onBeforeChangeHandler(value, comp) : changeNavBar(value, comp);
+		};
+
 		provide<BottomNavBarItemPropsProvide>('bottomNavBarItemProvide', {
 			active,
 			activeColor,
 			defaultColor,
 			scroll,
 			bottomNavBarItemProxys,
-			changeNavBar,
+			toggleHandler,
 		});
 
 		watch(

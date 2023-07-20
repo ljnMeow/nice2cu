@@ -1,8 +1,13 @@
 <template>
 	<button
 		ref="bottomNavbarItem"
-		v-ripple="{ disabled: false, isRipple: true }"
-		:class="[bem.b(), active === itemIndexOrName ? bem.m('active') : '', scroll ? bem.m('scroll') : '']"
+		v-ripple="{ disabled: disabled, isRipple: true }"
+		:class="[
+			bem.b(),
+			active === itemIndexOrName && !disabled ? bem.m('active') : '',
+			scroll ? bem.m('scroll') : '',
+			disabled ? bem.m('disabled') : '',
+		]"
 		:style="{
 			color: computeColorStyle(),
 		}"
@@ -43,7 +48,7 @@ export default defineComponent({
 		const bem = createNamespace('bottom-navbar-item');
 		const bottomNavBarItem: ComponentInternalInstance = getCurrentInstance() as ComponentInternalInstance;
 		const bottomNavBarItemProvide: BottomNavBarItemPropsProvide | undefined = inject('bottomNavBarItemProvide');
-		const { active, scroll, activeColor, defaultColor, bottomNavBarItemProxys, changeNavBar } = bottomNavBarItemProvide!;
+		const { active, scroll, activeColor, defaultColor, bottomNavBarItemProxys, toggleHandler } = bottomNavBarItemProvide!;
 		const itemIndexOrName: Ref<number | string | undefined> = ref(active.value);
 
 		if (bottomNavBarItem.proxy) {
@@ -57,11 +62,13 @@ export default defineComponent({
 		};
 
 		const clickHandler = () => {
+			if (props.disabled) return;
+
 			if (props.to && bottomNavBarItem.proxy) {
 				bottomNavBarItem.proxy.$router.push(props.to);
 			}
 			const active = props.name ?? itemIndexOrName.value;
-			changeNavBar(active!, bottomNavBarItem);
+			toggleHandler(active!, bottomNavBarItem);
 		};
 
 		if (props.to && bottomNavBarItem.proxy) {

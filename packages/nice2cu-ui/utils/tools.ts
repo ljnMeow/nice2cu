@@ -15,6 +15,8 @@ export const isObject = (val: unknown): val is Record<string, any> => typeof val
 
 export const isArray = (val: unknown): val is Array<any> => Array.isArray(val);
 
+export const isPromise = (val: unknown): val is Promise<any> => val instanceof Promise;
+
 export const isSameVNodeType = (node1: VNode, node2: VNode) => node1.type === node2.type && node1.key === node2.key;
 
 /**

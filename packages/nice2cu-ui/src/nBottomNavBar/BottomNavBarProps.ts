@@ -39,6 +39,9 @@ export const BottomNavBarProps = {
 		type: Boolean,
 		default: false,
 	},
+	onBeforeChange: {
+		type: Function as PropType<(value: string | number) => boolean | Promise<any>>,
+	},
 } as const;
 
 export type BottomNavBarPropsType = ExtractPropTypes<typeof BottomNavBarProps>;

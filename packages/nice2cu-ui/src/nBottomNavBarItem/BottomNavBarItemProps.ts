@@ -27,6 +27,10 @@ export const BottomNavBarItemProps = {
 	to: {
 		type: String,
 	},
+	disabled: {
+		type: Boolean,
+		default: false,
+	},
 } as const;
 
 export type BottomNavBarItemPropsType = ExtractPropTypes<typeof BottomNavBarItemProps>;
@@ -37,5 +41,5 @@ export type BottomNavBarItemPropsProvide = {
 	defaultColor: ComputedRef<string | undefined>;
 	scroll: ComputedRef<boolean>;
 	bottomNavBarItemProxys: Ref<ComponentInternalInstance['proxy'][]>;
-	changeNavBar: (indexOrName: number | string, comp: ComponentInternalInstance) => void;
+	toggleHandler: (indexOrName: number | string, comp: ComponentInternalInstance) => void;
 };
