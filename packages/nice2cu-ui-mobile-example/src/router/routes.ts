@@ -108,4 +108,12 @@ export default [
 			title: '底部导航栏',
 		},
 	},
+	{
+		path: '/sticky',
+		name: 'Sticky',
+		component: () => import(/* webpackChunkName: "Sticky" */ '@views/componentsViews/Sticky.vue'),
+		meta: {
+			title: '粘性布局',
+		},
+	},
 ];

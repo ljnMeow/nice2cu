@@ -1,4 +1,12 @@
 import { VNode } from 'vue';
+
+// 类型
+type ScrollElement = HTMLElement | Window;
+
+// 常量
+const defaultRoot = window;
+const overflowScrollReg = /scroll|auto|overlay/i;
+
 /**
  * @param val
  * @description 类型判断函数
@@ -18,6 +26,11 @@ export const isArray = (val: unknown): val is Array<any> => Array.isArray(val);
 export const isPromise = (val: unknown): val is Promise<any> => val instanceof Promise;
 
 export const isSameVNodeType = (node1: VNode, node2: VNode) => node1.type === node2.type && node1.key === node2.key;
+
+export const isElement = (node: Element) => {
+	const ELEMENT_NODE_TYPE = 1;
+	return node.tagName !== 'HTML' && node.tagName !== 'BODY' && node.nodeType === ELEMENT_NODE_TYPE;
+};
 
 /**
  * @function handleUnit
@@ -96,4 +109,18 @@ export const toNumber = (val: number | string | boolean | undefined | null): num
 	if (isBoolean(val)) return Number(val);
 
 	return val;
+};
+
+export const getScrollParent = (el: HTMLElement, root: ScrollElement | undefined = defaultRoot) => {
+	let node = el;
+
+	while (node && node !== root && isElement(node)) {
+		const { overflowY } = window.getComputedStyle(node);
+		if (overflowScrollReg.test(overflowY)) {
+			return node;
+		}
+		node = node.parentNode as HTMLElement;
+	}
+
+	return root;
 };
