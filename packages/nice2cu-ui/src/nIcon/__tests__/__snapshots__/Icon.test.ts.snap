@@ -6,4 +6,4 @@ exports[`test Icon Props > test Icon badge Number 1`] = `"<div class=\\"n-icon__
 
 exports[`test Icon Props > test Icon badge String 1`] = `"<div class=\\"n-icon__badge\\">10</div>"`;
 
-exports[`test Icon Props > test Icon svg 1`] = `"<i class=\\"n-icon\\"><span class=\\"svg-content\\"><svg class=\\"n-icon__svg\\"><use xlink:href=\\"#n-alarm-sharp\\"></use></svg><!--v-if--></span></i>"`;
+exports[`test Icon Props > test Icon svg 1`] = `"<i class=\\"n-icon\\"><span class=\\"svg-content\\"><svg class=\\"n-icon__svg\\" style=\\"margin: 0px;\\"><use xlink:href=\\"#n-alarm-sharp\\"></use></svg><!--v-if--></span></i>"`;

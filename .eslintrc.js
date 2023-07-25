@@ -46,5 +46,14 @@ module.exports = {
 				allowedNames: ['self'],
 			},
 		],
+		'@typescript-eslint/ban-types': [
+			'error',
+			{
+				extendDefaults: true,
+				types: {
+					'{}': false,
+				},
+			},
+		],
 	},
 };

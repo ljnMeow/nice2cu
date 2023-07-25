@@ -7,16 +7,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, CSSProperties, watch, onMounted, onUnmounted } from 'vue';
+import { defineComponent, ref, computed, CSSProperties, onMounted, onUnmounted } from 'vue';
 import { createNamespace } from '../../utils/create';
-import { getScrollParent } from '../../utils/tools';
+import { getScrollParent, toNumber } from '../../utils/tools';
 import { StickyProps, StickyPropsType } from './StickyProps';
 import './style/sticky.less';
 
 export default defineComponent({
 	name: 'NSticky',
 	props: StickyProps,
-	emits: ['change'],
 	setup(props: StickyPropsType) {
 		const bem = createNamespace('sticky');
 
@@ -32,11 +31,11 @@ export default defineComponent({
 		const fixedWrapperHeight = ref<string>('auto');
 
 		const threshold = computed(() => {
-			return props.position === 'top' ? Number(props.top) : Number(props.bottom);
+			return props.position === 'top' ? toNumber(props.top) : toNumber(props.bottom);
 		});
 
 		const rootStyle = computed<CSSProperties>(() => {
-			if (isFixed.value) return { width: fixedWidth.value, height: fixedHeight.value, zIndex: Number(props.zIndex) };
+			if (isFixed.value) return { width: fixedWidth.value, height: fixedHeight.value, zIndex: toNumber(props.zIndex) };
 			return {};
 		});
 		const stickyStyle = computed<CSSProperties>(() => {
@@ -47,7 +46,7 @@ export default defineComponent({
 				height: fixedWrapperHeight.value,
 				left: fixedLeft.value,
 				top: fixedTop.value,
-				zIndex: Number(props.zIndex),
+				zIndex: toNumber(props.zIndex),
 			};
 		});
 
