@@ -10,5 +10,6 @@
 		<n-cell title="NavBar 导航栏" link="navbar"></n-cell>
 		<n-cell title="BottomNavBar 底部导航栏" link="bottomNavBar"></n-cell>
 		<n-cell title="Sticky 粘性布局" link="sticky"></n-cell>
+		<n-cell title="Space 间距" link="space"></n-cell>
 	</div>
 </template>

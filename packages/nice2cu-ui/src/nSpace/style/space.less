@@ -1,0 +1,16 @@
+.n-space {
+    display: inline-flex;
+
+    &--block {
+        display: flex;
+    }
+
+    &--scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}

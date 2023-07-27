@@ -116,4 +116,12 @@ export default [
 			title: '粘性布局',
 		},
 	},
+	{
+		path: '/space',
+		name: 'Space',
+		component: () => import(/* webpackChunkName: "Space" */ '@views/componentsViews/Space.vue'),
+		meta: {
+			title: '间距',
+		},
+	},
 ];

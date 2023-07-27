@@ -1,0 +1,18 @@
+// Vitest Snapshot v1
+
+exports[`test Space props > test Space size 1`] = `
+"<div class=\\"n-space n-space--block\\" style=\\"flex-direction: row; justify-content: flex-start; align-items: flex-start; flex-wrap: wrap;\\">
+  <div class=\\"n-space__margin-box\\" data-key=\\"0\\" style=\\"\\">
+    <div>1</div>
+  </div>
+  <div class=\\"n-space__margin-box\\" data-key=\\"1\\" style=\\"\\">
+    <div>2</div>
+  </div>
+  <div class=\\"n-space__margin-box\\" data-key=\\"2\\" style=\\"\\">
+    <div>3</div>
+  </div>
+  <div class=\\"n-space__margin-box\\" data-key=\\"3\\" style=\\"\\">
+    <div>4</div>
+  </div>
+</div>"
+`;

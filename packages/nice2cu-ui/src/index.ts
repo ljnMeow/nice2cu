@@ -10,3 +10,4 @@ export * from './nNavBar';
 export * from './nBottomNavBar';
 export * from './nBottomNavBarItem';
 export * from './nSticky';
+export * from './nSpace';
