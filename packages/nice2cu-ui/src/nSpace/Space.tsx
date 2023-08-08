@@ -1,6 +1,6 @@
-import { computed, defineComponent, CSSProperties, VNode, Fragment } from 'vue';
+import { computed, defineComponent, CSSProperties, VNode } from 'vue';
 import { createNamespace } from '../../utils/create';
-import { handleUnit, isArray } from '../../utils/tools';
+import { handleUnit, filterFragment } from '../../utils/tools';
 import { SpaceProps, SpacePropsType } from './SpaceProps';
 import './style/space.less';
 
@@ -49,27 +49,6 @@ export default defineComponent({
 			}
 
 			return style;
-		};
-
-		const filterFragment = (children: VNode[] = []) => {
-			const result: VNode[] = [];
-
-			children.forEach((vNode: any) => {
-				if (vNode.type === Comment) {
-					return;
-				}
-
-				if (vNode.type === Fragment && isArray(vNode.children)) {
-					vNode.children.forEach((item: VNode) => {
-						result.push(item);
-					});
-					return;
-				}
-
-				result.push(vNode);
-			});
-
-			return result;
 		};
 
 		return () => {

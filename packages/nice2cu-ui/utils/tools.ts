@@ -1,4 +1,4 @@
-import { VNode } from 'vue';
+import { Fragment, VNode } from 'vue';
 
 // 类型
 type ScrollElement = HTMLElement | Window;
@@ -50,6 +50,48 @@ export const handleUnit = (size: string | number) => {
 		}
 	}
 };
+
+/**
+ * @function convertToNumber
+ * @description 将带单位数值转换成number
+ * @param value
+ * @returns number
+ */
+export const convertToNumber = (value: string): number => {
+	// 如果传入的不是字符串类型，则直接返回
+	if (typeof value !== 'string') {
+		return value;
+	}
+
+	// 使用正则表达式匹配数值和单位
+	const match = value.match(/^([+-]?\d*\.?\d+)(px|rem|em)?$/);
+
+	// 如果没有匹配到数值，则直接返回
+	if (!match) {
+		return NaN;
+	}
+
+	// 将匹配到的数值转换为数字类型
+	const numberValue = parseFloat(match[1]);
+
+	// 如果没有匹配到单位，则直接返回数字类型的数值
+	if (!match[2]) {
+		return numberValue;
+	}
+
+	// 根据单位类型进行转换
+	switch (match[2]) {
+		case 'px':
+			return numberValue;
+		case 'rem':
+			return numberValue * parseFloat(getComputedStyle(document.documentElement).fontSize);
+		case 'em':
+			return numberValue * parseFloat(getComputedStyle(document.body).fontSize);
+		default:
+			return NaN;
+	}
+};
+
 /**
  * @function delay
  * @description 配合async await使用，让后面函数等待多长时间执行
@@ -111,6 +153,13 @@ export const toNumber = (val: number | string | boolean | undefined | null): num
 	return val;
 };
 
+/**
+ * @function getScrollParent
+ * @description 获取滚动父容器
+ * @param el
+ * @param root
+ * @returns HTMLElement
+ */
 export const getScrollParent = (el: HTMLElement, root: ScrollElement | undefined = defaultRoot) => {
 	let node = el;
 
@@ -123,4 +172,31 @@ export const getScrollParent = (el: HTMLElement, root: ScrollElement | undefined
 	}
 
 	return root;
+};
+
+/**
+ * @function filterFragment
+ * @description 过滤掉Fragment类型节点
+ * @param children
+ * @returns VNode[]
+ */
+export const filterFragment = (children: VNode[] = []) => {
+	const result: VNode[] = [];
+
+	children.forEach((vNode: any) => {
+		if (vNode.type === Comment) {
+			return;
+		}
+
+		if (vNode.type === Fragment && isArray(vNode.children)) {
+			vNode.children.forEach((item: VNode) => {
+				result.push(item);
+			});
+			return;
+		}
+
+		result.push(vNode);
+	});
+
+	return result;
 };

@@ -22,10 +22,10 @@ describe('test NavBar props', () => {
 		expect(wrapper.find('.n-nav-bar__title').html()).toContain('标题');
 		wrapper.unmount();
 	});
-	test('test NavBar shadowButtom', () => {
+	test('test NavBar shadowBottom', () => {
 		const wrapper = mount(nNavBarVue, {
 			props: {
-				shadowButtom: true,
+				shadowBottom: true,
 			},
 		});
 		expect(wrapper.find('.n-nav-bar__content').attributes('style')).toMatch(
@@ -37,7 +37,7 @@ describe('test NavBar props', () => {
 		const shadowColor = '#eea2a4';
 		const wrapper = mount(nNavBarVue, {
 			props: {
-				shadowButtom: true,
+				shadowBottom: true,
 				shadowColor: shadowColor,
 			},
 		});

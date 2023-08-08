@@ -9,7 +9,7 @@
 			</div>
 		</section>
 		<section>
-			<div class="title">底部阴影（shadowButtom）</div>
+			<div class="title">底部阴影（shadowBottom）</div>
 			<div class="content unflex">
 				<n-nav-bar title="底部阴影" shadow-buttom></n-nav-bar>
 			</div>

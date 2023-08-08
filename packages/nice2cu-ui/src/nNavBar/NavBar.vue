@@ -2,7 +2,7 @@
 	<div :class="[bem.b()]">
 		<div
 			:class="[bem.e('content'), fixedTop ? bem.em('content', 'fixed-top') : '', safeAreaInsetTop ? bem.m('safe-top') : '']"
-			:style="{ height: height, background: background, boxShadow: shadowButtom ? `0px 2px 4px 0px ${shadowColor}` : '' }"
+			:style="{ height: height, background: background, boxShadow: shadowBottom ? `0px 2px 4px 0px ${shadowColor}` : '' }"
 		>
 			<div v-if="showLeft" :class="[bem.e('left')]">
 				<div v-if="!useSlots().left" :class="[bem.e('left-content')]" @click="leftClickHandler">

@@ -124,4 +124,12 @@ export default [
 			title: '间距',
 		},
 	},
+	{
+		path: '/tabs',
+		name: 'Tabs',
+		component: () => import(/* webpackChunkName: "Tabs" */ '@views/componentsViews/Tabs.vue'),
+		meta: {
+			title: '标签页',
+		},
+	},
 ];

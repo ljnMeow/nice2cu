@@ -5,7 +5,7 @@ export const NavBarProps = {
 		type: String,
 		default: '46px',
 	},
-	shadowButtom: {
+	shadowBottom: {
 		type: Boolean,
 		default: false,
 	},
