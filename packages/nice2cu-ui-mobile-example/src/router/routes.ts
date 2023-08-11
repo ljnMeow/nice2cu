@@ -132,4 +132,12 @@ export default [
 			title: '标签页',
 		},
 	},
+	{
+		path: '/swiper',
+		name: 'Swiper',
+		component: () => import(/* webpackChunkName: "Swiper" */ '@views/componentsViews/Swiper.vue'),
+		meta: {
+			title: '轮播',
+		},
+	},
 ];

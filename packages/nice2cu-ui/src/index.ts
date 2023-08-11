@@ -13,3 +13,5 @@ export * from './nSticky';
 export * from './nSpace';
 export * from './nTabs';
 export * from './nTabItem';
+export * from './nSwiper';
+export * from './nSwiperItem';

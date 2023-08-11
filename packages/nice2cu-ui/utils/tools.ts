@@ -200,3 +200,16 @@ export const filterFragment = (children: VNode[] = []) => {
 
 	return result;
 };
+
+/**
+ * @function waitingScreenRedrawn
+ * @description 确保在两次重绘后执行操作
+ * @returns Promise
+ */
+export const waitingScreenRedrawn = () => {
+	return new Promise((resolve) => {
+		requestAnimationFrame(() => {
+			requestAnimationFrame(resolve);
+		});
+	});
+};
