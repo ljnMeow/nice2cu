@@ -5,6 +5,10 @@ function directorTypeValidator(directorType: string): boolean {
 }
 
 export const SwiperProps = {
+	active: {
+		type: [Number, String],
+		default: 0,
+	},
 	autoPlay: {
 		type: [Number, String],
 		default: 0,
@@ -17,9 +21,9 @@ export const SwiperProps = {
 		type: Boolean,
 		default: true,
 	},
-	initIndex: {
-		type: [Number, String],
-		default: 0,
+	touchable: {
+		type: Boolean,
+		default: true,
 	},
 	hasdot: {
 		type: Boolean,
@@ -42,10 +46,34 @@ export const SwiperProps = {
 		default: 'static',
 		validator: directorTypeValidator,
 	},
+	vertical: {
+		type: Boolean,
+		default: false,
+	},
 };
 
 export type SwiperPropsType = ExtractPropTypes<typeof SwiperProps>;
 
+export type SwiperState = {
+	wrapperWidth: number;
+	wrapperHeight: number;
+	width: number;
+	height: number;
+	active: number;
+	translate: number;
+	lockDuration: boolean;
+};
+
 export type SwiperItemProvidType = {
 	width: Ref<string | number>;
+	height: Ref<string | number>;
+	vertical: boolean;
+};
+
+export type SwiperExporeType = {
+	prev: () => void;
+	next: () => void;
+	jump: (idx: number) => void;
+	init: () => void;
+	state: SwiperState;
 };

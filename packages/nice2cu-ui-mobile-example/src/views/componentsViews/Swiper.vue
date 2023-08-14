@@ -5,21 +5,31 @@
 		<section>
 			<div class="title">基础用法</div>
 			<div class="content unflex">
-				<n-swiper class="swipe-container" :has-director="true" :init-index="2">
-					<n-swiper-item>
-						<div class="box" style="background: red">1</div>
-					</n-swiper-item>
-					<n-swiper-item>
-						<div class="box" style="background: blue">2</div>
-					</n-swiper-item>
-					<n-swiper-item>
-						<div class="box" style="background: green">3</div>
+				<n-swiper ref="swiper" v-model:active="active" class="swipe-container" :has-director="true" dot-color="red">
+					<n-swiper-item v-for="item in list" :key="item">
+						<div class="box">{{ item }}</div>
 					</n-swiper-item>
 				</n-swiper>
 			</div>
 		</section>
 	</div>
 </template>
+
+<script lang="ts" setup>
+import { nextTick, ref, watch } from 'vue';
+
+const active = ref(1);
+const swiper = ref(null);
+const list = ref([1, 2, 3]);
+
+const add = () => {
+	list.value.push(list.value.length + 1);
+};
+
+watch(active, () => {
+	console.log(active.value);
+});
+</script>
 
 <style lang="less">
 .swipe-container {

@@ -1,5 +1,5 @@
 <template>
-	<div :class="[bem.b()]" :style="{ width: `${width}px`, transform: `translateX(${translate}px)` }">
+	<div :class="[bem.b()]" :style="{ width: `${width}px`, height: `${height}px`, transform: `translate${vertical ? 'Y' : 'X'}(${translate}px)` }">
 		<slot />
 	</div>
 </template>
@@ -18,6 +18,8 @@ export default defineComponent({
 		const swiperItemProvid: SwiperItemProvidType | undefined = inject('swiperItemProvid');
 
 		const width = computed(() => swiperItemProvid?.width.value);
+		const height = computed(() => swiperItemProvid?.height.value);
+		const vertical = computed(() => swiperItemProvid?.vertical);
 
 		const translate: Ref<number> = ref(0);
 
@@ -25,7 +27,7 @@ export default defineComponent({
 			translate.value = num;
 		};
 
-		return { bem, width, translate, setTranslate };
+		return { bem, width, height, vertical, translate, setTranslate };
 	},
 });
 </script>

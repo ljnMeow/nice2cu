@@ -1,7 +1,22 @@
-import { defineComponent, Ref, ref, ComputedRef, computed, VNode, watch, reactive, toRef, provide } from 'vue';
+import {
+	defineComponent,
+	Ref,
+	ref,
+	ComputedRef,
+	computed,
+	VNode,
+	watch,
+	reactive,
+	toRef,
+	provide,
+	Fragment,
+	onDeactivated,
+	onBeforeUnmount,
+} from 'vue';
 import { createNamespace } from '../../utils/create';
-import { toNumber, filterFragment, waitingScreenRedrawn } from '../../utils/tools';
-import { SwiperProps, SwiperPropsType, SwiperItemProvidType } from './SwiperProps';
+import { isNumber, toNumber, filterFragment, waitingScreenRedrawn } from '../../utils/tools';
+import { useExpose } from '../../utils/useExpose';
+import { SwiperProps, SwiperPropsType, SwiperState, SwiperItemProvidType, SwiperExporeType } from './SwiperProps';
 import nIcon from '../nIcon';
 import './style/swiper.less';
 
@@ -9,7 +24,8 @@ export default defineComponent({
 	name: 'NSwiper',
 	components: { nIcon },
 	props: SwiperProps,
-	setup(props: SwiperPropsType, { slots }) {
+	emits: ['update:active'],
+	setup(props: SwiperPropsType, { slots, emit }) {
 		const bem = createNamespace('swiper');
 
 		const swiper: Ref<HTMLElement | null> = ref(null);
@@ -18,8 +34,9 @@ export default defineComponent({
 		);
 		const length: Ref<number> = ref(childrenList.value.length);
 
-		const state = reactive({
+		const state: SwiperState = reactive({
 			wrapperWidth: 0,
+			wrapperHeight: 0,
 			width: 0,
 			height: 0,
 			active: 0,
@@ -29,10 +46,12 @@ export default defineComponent({
 
 		let isInitIndex = false;
 		let timer: number | null = null;
-
-		provide<SwiperItemProvidType>('swiperItemProvid', {
-			width: toRef(state, 'width'),
-		});
+		let startX: number;
+		let startY: number;
+		let startTime: number;
+		let isTouching = false;
+		let prevX: number | undefined;
+		let prevY: number | undefined;
 
 		const boundIndex = (index: number) => {
 			if (props.loop) {
@@ -47,11 +66,30 @@ export default defineComponent({
 			return Math.min(length.value - 1, Math.max(0, index));
 		};
 
+		const checkLoopPositionBound = () => {
+			if (!props.loop) return;
+
+			if (state.translate >= 0) {
+				const lastSwiperItem = childrenList.value[length.value - 1];
+				(lastSwiperItem.component!.proxy! as any).setTranslate(props.vertical ? -state.wrapperHeight : -state.wrapperWidth);
+			}
+			if (state.translate <= (props.vertical ? -(state.wrapperHeight - state.height) : -(state.wrapperWidth - state.width))) {
+				const firstSwiperItem = childrenList.value[0];
+				(firstSwiperItem.component!.proxy! as any).setTranslate(props.vertical ? state.wrapperHeight : state.wrapperWidth);
+			}
+			if (state.translate > (props.vertical ? -(state.wrapperHeight - state.height) : -(state.wrapperWidth - state.width)) && state.translate < 0) {
+				const firstSwiperItem = childrenList.value[0];
+				const lastSwiperItem = childrenList.value[length.value - 1];
+				(firstSwiperItem.component!.proxy! as any).setTranslate(0);
+				(lastSwiperItem.component!.proxy! as any).setTranslate(0);
+			}
+		};
+
 		const checkPositionBoundAndFix = (fn?: () => void) => {
-			const outweighLeft = state.translate >= state.width;
-			const outweighRight = state.translate <= -state.wrapperWidth;
+			const outweighLeft = props.vertical ? state.translate >= state.height : state.translate >= state.height;
+			const outweighRight = props.vertical ? state.translate <= -state.wrapperHeight : state.translate <= -state.wrapperWidth;
 			const leftTranslate = 0;
-			const rightTranslate = -(state.wrapperWidth - state.width);
+			const rightTranslate = props.vertical ? -(state.wrapperHeight - state.height) : -(state.wrapperWidth - state.width);
 
 			state.lockDuration = true;
 
@@ -73,19 +111,55 @@ export default defineComponent({
 			});
 		};
 
+		const getSwiperIndex = (targetSwiperIndex?: number) => {
+			const swiperIndex = isNumber(targetSwiperIndex)
+				? targetSwiperIndex
+				: props.vertical
+				? Math.floor((state.translate - state.height / 2) / -state.height)
+				: Math.floor((state.translate - state.width / 2) / -state.width);
+
+			if (swiperIndex <= -1) {
+				return props.loop ? -1 : 0;
+			}
+			if (swiperIndex >= length.value) {
+				return props.loop ? length.value : length.value - 1;
+			}
+
+			return swiperIndex;
+		};
+
+		const swiperIndexToIndex = (swiperIndex: number) => {
+			const { loop } = props;
+
+			if (swiperIndex === -1) {
+				return loop ? length.value - 1 : 0;
+			}
+			if (swiperIndex === length.value) {
+				return loop ? 0 : length.value - 1;
+			}
+
+			return swiperIndex;
+		};
+
 		const init = () => {
+			length.value = childrenList.value.length;
 			const swiperRect: DOMRect | undefined = swiper.value?.getBoundingClientRect();
 			state.width = swiperRect ? swiperRect.width : 0;
+			state.height = swiperRect ? swiperRect.height : 0;
 			state.wrapperWidth = state.width * length.value;
+			state.wrapperHeight = state.height * length.value;
 
 			childrenList.value.forEach((swiperItem: VNode) => {
 				(swiperItem.component?.proxy as any).setTranslate(0);
 			});
 
 			state.lockDuration = true;
-			state.translate = state.active * -state.width;
+			state.translate = props.vertical ? state.active * -state.height : state.active * -state.width;
 
-			startAutoPlay();
+			stopAutoPlay();
+			setTimeout(() => {
+				startAutoPlay();
+			}, 500);
 
 			setTimeout(() => {
 				state.lockDuration = false;
@@ -95,7 +169,7 @@ export default defineComponent({
 		const handlerInitIndex = () => {
 			if (isInitIndex) return;
 
-			state.active = boundIndex(toNumber(props.initIndex));
+			state.active = boundIndex(toNumber(props.active));
 
 			isInitIndex = true;
 		};
@@ -124,15 +198,20 @@ export default defineComponent({
 			checkPositionBoundAndFix(() => {
 				if (currentIndex === length.value - 1 && props.loop) {
 					const firstSwiperItem = childrenList.value[0];
-					(firstSwiperItem.component!.proxy! as any).setTranslate(state.wrapperWidth);
+					(firstSwiperItem.component!.proxy! as any).setTranslate(props.vertical ? state.wrapperHeight : state.wrapperWidth);
 
-					state.translate = length.value * -state.width;
+					state.translate = props.vertical ? length.value * -state.height : length.value * -state.width;
 					return;
 				}
 				if (currentIndex !== length.value - 1) {
-					state.translate = state.active * -state.width;
+					state.translate = props.vertical ? state.active * -state.height : state.active * -state.width;
 				}
 			});
+
+			stopAutoPlay();
+			setTimeout(() => {
+				startAutoPlay();
+			}, 500);
 		};
 
 		const prev = () => {
@@ -146,15 +225,20 @@ export default defineComponent({
 			checkPositionBoundAndFix(() => {
 				if (currentIndex === 0 && props.loop) {
 					const lastSwiperItem = childrenList.value[length.value - 1];
-					(lastSwiperItem.component!.proxy! as any).setTranslate(-state.wrapperWidth);
+					(lastSwiperItem.component!.proxy! as any).setTranslate(props.vertical ? -state.wrapperHeight : -state.wrapperWidth);
 
-					state.translate = state.width;
+					state.translate = props.vertical ? state.height : state.width;
 					return;
 				}
 				if (currentIndex !== 0) {
-					state.translate = state.active * -state.width;
+					state.translate = props.vertical ? state.active * -state.height : state.active * -state.width;
 				}
 			});
+
+			stopAutoPlay();
+			setTimeout(() => {
+				startAutoPlay();
+			}, 500);
 		};
 
 		const jump = (idx: number) => {
@@ -178,12 +262,12 @@ export default defineComponent({
 
 		const renderDots = () => {
 			return (
-				<div class={[bem.e('dots')]}>
+				<div class={[bem.e('dots'), props.vertical ? bem.em('dots', 'vertical') : '']}>
 					{childrenList.value.map((_child, index: number) => {
 						return (
 							<div
 								onClick={() => jump(index)}
-								class={[bem.e('dot'), state.active === index ? bem.em('dot', 'active') : '']}
+								class={[bem.e('dot'), props.vertical ? bem.em('dot', 'vertical') : '', state.active === index ? bem.em('dot', 'active') : '']}
 								style={{ backgroundColor: props.dotColor }}
 							></div>
 						);
@@ -194,16 +278,83 @@ export default defineComponent({
 
 		const renderDirector = () => {
 			return (
-				<div class={bem.e('director')}>
-					<div onClick={() => prev()} class={bem.b('left')}>
+				<Fragment>
+					<div onClick={() => prev()} class={[bem.b('director'), bem.be('director', props.vertical ? 'top' : 'left')]}>
 						<n-icon icon={props.directorType === 'static' ? 'n-left' : 'n-arrow-back'} color={props.directorColor} size="20px" />
 					</div>
-					<div onClick={() => next()} class={bem.b('right')}>
+					<div onClick={() => next()} class={[bem.b('director'), bem.be('director', props.vertical ? 'bottom' : 'right')]}>
 						<n-icon icon={props.directorType === 'static' ? 'n-right' : 'n-arrow-forward'} color={props.directorColor} size="20px" />
 					</div>
-				</div>
+				</Fragment>
 			);
 		};
+
+		const handlerTouchStart = (event: TouchEvent) => {
+			if (length.value <= 1 || !props.touchable) return;
+
+			const { clientX, clientY } = event.touches[0];
+			startX = clientX;
+			startY = clientY;
+			startTime = performance.now();
+			isTouching = true;
+
+			stopAutoPlay();
+
+			checkPositionBoundAndFix(() => {
+				state.lockDuration = true;
+			});
+		};
+
+		const handlerTouchMove = (event: TouchEvent) => {
+			if (!props.touchable || !isTouching) return;
+
+			const { clientX, clientY } = event.touches[0];
+
+			event.preventDefault();
+
+			const moveX = prevX ? clientX - prevX : 0;
+			const moveY = prevY ? clientY - prevY : 0;
+			prevX = clientX;
+			prevY = clientY;
+
+			state.translate += props.vertical ? moveY : moveX;
+
+			checkLoopPositionBound();
+		};
+
+		const handlerTouchEnd = () => {
+			if (!isTouching) return;
+
+			const positive = props.vertical ? (prevY as number) < startY : (prevX as number) < startX;
+			const distance = props.vertical ? Math.abs(startY - (prevY as number)) : Math.abs(startX - (prevX as number));
+			const quickSwiping = performance.now() - startTime <= 250 && distance >= 20;
+			const swiperIndex = quickSwiping ? (positive ? getSwiperIndex(state.active + 1) : getSwiperIndex(state.active - 1)) : getSwiperIndex();
+
+			isTouching = false;
+			state.lockDuration = false;
+			prevX = undefined;
+			prevY = undefined;
+
+			state.translate = props.vertical ? swiperIndex * -state.height : swiperIndex * -state.width;
+
+			state.active = swiperIndexToIndex(swiperIndex);
+
+			startAutoPlay();
+		};
+
+		provide<SwiperItemProvidType>('swiperItemProvid', {
+			width: toRef(state, 'width'),
+			height: toRef(state, 'height'),
+			vertical: props.vertical,
+		});
+
+		useExpose<SwiperExporeType>({
+			prev,
+			next,
+			jump,
+			init,
+			state,
+		});
 
 		watch(
 			() => childrenList.value,
@@ -215,18 +366,41 @@ export default defineComponent({
 			{ immediate: true }
 		);
 
+		watch(
+			() => state.active,
+			() => {
+				emit('update:active', state.active);
+			}
+		);
+
+		onDeactivated(() => {
+			stopAutoPlay();
+		});
+
+		onBeforeUnmount(() => {
+			stopAutoPlay();
+		});
+
+		window.addEventListener('resize', () => init(), { passive: true });
+		window.addEventListener('orientationchange', () => init(), { passive: true });
+
 		return () => {
 			const wrapperWidthRef = toRef(state, 'wrapperWidth');
+			const wrapperHeightRef = toRef(state, 'wrapperHeight');
 
 			return (
 				<div ref={swiper} class={[bem.b()]}>
 					<div
-						class={[bem.e('wrapper')]}
+						class={[bem.e('wrapper'), props.vertical ? bem.em('wrapper', 'vertical') : '']}
 						style={{
-							width: `${wrapperWidthRef.value}px`,
-							transform: `translateX(${state.translate}px)`,
+							width: !props.vertical ? `${wrapperWidthRef.value}px` : 'auto',
+							height: props.vertical ? `${wrapperHeightRef.value}px` : 'auto',
+							transform: `translate${props.vertical ? 'Y' : 'X'}(${state.translate}px)`,
 							transitionDuration: state.lockDuration ? `0ms` : `${toNumber(props.duration)}ms`,
 						}}
+						onTouchstart={handlerTouchStart}
+						onTouchmove={handlerTouchMove}
+						onTouchend={handlerTouchEnd}
 					>
 						{childrenList.value.map((child: VNode) => {
 							return child;
