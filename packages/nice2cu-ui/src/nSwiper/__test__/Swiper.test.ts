@@ -1,5 +1,5 @@
 import { expect, describe, test } from 'vitest';
-import { createApp, nextTick } from 'vue';
+import { createApp } from 'vue';
 import { mount } from '@vue/test-utils';
 import { delay } from '../../../utils/tools';
 import { SwiperState } from '../SwiperProps';
@@ -7,9 +7,7 @@ import { SwiperState } from '../SwiperProps';
 document.body.innerHTML = '<script></script>';
 
 import nSwiper from '../';
-import nswiperVue from '../Swiper.vue';
 import nSwiperItem from '../../nSwiperItem';
-import nSwiperItemVue from '../../nSwiperItem/SwiperItem.vue';
 
 const Wrapper = {
 	components: {
