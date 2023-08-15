@@ -262,19 +262,23 @@ export default defineComponent({
 		};
 
 		const renderDots = () => {
-			return (
-				<div class={[bem.e('dots'), props.vertical ? bem.em('dots', 'vertical') : '']}>
-					{childrenList.value.map((_child, index: number) => {
-						return (
-							<div
-								onClick={() => jump(index)}
-								class={[bem.e('dot'), props.vertical ? bem.em('dot', 'vertical') : '', state.active === index ? bem.em('dot', 'active') : '']}
-								style={{ backgroundColor: props.dotColor }}
-							></div>
-						);
-					})}
-				</div>
-			);
+			if (props.hasdot) {
+				return (
+					<div class={[bem.e('dots'), props.vertical ? bem.em('dots', 'vertical') : '']}>
+						{childrenList.value.map((_child, index: number) => {
+							return (
+								<div
+									onClick={() => jump(index)}
+									class={[bem.e('dot'), props.vertical ? bem.em('dot', 'vertical') : '', state.active === index ? bem.em('dot', 'active') : '']}
+									style={{ backgroundColor: props.dotColor }}
+								></div>
+							);
+						})}
+					</div>
+				);
+			} else {
+				return '';
+			}
 		};
 
 		const renderDirector = () => {
