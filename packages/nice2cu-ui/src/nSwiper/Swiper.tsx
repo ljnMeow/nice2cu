@@ -44,6 +44,7 @@ export default defineComponent({
 			lockDuration: false,
 		});
 
+		let isUpdate = false;
 		let isInitIndex = false;
 		let timer: number | null = null;
 		let startX: number;
@@ -339,6 +340,8 @@ export default defineComponent({
 
 			state.active = swiperIndexToIndex(swiperIndex);
 
+			isUpdate = true;
+
 			startAutoPlay();
 		};
 
@@ -364,6 +367,19 @@ export default defineComponent({
 				init();
 			},
 			{ immediate: true }
+		);
+
+		watch(
+			() => props.active,
+			() => {
+				setTimeout(() => {
+					if (isUpdate) {
+						isUpdate = false;
+						return;
+					}
+					jump(toNumber(props.active));
+				}, 100);
+			}
 		);
 
 		watch(
@@ -406,7 +422,7 @@ export default defineComponent({
 							return child;
 						})}
 					</div>
-					{slots.dots && props.hasdot ? slots.dots({ active: state.active, length: length.value }) : renderDots()}
+					{slots.dots && props.hasdot ? slots.dots({ index: state.active, length: length.value }) : renderDots()}
 					{props.hasDirector ? renderDirector() : false}
 				</div>
 			);

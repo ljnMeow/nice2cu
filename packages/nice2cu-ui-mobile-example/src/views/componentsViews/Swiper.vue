@@ -5,10 +5,115 @@
 		<section>
 			<div class="title">基础用法</div>
 			<div class="content unflex">
-				<n-swiper ref="swiper" v-model:active="active" class="swipe-container" :has-director="true" dot-color="red">
-					<n-swiper-item v-for="item in list" :key="item">
-						<div class="box">{{ item }}</div>
+				<n-swiper v-model:active="active" class="swipe-container">
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbff3d163.jpg" alt="cat1" />
 					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbffd9ea0.jpg" alt="cat2" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadc016afb6.jpg" alt="cat3" />
+					</n-swiper-item>
+				</n-swiper>
+			</div>
+		</section>
+		<section>
+			<div class="title">禁用循环（loop）</div>
+			<div class="content unflex">
+				<n-swiper v-model:active="active1" :loop="false" class="swipe-container">
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbff3d163.jpg" alt="cat1" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbffd9ea0.jpg" alt="cat2" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadc016afb6.jpg" alt="cat3" />
+					</n-swiper-item>
+				</n-swiper>
+			</div>
+		</section>
+		<section>
+			<div class="title">自动播放（autoPlay）</div>
+			<div class="content unflex">
+				<n-swiper v-model:active="active2" :auto-play="2000" class="swipe-container">
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbff3d163.jpg" alt="cat1" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbffd9ea0.jpg" alt="cat2" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadc016afb6.jpg" alt="cat3" />
+					</n-swiper-item>
+				</n-swiper>
+			</div>
+		</section>
+		<section>
+			<div class="title">垂直方向（vertical）</div>
+			<div class="content unflex">
+				<n-swiper v-model:active="active3" :auto-play="2000" vertical class="swipe-container">
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbff3d163.jpg" alt="cat1" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbffd9ea0.jpg" alt="cat2" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadc016afb6.jpg" alt="cat3" />
+					</n-swiper-item>
+				</n-swiper>
+			</div>
+		</section>
+		<section>
+			<div class="title">指示器（hasDirector/directorColor/directorType）</div>
+			<div class="content unflex">
+				<n-swiper v-model:active="active4" :has-director="true" director-color="white" director-type="arrow" class="swipe-container">
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbff3d163.jpg" alt="cat1" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbffd9ea0.jpg" alt="cat2" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadc016afb6.jpg" alt="cat3" />
+					</n-swiper-item>
+				</n-swiper>
+			</div>
+		</section>
+		<section>
+			<div class="title">标点（hasDot/dotColor）</div>
+			<div class="content unflex">
+				<n-swiper v-model:active="active5" dot-color="#d1c2d3" class="swipe-container">
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbff3d163.jpg" alt="cat1" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbffd9ea0.jpg" alt="cat2" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadc016afb6.jpg" alt="cat3" />
+					</n-swiper-item>
+				</n-swiper>
+			</div>
+		</section>
+		<section>
+			<div class="title">自定义标点</div>
+			<div class="content unflex">
+				<n-swiper v-model:active="active6" class="swipe-container">
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbff3d163.jpg" alt="cat1" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadbffd9ea0.jpg" alt="cat2" />
+					</n-swiper-item>
+					<n-swiper-item>
+						<img class="swiper-img" src="https://bu.dusays.com/2023/08/15/64dadc016afb6.jpg" alt="cat3" />
+					</n-swiper-item>
+					<template #dots="{ index, length }">
+						<div class="custom-dots">{{ index + 1 }} / {{ length }}</div>
+					</template>
 				</n-swiper>
 			</div>
 		</section>
@@ -16,40 +121,37 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, ref, watch } from 'vue';
+import { ref } from 'vue';
 
-const active = ref(1);
-const swiper = ref(null);
-const list = ref([1, 2, 3]);
-
-const add = () => {
-	list.value.push(list.value.length + 1);
-};
-
-watch(active, () => {
-	console.log(active.value);
-});
+const active = ref(0);
+const active1 = ref(0);
+const active2 = ref(0);
+const active3 = ref(0);
+const active4 = ref(0);
+const active5 = ref(0);
+const active6 = ref(0);
 </script>
 
 <style lang="less">
 .swipe-container {
-	height: 200px;
+	height: 240px;
 }
-.box {
+.swiper-img {
 	width: 100%;
-	height: 200px;
-	line-height: 200px;
-	text-align: center;
-	background-color: #ffffff;
+	height: 100%;
+	pointer-events: none;
 }
-.swipe-example-indicators {
+.custom-dots {
 	position: absolute;
-	bottom: 0;
-	width: 100%;
+	bottom: 10px;
+	right: 10px;
+	width: 50px;
+	height: 26px;
+	line-height: 26px;
 	text-align: center;
-	padding: 4px 0;
-	color: #fff;
+	color: #ffffff;
 	font-size: 14px;
-	background: rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.7);
 }
 </style>
