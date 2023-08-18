@@ -105,7 +105,8 @@ export default defineComponent({
 
 		const setLineStyle = () => {
 			nextTick(() => {
-				const activeItem = navItem.value && (navItem.value.children.namedItem('n-tabs-nav-item--active') as HTMLElement);
+				const activeItem =
+					navItem.value && (Array.from(navItem.value.children).find((child) => child.id === 'n-tabs-nav-item--active') as HTMLElement);
 				if (props.vertical) {
 					if (activeItem?.className.includes('n-tabs-nav-item--disabled')) {
 						lineStyle.top = `-100%`;
@@ -137,7 +138,8 @@ export default defineComponent({
 				if (!props.scroll) return;
 				const scrollDom = navItem.value;
 				const scrollDomRect = scrollDom && scrollDom.getBoundingClientRect();
-				const activeItem = navItem.value && (navItem.value.children.namedItem('n-tabs-nav-item--active') as HTMLElement);
+				const activeItem =
+					navItem.value && (Array.from(navItem.value.children).find((child) => child.id === 'n-tabs-nav-item--active') as HTMLElement);
 				const activeItemRect = activeItem && activeItem.getBoundingClientRect();
 
 				if (!scrollDom || !activeItem || !scrollDomRect || !activeItemRect) return;
@@ -280,7 +282,7 @@ export default defineComponent({
 						style={{
 							background: props.background,
 							boxShadow: props.shadowBottom ? `0px 2px 4px 0px ${props.shadowColor}` : '',
-							flex: `0 0 ${props.vertical ? props.leftWidth : 'auto'}`,
+							flex: `0 0 ${props.vertical ? `${props.leftWidth}px` : 'auto'}`,
 							height: props.vertical ? `${navDomHeight.value}px` : 'auto',
 						}}
 					>
@@ -334,7 +336,7 @@ export default defineComponent({
 						ref={scrollWrapper}
 						class={[bem.be('scroll', 'wrapper'), props.vertical ? bem.bem('scroll', 'wrapper', 'vertical') : '']}
 						style={{
-							width: !props.vertical ? `${scrollWrapperWidth.value}px` : `calc(100% - ${props.leftWidth})`,
+							width: !props.vertical ? `${scrollWrapperWidth.value}px` : `calc(100% - ${props.leftWidth}px)`,
 							height: props.vertical ? `${props.wrapperHeight}px` : 'auto',
 							transform: `translate${props.vertical ? 'Y' : 'X'}(${translate.value}px)`,
 							transitionDuration: `${lockDuration ? '0ms' : props.wrapperAnimated ? '300ms' : '0ms'}`,

@@ -92,6 +92,8 @@ describe('test Swiper props', () => {
 		track.trigger('drag');
 
 		expect(state.active).toBe(0);
+
+		wrapper.unmount();
 	});
 	test('test Swiper autoplay', async () => {
 		const wrapper = mount(Wrapper, {

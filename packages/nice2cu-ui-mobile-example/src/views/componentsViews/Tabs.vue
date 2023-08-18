@@ -51,9 +51,9 @@
 			</div>
 		</section>
 		<section>
-			<div class="title">多标签滚动（scroll）/ 触摸切换（touchable）</div>
+			<div class="title" @click="() => (scroll = !scroll)">多标签滚动（scroll）/ 触摸切换（touchable）</div>
 			<div class="content unflex">
-				<n-tabs v-model:active="active4" scroll touchable>
+				<n-tabs v-model:active="active4" :scroll="scroll" touchable>
 					<n-tab-item v-for="item in 10" :key="item" :title="`标签${item}`">
 						<div class="wrapper">{{ `内容${item}` }}</div>
 					</n-tab-item>
@@ -63,7 +63,7 @@
 		<section>
 			<div class="title">垂直布局（vertical）</div>
 			<div class="content unflex">
-				<n-tabs v-model:active="active4" scroll touchable left-width="80px" vertical>
+				<n-tabs v-model:active="active4" scroll touchable :left-width="80" vertical>
 					<n-tab-item v-for="item in 10" :key="item" :title="`标签${item}`">
 						<div class="wrapper">{{ `内容${item}` }}</div>
 					</n-tab-item>
@@ -114,6 +114,7 @@ const active3 = ref(0);
 const active4 = ref(0);
 const active5 = ref(0);
 const active6 = ref(0);
+const scroll = ref(true);
 </script>
 
 <style lang="less" scoped>

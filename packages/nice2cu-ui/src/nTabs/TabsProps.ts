@@ -48,8 +48,8 @@ export const TabsProps = {
 		default: false,
 	},
 	leftWidth: {
-		type: String,
-		default: '100px',
+		type: Number,
+		default: 100,
 	},
 } as const;
 
