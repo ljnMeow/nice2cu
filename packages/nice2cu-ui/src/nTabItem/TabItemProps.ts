@@ -1,4 +1,4 @@
-import { ComputedRef, ExtractPropTypes, VNode } from 'vue';
+import { ExtractPropTypes } from 'vue';
 
 export const TabItemProps = {
 	title: {
@@ -39,8 +39,3 @@ export const TabItemProps = {
 } as const;
 
 export type TabItemPropsType = ExtractPropTypes<typeof TabItemProps>;
-
-export type TabItemProvide = {
-	active: ComputedRef<string | number | undefined>;
-	childrenList: ComputedRef<VNode[]>;
-};

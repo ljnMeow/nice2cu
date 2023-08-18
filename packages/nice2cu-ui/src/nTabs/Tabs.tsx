@@ -1,10 +1,12 @@
-import { defineComponent, VNode, ref, computed, ComputedRef, watch, nextTick, CSSProperties, reactive, provide } from 'vue';
+import { defineComponent, VNode, ref, computed, ComputedRef, watch, nextTick, CSSProperties, reactive } from 'vue';
 import { createNamespace } from '../../utils/create';
-import { isNumber, filterFragment } from '../../utils/tools';
+import { isNumber, filterFragment, waitingScreenRedrawn } from '../../utils/tools';
 import { TabsProps, TabsPropsType } from './TabsProps';
-import { TabItemPropsType, TabItemProvide } from '../nTabItem/TabItemProps';
+import { TabItemPropsType } from '../nTabItem/TabItemProps';
 import nIcon from '../nIcon';
 import nBadge from '../nBadge';
+import nSwiper from '../nSwiper';
+import nSwiperItem from '../nSwiperItem';
 import './style/tab.less';
 
 export default defineComponent({
@@ -12,6 +14,8 @@ export default defineComponent({
 	components: {
 		nIcon,
 		nBadge,
+		nSwiper,
+		nSwiperItem,
 	},
 	props: TabsProps,
 	emits: ['update:active', 'switch'],
@@ -19,9 +23,22 @@ export default defineComponent({
 		const bem = createNamespace('tabs');
 		const active: ComputedRef<number | string | undefined> = computed(() => props.active);
 		const childrenList: ComputedRef<VNode[]> = computed(() => filterFragment(slots && slots.default ? slots.default() : []));
+		const navDom = ref<HTMLElement | null>(null);
 		const navItem = ref<HTMLElement | null>(null);
 		const lineStyle: CSSProperties = reactive({});
-		const navContent = ref<HTMLElement | null>(null);
+		const navDomHeight = ref<number>(0);
+
+		const scrollWrapper = ref<HTMLElement>();
+		const contentWidth = ref<number>(0);
+		const scrollWrapperWidth = ref<number>(0);
+		const translate = ref<number>(0);
+		let startX: number;
+		let startY: number;
+		let startTime: number;
+		let isTouching = false;
+		let prevX: number | undefined;
+		let prevY: number | undefined;
+		let lockDuration = false;
 
 		const checkBoundary = () => {
 			if (childrenList.value.length === 0 || !matchName() || !matchIndex()) {
@@ -33,6 +50,32 @@ export default defineComponent({
 		const matchName = () => childrenList.value.find((node) => active.value === (node.props && node.props.name));
 
 		const matchIndex = () => childrenList.value.find((_node, index) => active.value === index);
+
+		const getPlaneIndex = (status?: number) => {
+			const wrapperIndex = childrenList.value.findIndex(
+				(child: VNode, index: number) => child.props!.name === active.value || index === active.value
+			);
+			if (status === 1) {
+				return wrapperIndex + 1;
+			} else if (status === -1) {
+				return wrapperIndex - 1;
+			} else {
+				return isTouching ? Math.floor((translate.value - contentWidth.value / 2) / -contentWidth.value) : wrapperIndex;
+			}
+		};
+
+		const initWrapper = async () => {
+			await waitingScreenRedrawn();
+
+			navDomHeight.value = navDom.value ? navDom.value.offsetHeight : 0;
+
+			const navDomRect = navDom.value?.getBoundingClientRect();
+			contentWidth.value = navDomRect ? navDomRect.width : 0;
+			scrollWrapperWidth.value = navDomRect ? contentWidth.value * childrenList.value.length : 0;
+
+			const index = getPlaneIndex();
+			translate.value = index * -contentWidth.value;
+		};
 
 		const activeHandler = () => {
 			if (!isNumber(active.value)) {
@@ -51,6 +94,7 @@ export default defineComponent({
 			emit('switch', value, title);
 			scrollHandler();
 			setLineStyle();
+			setPlaneTranslate();
 		};
 
 		const toggleHandler = (value: string | number, title: string, childProps: TabItemPropsType | null) => {
@@ -62,17 +106,35 @@ export default defineComponent({
 		const setLineStyle = () => {
 			nextTick(() => {
 				const activeItem = navItem.value && (navItem.value.children.namedItem('n-tabs-nav-item--active') as HTMLElement);
-				if (activeItem?.className.includes('n-tabs-nav-item--disabled')) {
-					lineStyle.left = `-100%`;
+				if (props.vertical) {
+					if (activeItem?.className.includes('n-tabs-nav-item--disabled')) {
+						lineStyle.top = `-100%`;
+					} else {
+						lineStyle.top = `${activeItem?.offsetTop}px`;
+					}
 				} else {
-					lineStyle.left = `${activeItem?.offsetLeft}px`;
+					if (activeItem?.className.includes('n-tabs-nav-item--disabled')) {
+						lineStyle.left = `-100%`;
+					} else {
+						lineStyle.left = `${activeItem?.offsetLeft}px`;
+					}
 				}
-				lineStyle.width = `${activeItem?.offsetWidth}px`;
+				lineStyle[props.vertical ? 'right' : 'bottom'] = 0;
+				lineStyle.width = props.vertical ? '3px' : `${activeItem?.offsetWidth}px`;
+				lineStyle.height = props.vertical ? `${activeItem?.offsetHeight}px` : '3px';
+			});
+		};
+
+		const setPlaneTranslate = () => {
+			nextTick(() => {
+				const index = getPlaneIndex();
+				translate.value = props.vertical ? index * -props.wrapperHeight : index * -contentWidth.value;
 			});
 		};
 
 		const scrollHandler = () => {
 			nextTick(() => {
+				if (!props.scroll) return;
 				const scrollDom = navItem.value;
 				const scrollDomRect = scrollDom && scrollDom.getBoundingClientRect();
 				const activeItem = navItem.value && (navItem.value.children.namedItem('n-tabs-nav-item--active') as HTMLElement);
@@ -81,54 +143,146 @@ export default defineComponent({
 				if (!scrollDom || !activeItem || !scrollDomRect || !activeItemRect) return;
 
 				const scrollLeft: number = scrollDom.scrollLeft + activeItemRect.left - scrollDomRect.left - (scrollDomRect.width - activeItemRect.width) / 2;
-				scrollDom.scrollLeft = scrollLeft;
-
-				const navContentScrollDom = navContent.value;
-				const activeWrapper = navContent.value && (navContent.value.children.namedItem('n-tabs-nav-wrapper--active') as HTMLElement);
-				const activeWrapperRect = activeWrapper && activeWrapper.getBoundingClientRect();
-
-				if (!navContentScrollDom || !activeWrapper || !activeWrapperRect) return;
-
-				const wrapperIndex = childrenList.value.findIndex(
-					(child: VNode, index: number) => child.props!.name === active.value || index === active.value
-				);
-
-				navContentScrollDom.scrollLeft = activeWrapperRect.width * wrapperIndex;
+				const scrollTop: number = scrollDom.scrollTop + activeItemRect.top - scrollDomRect.top - (scrollDomRect.height - activeItemRect.height) / 2;
+				scrollDom[props.vertical ? 'scrollTop' : 'scrollLeft'] = props.vertical ? scrollTop : scrollLeft;
 			});
 		};
 
+		const checkPositionBoundAndFix = (fn?: () => void) => {
+			const outweighLeft = translate.value >= contentWidth.value;
+			const outweighRight = translate.value <= -scrollWrapperWidth.value;
+			const leftTranslate = 0;
+			const rightTranslate = -(scrollWrapperWidth.value - contentWidth.value);
+
+			lockDuration = true;
+
+			if (outweighLeft || outweighRight) {
+				lockDuration = true;
+				translate.value = outweighRight ? leftTranslate : rightTranslate;
+
+				const firstSwiperItem = scrollWrapper.value?.children[0];
+				const lastSwiperItem = scrollWrapper.value?.children[scrollWrapper.value?.children.length - 1];
+				(firstSwiperItem as any)!.style.transform = 'translateX(0px)';
+				(lastSwiperItem as any)!.style.transform = 'translateX(0px)';
+			}
+
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					lockDuration = false;
+					fn && fn();
+				});
+			});
+		};
+
+		const handlerTouchStart = (event: TouchEvent) => {
+			if (childrenList.value.length <= 1 || !props.touchable) return;
+
+			const { clientX, clientY } = event.touches[0];
+			startX = clientX;
+			startY = clientY;
+			startTime = performance.now();
+			isTouching = true;
+
+			checkPositionBoundAndFix(() => {
+				lockDuration = true;
+			});
+		};
+
+		const handlerTouchMove = (event: TouchEvent) => {
+			if (!props.touchable || !isTouching) return;
+
+			const { clientX, clientY } = event.touches[0];
+
+			event.preventDefault();
+
+			const moveX = prevX ? clientX - prevX : 0;
+			const moveY = prevY ? clientY - prevY : 0;
+			prevX = clientX;
+			prevY = clientY;
+
+			translate.value += props.vertical ? moveY : moveX;
+		};
+
+		const handlerTouchEnd = () => {
+			if (!isTouching) return;
+
+			const positive = props.vertical ? (prevY as number) < startY : (prevX as number) < startX;
+			const distance = props.vertical ? Math.abs(startY - (prevY as number)) : Math.abs(startX - (prevX as number));
+			const quickSwiping = performance.now() - startTime <= 250 && distance >= 20;
+			let swiperIndex = quickSwiping ? (positive ? getPlaneIndex(1) : getPlaneIndex(-1)) : getPlaneIndex();
+
+			if (swiperIndex <= 0) {
+				swiperIndex = 0;
+			}
+			if (swiperIndex >= childrenList.value.length - 1) {
+				swiperIndex = childrenList.value.length - 1;
+			}
+
+			isTouching = false;
+			prevX = undefined;
+			prevY = undefined;
+
+			lockDuration = false;
+			translate.value = props.vertical ? swiperIndex * -props.wrapperHeight : swiperIndex * -contentWidth.value;
+
+			const currentSwiper = childrenList.value[swiperIndex];
+			toggleHandler(currentSwiper.props!.name || swiperIndex, currentSwiper.props!.title, currentSwiper.props as TabItemPropsType);
+		};
+
 		watch(
-			childrenList,
-			() => {
+			() => active.value,
+			async () => {
+				await initWrapper();
 				checkBoundary();
 				setLineStyle();
 				scrollHandler();
+				setPlaneTranslate();
+			}
+		);
+
+		watch(
+			childrenList,
+			async () => {
+				await initWrapper();
+				checkBoundary();
+				setLineStyle();
+				scrollHandler();
+				setPlaneTranslate();
 			},
 			{ immediate: true }
 		);
 
-		provide<TabItemProvide>('TabsItemProvide', {
-			active,
-			childrenList,
-		});
-
 		window.addEventListener(
 			'resize',
-			() => {
+			async () => {
+				await initWrapper();
 				checkBoundary();
 				setLineStyle();
 				scrollHandler();
+				setPlaneTranslate();
 			},
 			true
 		);
 
 		return () => {
+			const width = contentWidth.value;
+
 			return (
-				<div class={[bem.b()]}>
+				<div ref={navDom} class={[bem.b(), props.vertical ? bem.m('vertical') : '']}>
 					<div
 						ref={navItem}
-						class={[bem.b('nav'), props.scroll ? bem.bm('nav', 'scroll') : '', props.lineAnimated ? bem.bm('nav', 'animated') : '']}
-						style={{ background: props.background, boxShadow: props.shadowBottom ? `0px 2px 4px 0px ${props.shadowColor}` : '' }}
+						class={[
+							bem.b('nav'),
+							props.scroll ? bem.bm('nav', 'scroll') : '',
+							props.lineAnimated ? bem.bm('nav', 'animated') : '',
+							props.vertical ? bem.bm('nav', 'vertical') : '',
+						]}
+						style={{
+							background: props.background,
+							boxShadow: props.shadowBottom ? `0px 2px 4px 0px ${props.shadowColor}` : '',
+							flex: `0 0 ${props.vertical ? props.leftWidth : 'auto'}`,
+							height: props.vertical ? `${navDomHeight.value}px` : 'auto',
+						}}
 					>
 						{childrenList.value.map((child: VNode, index: number) => {
 							if ((child.type as any).name !== 'NTabItem') return;
@@ -170,16 +324,35 @@ export default defineComponent({
 						})}
 						<div
 							class={[bem.be('nav', 'line'), props.lineAnimated ? bem.bem('nav', 'line', 'animated') : '']}
-							style={{ width: lineStyle.width, background: props.activeColor, left: lineStyle.left, display: lineStyle.display }}
+							style={{
+								...lineStyle,
+								background: props.activeColor,
+							}}
 						></div>
 					</div>
-					<div ref={navContent} class={[bem.b('content'), props.wrapperAnimated ? bem.bm('content', 'animated') : '']}>
+					<div
+						ref={scrollWrapper}
+						class={[bem.be('scroll', 'wrapper'), props.vertical ? bem.bem('scroll', 'wrapper', 'vertical') : '']}
+						style={{
+							width: !props.vertical ? `${scrollWrapperWidth.value}px` : `calc(100% - ${props.leftWidth})`,
+							height: props.vertical ? `${props.wrapperHeight}px` : 'auto',
+							transform: `translate${props.vertical ? 'Y' : 'X'}(${translate.value}px)`,
+							transitionDuration: `${lockDuration ? '0ms' : props.wrapperAnimated ? '300ms' : '0ms'}`,
+						}}
+						onTouchstart={handlerTouchStart}
+						onTouchmove={handlerTouchMove}
+						onTouchend={handlerTouchEnd}
+					>
 						{childrenList.value.map((child: VNode, index: number) => {
 							const isActive = active.value === index || active.value === child.props!.name;
+							const disabled = child.props!.disabled || child.props!.disabled === '' ? true : false;
 
 							return (
-								<div class={[bem.be('item', 'wrapper')]} id={isActive ? bem.bm('nav-wrapper', 'active') : ''}>
-									{child}
+								<div
+									class={[bem.be('wrapper', 'item'), isActive && !disabled ? bem.em('item', 'active') : '']}
+									style={{ width: props.vertical ? '100%' : `${width}px`, height: `${props.wrapperHeight}px` }}
+								>
+									{!disabled ? child : ''}
 								</div>
 							);
 						})}

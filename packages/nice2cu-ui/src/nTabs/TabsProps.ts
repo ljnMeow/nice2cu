@@ -33,7 +33,23 @@ export const TabsProps = {
 	},
 	wrapperAnimated: {
 		type: Boolean,
+		default: true,
+	},
+	wrapperHeight: {
+		type: Number,
+		default: 160,
+	},
+	touchable: {
+		type: Boolean,
 		default: false,
+	},
+	vertical: {
+		type: Boolean,
+		default: false,
+	},
+	leftWidth: {
+		type: String,
+		default: '100px',
 	},
 } as const;
 

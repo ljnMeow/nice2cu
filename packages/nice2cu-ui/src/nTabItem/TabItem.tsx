@@ -1,4 +1,4 @@
-import { Fragment, defineComponent } from 'vue';
+import { Fragment, defineComponent, nextTick } from 'vue';
 import { TabItemProps } from './TabItemProps';
 
 export default defineComponent({

@@ -87,7 +87,7 @@ export default defineComponent({
 		};
 
 		const checkPositionBoundAndFix = (fn?: () => void) => {
-			const outweighLeft = props.vertical ? state.translate >= state.height : state.translate >= state.height;
+			const outweighLeft = props.vertical ? state.translate >= state.height : state.translate >= state.width;
 			const outweighRight = props.vertical ? state.translate <= -state.wrapperHeight : state.translate <= -state.wrapperWidth;
 			const leftTranslate = 0;
 			const rightTranslate = props.vertical ? -(state.wrapperHeight - state.height) : -(state.wrapperWidth - state.width);
@@ -334,7 +334,6 @@ export default defineComponent({
 			const distance = props.vertical ? Math.abs(startY - (prevY as number)) : Math.abs(startX - (prevX as number));
 			const quickSwiping = performance.now() - startTime <= 250 && distance >= 20;
 			const swiperIndex = quickSwiping ? (positive ? getSwiperIndex(state.active + 1) : getSwiperIndex(state.active - 1)) : getSwiperIndex();
-
 			isTouching = false;
 			state.lockDuration = false;
 			prevX = undefined;
