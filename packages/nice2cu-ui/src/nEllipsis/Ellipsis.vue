@@ -24,7 +24,8 @@ import './style/ellipsis.less';
 export default defineComponent({
 	name: 'NEllipsis',
 	props: EllipsisProps,
-	setup(props: EllipsisPropsType) {
+	emits: ['change'],
+	setup(props: EllipsisPropsType, { emit }) {
 		const bem = createNamespace('ellipsis');
 
 		const ellipsis = ref<HTMLElement | null>(null);
@@ -124,8 +125,10 @@ export default defineComponent({
 		const handlerClick = (type: number) => {
 			if (type === 1) {
 				state.expanded = true;
+				emit('change', 'expand');
 			} else if (type === 2) {
 				state.expanded = false;
+				emit('change', 'collapse');
 			}
 		};
 
