@@ -314,12 +314,13 @@ export default defineComponent({
 									id={isActive ? bem.bm('nav-item', 'active') : ''}
 									style={{
 										color: isActive && !disabled ? props.activeColor : props.defaultColor,
+										width: props.vertical ? 'calc(100% - 24px)' : '10px',
 									}}
 									onClick={() => toggleHandler(name ?? index, title, child.props as TabItemPropsType)}
 								>
 									<n-badge class={bem.be('nav-item', 'badge')} dot={dot} content={badge} hidden={isHidden} color={badgeColor} position="right-top">
 										<n-icon class={bem.e('nav-item-icon')} v-show={itemIcon} icon={itemIcon} classPrefix={classPrefix} size={iconSize}></n-icon>
-										<div class={[bem.e('nav-item-text')]}>{title}</div>
+										<div class={[bem.e('nav-item-text'), 'text-ellipsis']}>{title}</div>
 									</n-badge>
 								</div>
 							);
