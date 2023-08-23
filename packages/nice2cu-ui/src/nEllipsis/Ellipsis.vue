@@ -79,7 +79,7 @@ export default defineComponent({
 
 			await waitingScreenRedrawn();
 
-			if (calculate.value!.offsetHeight <= maxHeight) {
+			if (calculate.value && calculate.value.offsetHeight <= maxHeight) {
 				return cuttingMiddleText([leftPartMiddle, leftPart[1]], [rightPart[0], rightPartMiddle]);
 			} else {
 				return cuttingMiddleText([leftPart[0], leftPartMiddle], [rightPartMiddle, rightPart[1]]);
@@ -107,7 +107,7 @@ export default defineComponent({
 
 			await waitingScreenRedrawn();
 
-			if (calculate.value!.offsetHeight <= maxHeight) {
+			if (calculate.value && calculate.value.offsetHeight <= maxHeight) {
 				if (props.direction === 'end') {
 					return cuttingText(middle, right);
 				} else {
