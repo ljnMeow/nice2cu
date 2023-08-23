@@ -140,4 +140,12 @@ export default [
 			title: '轮播',
 		},
 	},
+	{
+		path: '/ellipsis',
+		name: 'Ellipsis',
+		component: () => import(/* webpackChunkName: "Ellipsis" */ '@views/componentsViews/Ellipsis.vue'),
+		meta: {
+			title: '文本省略',
+		},
+	},
 ];

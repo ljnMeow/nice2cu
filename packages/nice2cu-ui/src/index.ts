@@ -15,3 +15,4 @@ export * from './nTabs';
 export * from './nTabItem';
 export * from './nSwiper';
 export * from './nSwiperItem';
+export * from './nEllipsis';

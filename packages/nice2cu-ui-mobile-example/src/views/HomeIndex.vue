@@ -13,5 +13,6 @@
 		<n-cell title="Space 间距" link="space"></n-cell>
 		<n-cell title="Tab 标签页" link="tabs"></n-cell>
 		<n-cell title="Swipe 轮播" link="swiper"></n-cell>
+		<n-cell title="Ellipsis 文本省略" link="ellipsis"></n-cell>
 	</div>
 </template>
