@@ -156,4 +156,12 @@ export default [
 			title: '头像',
 		},
 	},
+	{
+		path: '/divider',
+		name: 'Divider',
+		component: () => import(/* webpackChunkName: "Divider" */ '@views/componentsViews/Divider.vue'),
+		meta: {
+			title: '分割线',
+		},
+	},
 ];

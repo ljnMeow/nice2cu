@@ -15,5 +15,6 @@
 		<n-cell title="Swipe 轮播" link="swiper"></n-cell>
 		<n-cell title="Ellipsis 文本省略" link="ellipsis"></n-cell>
 		<n-cell title="Avatar 头像" link="avatar"></n-cell>
+		<n-cell title="Divider 分割线" link="divider"></n-cell>
 	</div>
 </template>

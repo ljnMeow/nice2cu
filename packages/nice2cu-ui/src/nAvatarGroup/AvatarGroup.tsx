@@ -1,4 +1,4 @@
-import { defineComponent, ComputedRef, computed, VNode, StyleValue, Fragment } from 'vue';
+import { defineComponent, ComputedRef, computed, VNode, StyleValue } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { handleUnit, filterFragment } from '../../utils/tools';
 import { AvatarGroupProps, AvatarGroupPropsType } from './AvatarGroupProps';
