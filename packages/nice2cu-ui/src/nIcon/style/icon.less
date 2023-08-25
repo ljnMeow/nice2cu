@@ -6,13 +6,13 @@
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	font-size: @icon-size-xs;
+	font-size: var(--icon-size-xs);
 	font-style: normal;
 	user-select: none;
 
 	.n-icon__svg {
-		width: @icon-size-xs;
-		height: @icon-size-xs;
+		width: var(--icon-size-xs);
+		height: var(--icon-size-xs);
 		object-fit: cover;
 
 		.svg-content {
@@ -22,15 +22,15 @@
 
 	.n-icon__badge {
 		position: absolute;
-		min-width: @badge-dot-size;
-		min-height: @badge-dot-size;
-    padding: @badge-padding;
-    box-sizing: border-box;
-		background-color: @badge-dot-color;
-    color: @badge-dot-text-color;
-    font-size: @font-size-sm;
-    text-align: center;
-    line-height: 1.2;
+		min-width: var(--badge-dot-size);
+		min-height: var(--badge-dot-size);
+		padding: var(--badge-padding);
+		box-sizing: border-box;
+		background-color: var(--badge-dot-color);
+		color: var(--badge-dot-text-color);
+		font-size: var(--font-size-sm);
+		text-align: center;
+		line-height: 1.2;
 		border-radius: 999999999px;
 		top: 0;
 		right: 0;

@@ -1,0 +1,23 @@
+@import url('../../../theme-chalk/mixins/variable.less');
+
+.n-avatar-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+
+    &--row {
+        margin-left: calc(var(--avatar-group-offset) * -1);
+
+        .n-avatar {
+            margin-left: var(--avatar-group-offset);
+        }
+    }
+
+    &--column {
+        flex-direction: column;
+        margin-top: calc(var(--avatar-group-offset) * -1);
+
+        .n-avatar {
+            margin-top: var(--avatar-group-offset);
+        }
+    }
+}

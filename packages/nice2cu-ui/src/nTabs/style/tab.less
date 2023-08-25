@@ -43,14 +43,14 @@
             min-width: 54px;
             height: 44px;
             padding: 0 12px;
-            font-size: @font-size-sm;
+            font-size: var(--font-size-sm);
             cursor: pointer;
             user-select: none;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-            color: @color-tint;
+            color: var(--color-tint);
 
             &--active {
-                color: @color-primary;
+                color: var(--color-primary);
             }
 
             &--disabled {
@@ -77,7 +77,7 @@
 
         &__line {
             position: absolute;
-            background: @color-primary;
+            background: var(--color-primary);
         }
 
         &__line--animated {

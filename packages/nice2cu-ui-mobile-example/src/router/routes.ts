@@ -148,4 +148,12 @@ export default [
 			title: '文本省略',
 		},
 	},
+	{
+		path: '/avatar',
+		name: 'Avatar',
+		component: () => import(/* webpackChunkName: "Avatar" */ '@views/componentsViews/Avatar.vue'),
+		meta: {
+			title: '头像',
+		},
+	},
 ];

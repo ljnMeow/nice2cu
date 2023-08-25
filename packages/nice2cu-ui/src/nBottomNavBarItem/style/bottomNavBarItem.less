@@ -18,10 +18,10 @@
     outline: 0;
     border: 0;
     transition: color 250ms, margin 250ms;
-    color: @color-tint;
+    color: var(--color-tint);
 
     &-label {
-        font-size: @font-size-sm;
+        font-size: var(--font-size-sm);
         transition: font-size 0.2s ease 0.1s;
         white-space: nowrap;
     }
@@ -32,7 +32,7 @@
     }
 
     &--active {
-        color: @color-primary;
+        color: var(--color-primary);
     }
 
     .n-icon {

@@ -1,74 +1,86 @@
-// icon
-@icon-size-xs: 16px;
-@icon-size-sm: 18px;
-@icon-size-md: 20px;
-@icon-size-lg: 22px;
+:root {
+    // icon
+    --icon-size-xs: 16px;
+    --icon-size-sm: 18px;
+    --icon-size-md: 20px;
+    --icon-size-lg: 22px;
 
-// font
-@font-size-xs: 10px;
-@font-size-sm: 14px;
-@font-size-md: 16px;
-@font-size-lg: 20px;
-@font-bold: 600;
+    // font
+    --font-size-xs: 10px;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 20px;
+    --font-bold: 600;
 
-// padding
-@padding-base: 4px;
-@padding-xs: 8px;
-@padding-sm: 12px;
-@padding-md: 16px;
-@padding-lg: 24px;
-@padding-xl: 32px;
+    // padding
+    --padding-base: 4px;
+    --padding-xs: 8px;
+    --padding-sm: 12px;
+    --padding-md: 16px;
+    --padding-lg: 24px;
+    --padding-xl: 32px;
 
-// badge
-@badge-dot-size: 8px;
-@badge-dot-color: #f44336;
-@badge-dot-text-color: #ffffff;
-@badge-padding: 0 3px;
+    // badge
+    --badge-dot-size: 8px;
+    --badge-dot-color: #f44336;
+    --badge-dot-text-color: #ffffff;
+    --badge-padding: 0 3px;
 
-// color
-@color-body: #fff;
-@color-text: #333;
-@color-tint: #646566;
-@color-primary: #3a7afe;
-@color-info: #00afef;
-@color-success: #00c48f;
-@color-warning: #ff9f00;
-@color-danger: #f44336;
-@color-disabled: #e0e0e0;
-@color-text-disabled: #aaa;
+    // color
+    --color-body: #fff;
+    --color-text: #333;
+    --color-tint: #646566;
+    --color-primary: #3a7afe;
+    --color-info: #00afef;
+    --color-success: #00c48f;
+    --color-warning: #ff9f00;
+    --color-danger: #f44336;
+    --color-disabled: #e0e0e0;
+    --color-text-disabled: #aaa;
 
-// button
-@button-border-radius: 4px;
-@button-default-bg: #f5f5f5;
-@button-primary-bg: @color-primary;
-@button-success-bg: @color-success;
-@button-info-bg: @color-info;
-@button-warning-bg: @color-warning;
-@button-danger-bg: @color-danger;
-@button-mini-padding: 0 9px;
-@button-mini-height: 20px;
-@button-small-padding: 0 12px;
-@button-small-height: 28px;
-@button-normal-padding: 0 15px;
-@button-normal-height: 30px;
-@button-large-padding: 0 18px;
-@button-large-height: 40px;
-@button-disabled-color: @color-disabled;
+    // button
+    --button-border-radius: 4px;
+    --button-default-bg: #f5f5f5;
+    --button-primary-bg: var(--color-primary);
+    --button-success-bg: var(--color-success);
+    --button-info-bg: var(--color-info);
+    --button-warning-bg: var(--color-warning);
+    --button-danger-bg: var(--color-danger);
+    --button-mini-padding: 0 9px;
+    --button-mini-height: 20px;
+    --button-small-padding: 0 12px;
+    --button-small-height: 28px;
+    --button-normal-padding: 0 15px;
+    --button-normal-height: 30px;
+    --button-large-padding: 0 18px;
+    --button-large-height: 40px;
+    --button-disabled-color: var(--color-disabled);
 
-// cell
-@cell-min-height: 40px;
-@cell-border-color: #bcc2cb;
-@cell-border-left: 12px;
-@cell-border-right: 12px;
-@cell-icon-right: 8px;
-@cell-extra-left: 8px;
-@cell-padding: 10px;
-@cell-description-font-size: @font-size-sm;
-@cell-description-color: rgba(0, 0, 0, 0.6);
-@cell-font-size: @font-size-md;
-@cell-color: @color-text;
+    // cell
+    --cell-min-height: 40px;
+    --cell-border-color: #bcc2cb;
+    --cell-border-left: 12px;
+    --cell-border-right: 12px;
+    --cell-icon-right: 8px;
+    --cell-extra-left: 8px;
+    --cell-padding: 10px;
+    --cell-description-font-size: var(--font-size-sm);
+    --cell-description-color: rgba(0, 0, 0, 0.6);
+    --cell-font-size: var(--font-size-md);
+    --cell-color: var(--color-text);
 
-// shadow
-@shadow-umbra: rgba(0, 0, 0, 0.2);
-@shadow-penumbra: rgba(0, 0, 0, 0.14);
-@shadow-ambient: rgba(0, 0, 0, 0.12);
+    // shadow
+    --shadow-umbra: rgba(0, 0, 0, 0.2);
+    --shadow-penumbra: rgba(0, 0, 0, 0.14);
+    --shadow-ambient: rgba(0, 0, 0, 0.12);
+
+    // avatar
+    --avatar-text-color: #f5f5f5;
+    --avatar-background-color: #bebebe;
+    --avatar-mini-size: 28px;
+    --avatar-small-size: 36px;
+    --avatar-normal-size: 48px;
+    --avatar-large-size: 64px;
+    --avatar-border: 2px solid #fff;
+    --avatar-group-offset: -10px;
+}

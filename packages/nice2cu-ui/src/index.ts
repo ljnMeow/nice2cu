@@ -16,3 +16,5 @@ export * from './nTabItem';
 export * from './nSwiper';
 export * from './nSwiperItem';
 export * from './nEllipsis';
+export * from './nAvatar';
+export * from './nAvatarGroup';

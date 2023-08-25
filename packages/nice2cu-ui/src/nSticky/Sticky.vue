@@ -99,7 +99,8 @@ export default defineComponent({
 		});
 
 		onUnmounted(() => {
-			scroller !== window && scroller.removeEventListener('scroll', scrollHandler);
+			scroller.removeEventListener('scroll', scrollHandler);
+			window.removeEventListener('scroll', scrollHandler, true);
 		});
 
 		window.addEventListener('scroll', scrollHandler, true);

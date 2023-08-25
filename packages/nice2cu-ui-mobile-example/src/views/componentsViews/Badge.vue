@@ -36,7 +36,7 @@
 			</div>
 		</section>
 		<section>
-			<div class="title">原点（dot）</div>
+			<div class="title">圆点（dot）</div>
 			<div class="content">
 				<div class="item">
 					<n-badge dot />

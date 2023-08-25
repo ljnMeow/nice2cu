@@ -19,7 +19,7 @@
         .n-nav-bar__left,
         .n-nav-bar__right {
             position: absolute;
-            padding: 0 @padding-sm;
+            padding: 0 var(--padding-sm);
             user-select: none;
 
             &.n-nav-bar__left {
@@ -37,8 +37,8 @@
 
                 .n-nav-bar__left-text,
                 .n-nav-bar__right-text {
-                    font-size: @font-size-sm;
-                    padding-left: @padding-base;
+                    font-size: var(--font-size-sm);
+                    padding-left: var(--padding-base);
                 }
             }
 
@@ -49,9 +49,9 @@
 
         .n-nav-bar__title {
             max-width: 50%;
-            color: @color-text;
-            font-size: @font-size-md;
-            font-weight: @font-bold;
+            color: var(--color-text);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-bold);
             margin: 0 auto;
         }
     }
