@@ -16,5 +16,6 @@
 		<n-cell title="Ellipsis 文本省略" link="ellipsis"></n-cell>
 		<n-cell title="Avatar 头像" link="avatar"></n-cell>
 		<n-cell title="Divider 分割线" link="divider"></n-cell>
+		<n-cell title="Tag 标签" link="tag"></n-cell>
 	</div>
 </template>

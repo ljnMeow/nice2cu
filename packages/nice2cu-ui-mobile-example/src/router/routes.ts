@@ -164,4 +164,12 @@ export default [
 			title: '分割线',
 		},
 	},
+	{
+		path: '/tag',
+		name: 'Tag',
+		component: () => import(/* webpackChunkName: "Tag" */ '@views/componentsViews/Tag.vue'),
+		meta: {
+			title: '标签',
+		},
+	},
 ];

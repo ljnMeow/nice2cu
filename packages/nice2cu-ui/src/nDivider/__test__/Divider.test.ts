@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, test } from 'vitest';
-import { createApp, nextTick } from 'vue';
+import { createApp } from 'vue';
 
 import nDivider from '../';
 import nDividerVue from '../Divider';
