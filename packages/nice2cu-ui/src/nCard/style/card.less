@@ -1,0 +1,50 @@
+.n-card {
+    width: 100%;
+    line-height: var(--card-text-lineheight);
+    border-radius: var(--card-border-radius);
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+    overflow: hidden;
+
+    &--outline {
+        border: thin solid var(--card-outline-color);
+    }
+
+    &__container {
+        padding: var(--card-padding);
+        overflow: hidden;
+    }
+
+    &__title {
+        font-size: var(--card-title-font-size);
+        padding: var(--card-title-padding);
+        margin: var(--card-title-margin);
+        color: var(--card-title-color);
+        word-break: break-word;
+    }
+
+    &__subtitle {
+        font-size: var(--card-subtitle-font-size);
+        color: var(--card-subtitle-color);
+        padding: var(--card-subtitle-padding);
+        margin: var(--card-subtitle-margin);
+        word-break: break-word;
+    }
+
+    &__description {
+        font-size: var(--card-description-font-size);
+        color: var(--card-description-color);
+        margin: var(--card-description-margin);
+        padding: var(--card-description-padding);
+        word-break: break-all;
+    }
+
+    &__footer {
+        padding: var(--card-footer-padding);
+        margin: var(--card-footer-margin);
+    }
+
+    &--horizontal {
+        display: flex;
+        align-items: center;
+    }
+}

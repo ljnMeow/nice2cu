@@ -172,4 +172,12 @@ export default [
 			title: '标签',
 		},
 	},
+	{
+		path: '/card',
+		name: 'Card',
+		component: () => import(/* webpackChunkName: "Card" */ '@views/componentsViews/Card.vue'),
+		meta: {
+			title: '卡片',
+		},
+	},
 ];

@@ -38,7 +38,8 @@ export const isElement = (node: Element) => {
  * @param size
  * @returns string | number
  */
-export const handleUnit = (size: string | number) => {
+export const handleUnit = (size: string | number | undefined) => {
+	if (!size) return;
 	if (typeof size === 'number') {
 		return `${size}px`;
 	}
