@@ -180,4 +180,12 @@ export default [
 			title: '卡片',
 		},
 	},
+	{
+		path: '/indexList',
+		name: 'IndexList',
+		component: () => import(/* webpackChunkName: "IndexList" */ '@views/componentsViews/IndexList/IndexList.vue'),
+		meta: {
+			title: '索引列表',
+		},
+	},
 ];

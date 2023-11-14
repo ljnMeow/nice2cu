@@ -1,0 +1,80 @@
+@import url('../../../theme-chalk/mixins/variable.less');
+
+.n-indexlist {
+    display: block;
+    position: relative;
+
+    &-inner {
+        overflow: auto;
+    }
+
+    &-item {
+        display: block;
+    }
+
+    &__title {
+        display: block;
+        position: relative;
+        height: var(--index-list-title-height);
+        line-height: var(--index-list-title-line-height);
+        padding: var(--index-list-title-padding);
+        background-color: var(--index-list-title-background-color);
+        font-size: var(--index-list-title-font-size);
+        font-weight: var(--index-list-title-font-weight);
+    }
+
+    &__title--sticky {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--index-list-title-height);
+        line-height: var(--index-list-title-line-height);
+        padding: var(--index-list-title-padding);
+        background-color: var(--index-list-title-background-color);
+        font-size: var(--index-list-title-font-size);
+        font-weight: var(--index-list-title-font-weight);
+        color: var(--color-primary);
+        box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    &__name {
+        display: block;
+        position: relative;
+        height: var(--index-list-name-height);
+        line-height: var(--index-list-name-line-height);
+        padding: var(--index-list-name-padding);
+        background-color: var(--index-list-name-background-color);
+        font-size: var(--index-list-name-font-size);
+
+        &--active {
+            color: var(--color-primary);
+        }
+    }
+
+    &-bar {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        font-size: var(--index-list-bar-font-size);
+        padding: var(--index-list-bar-padding);
+        background-color: var(--index-list-bar-background-color);
+        border-radius: var(--index-list-bar-border-radius);
+
+    }
+
+    &__bar-item {
+        padding: var(--index-list-bar-item-padding);
+        -webkit-user-select: none;
+        user-select: none;
+
+        &--active {
+            color: var(--color-primary);
+        }
+    }
+}

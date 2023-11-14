@@ -21,3 +21,4 @@ export * from './nAvatarGroup';
 export * from './nDivider';
 export * from './nTag';
 export * from './nCard';
+export * from './nIndexList';

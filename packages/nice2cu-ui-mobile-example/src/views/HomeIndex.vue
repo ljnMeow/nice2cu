@@ -18,5 +18,6 @@
 		<n-cell title="Divider 分割线" link="divider"></n-cell>
 		<n-cell title="Tag 标签" link="tag"></n-cell>
 		<n-cell title="Card 卡片" link="card"></n-cell>
+		<n-cell title="IndexList 索引列表" link="IndexList"></n-cell>
 	</div>
 </template>

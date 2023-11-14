@@ -12,7 +12,6 @@ const overflowScrollReg = /scroll|auto|overlay/i;
  * @description 类型判断函数
  * @returns boolean
  */
-
 export const isString = (val: unknown): val is string => typeof val === 'string';
 
 export const isBoolean = (val: unknown): val is boolean => typeof val === 'boolean';
@@ -44,7 +43,7 @@ export const handleUnit = (size: string | number | undefined) => {
 		return `${size}px`;
 	}
 	if (typeof size === 'string') {
-		if (size.includes('px') || size.includes('rem') || size.includes('em') || size.includes('vw') || size.includes('%')) {
+		if (size.includes('px') || size.includes('rem') || size.includes('em') || size.includes('vw') || size.includes('vh') || size.includes('%')) {
 			return size;
 		} else {
 			return `${size}px`;
@@ -99,7 +98,6 @@ export const convertToNumber = (value: string): number => {
  * @param time
  * @returns
  */
-
 export const delay = (time: number) => new Promise((resolve) => setTimeout(resolve, time));
 
 /**
@@ -107,30 +105,69 @@ export const delay = (time: number) => new Promise((resolve) => setTimeout(resol
  * @description 节流函数
  * @param fn 回调函数
  * @param delay 时间
+ * @param immediate 是否立即执行
  * @returns
  */
+export const throttle = (fn: any, delay: number, immediate = true) => {
+	const self = this;
+	let startTime = 0;
 
-export const throttle = (fn: any, delay: number) => {
-	let timeout = 0;
-	let lastRun = 0;
-	return function (this: void) {
-		if (timeout) {
-			return;
-		}
-		const elapsed = Date.now() - lastRun;
-		const self = this;
+	const _throttle = function () {
 		const args = arguments;
-		const runCallback = function () {
-			lastRun = Date.now();
-			timeout = 0;
+		const nowTime = new Date().getTime();
+
+		if (!immediate && startTime === 0) {
+			startTime = nowTime;
+		}
+
+		const waitTime = delay - (nowTime - startTime);
+		if (waitTime <= 0) {
 			fn.apply(self, args);
-		};
-		if (elapsed >= delay) {
-			runCallback();
-		} else {
-			timeout = window.setTimeout(runCallback, delay);
+			startTime = nowTime;
 		}
 	};
+
+	return _throttle;
+};
+
+/**
+ * @function debounce
+ * @description 防抖函数
+ * @param fn 回调函数
+ * @param delay 时间
+ * @param immediate 是否立即执行
+ * @returns
+ */
+export const debounce = (fn: any, delay: number, immediate = false) => {
+	const self = this;
+	let timer: any = null;
+	let isInvoke = false;
+
+	const _debounce = function () {
+		const args = arguments;
+
+		if (timer) clearTimeout(timer);
+
+		if (!isInvoke && immediate) {
+			fn.apply(self, args);
+			isInvoke = true;
+			return;
+		}
+
+		timer = setTimeout(() => {
+			fn.apply(self, args);
+			timer = null;
+			isInvoke = false;
+		}, delay);
+	};
+
+	_debounce.cancel = function () {
+		if (timer) clearTimeout(timer);
+		timer = null;
+		isInvoke = false;
+	};
+
+	return _debounce;
 };
 
 /**
@@ -139,7 +176,6 @@ export const throttle = (fn: any, delay: number) => {
  * @param val
  * @returns number
  */
-
 export const toNumber = (val: number | string | boolean | undefined | null): number => {
 	if (val == null) return 0;
 
@@ -214,3 +250,44 @@ export const waitingScreenRedrawn = () => {
 		});
 	});
 };
+
+/**
+ * @function animationScrollTo
+ * @description 动画滚动到指定元素的位置
+ * @param element - 要滚动到的目标元素
+ * @param to - 目标位置
+ * @param duration - 滚动的持续时间
+ */
+export function animationScrollTo(element: HTMLElement, to: number, duration: number) {
+	const start = element.scrollTop;
+	const change = to - start;
+	const increment = 20;
+	let currentTime = 0;
+
+	function animateScroll() {
+		currentTime += increment;
+		const val = easeInOutQuad(currentTime, start, change, duration);
+		element.scrollTop = val;
+		if (currentTime < duration) {
+			requestAnimationFrame(animateScroll);
+		}
+	}
+
+	animateScroll();
+}
+
+/**
+ * @function easeInOutQuad
+ * @description 函数用于计算缓动效果
+ * @param {number} t - 动画的时间
+ * @param {number} b - 动画的起始值
+ * @param {number} c - 动画的改变量
+ * @param {number} d - 动画的时间持续总长
+ * @returns {number} - 返回缓动后的值
+ */
+function easeInOutQuad(t: number, b: number, c: number, d: number) {
+	t /= d / 2;
+	if (t < 1) return (c / 2) * t * t + b;
+	t--;
+	return (-c / 2) * (t * (t - 2) - 1) + b;
+}
