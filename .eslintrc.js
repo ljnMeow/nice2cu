@@ -30,6 +30,7 @@ module.exports = {
 		defineEmits: 'readonly',
 		defineExpose: 'readonly',
 		withDefaults: 'readonly',
+		NodeJS: true,
 	},
 	rules: {
 		// @typescript-eslint

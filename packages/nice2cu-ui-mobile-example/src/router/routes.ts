@@ -188,4 +188,12 @@ export default [
 			title: '索引列表',
 		},
 	},
+	{
+		path: '/toast',
+		name: 'Toast',
+		component: () => import(/* webpackChunkName: "Toast" */ '@views/componentsViews/Toast.vue'),
+		meta: {
+			title: '消息提示',
+		},
+	},
 ];

@@ -26,6 +26,8 @@ export const isPromise = (val: unknown): val is Promise<any> => val instanceof P
 
 export const isSameVNodeType = (node1: VNode, node2: VNode) => node1.type === node2.type && node1.key === node2.key;
 
+export const isFunction = (val: unknown): val is unknown => typeof val === 'function';
+
 export const isElement = (node: Element) => {
 	const ELEMENT_NODE_TYPE = 1;
 	return node.tagName !== 'HTML' && node.tagName !== 'BODY' && node.nodeType === ELEMENT_NODE_TYPE;
