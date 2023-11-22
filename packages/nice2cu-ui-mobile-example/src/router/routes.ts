@@ -193,6 +193,14 @@ export default [
 		name: 'Toast',
 		component: () => import(/* webpackChunkName: "Toast" */ '@views/componentsViews/Toast.vue'),
 		meta: {
+			title: '轻提示',
+		},
+	},
+	{
+		path: '/message',
+		name: 'Message',
+		component: () => import(/* webpackChunkName: "Message" */ '@views/componentsViews/Message.vue'),
+		meta: {
 			title: '消息提示',
 		},
 	},

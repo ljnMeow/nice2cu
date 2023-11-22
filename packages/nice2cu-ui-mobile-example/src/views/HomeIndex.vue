@@ -19,6 +19,7 @@
 		<n-cell title="Tag 标签" link="tag"></n-cell>
 		<n-cell title="Card 卡片" link="card"></n-cell>
 		<n-cell title="IndexList 索引列表" link="IndexList"></n-cell>
-		<n-cell title="Toast 消息提示" link="Toast"></n-cell>
+		<n-cell title="Toast 轻提示" link="Toast"></n-cell>
+		<n-cell title="Message 消息提示" link="Message"></n-cell>
 	</div>
 </template>

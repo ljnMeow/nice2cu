@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-	<div>
+	<div :class="[bem.b('outer')]">
 		<div
 			v-if="state.hasMask"
 			:class="state.hasMask ? bem.e('mask') : undefined"

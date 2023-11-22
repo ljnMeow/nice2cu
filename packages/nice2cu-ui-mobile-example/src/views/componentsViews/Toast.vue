@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<n-nav-bar title="Toast 消息提示" show-left left-text="" :shadow-buttom="true" fixed-top safe-area-inset-top placeholder></n-nav-bar>
+		<n-nav-bar title="Toast 轻提示" show-left left-text="" :shadow-buttom="true" fixed-top safe-area-inset-top placeholder></n-nav-bar>
 
 		<section>
 			<div class="title">基本用法</div>
