@@ -55,6 +55,15 @@
 <script lang="ts" setup>
 import { Toast, nAvatar } from 'nice2cu-ui';
 
+Toast.setGlobleToastOptions({
+	id: 'globleToast',
+	duration: 1000,
+	customStyle: {
+		color: '#ffffff',
+		textShadow: '0 0 5px #FFFFFF',
+	},
+});
+
 const showToast = () => {
 	Toast.showToast({
 		content: 'Nice2CU-UI',
@@ -117,6 +126,8 @@ const showMaskToast = () => {
 	Toast.showToastLoading({
 		duration: 0,
 		hasMask: true,
+		maskColor: 'rgba(0, 0, 0, 0.5)',
+		clickMaskClose: true,
 	});
 
 	setTimeout(() => {

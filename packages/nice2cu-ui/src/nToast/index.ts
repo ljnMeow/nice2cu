@@ -1,11 +1,11 @@
-import { createVNode, render, toRaw, toRefs } from 'vue';
+import { toRaw, toRefs } from 'vue';
 import _toast from './Toast.vue';
 import { withInstall } from '../../utils/withInstall';
 import { CreateComponent } from '../../utils/components';
 
 const nToast = withInstall(_toast);
 
-const defaultToastOptions = {
+let defaultToastOptions = {
 	id: '',
 	type: 'default',
 	content: '',
@@ -27,6 +27,10 @@ let optsMap: any[] = [];
 export default nToast;
 
 export { nToast };
+
+const changedefaultToastOptions = (options: any) => {
+	defaultToastOptions = { ...defaultToastOptions, ...options };
+};
 
 const updateToast = (options: any, comp: any) => {
 	const container = document.getElementById(`NToast-${options.id}`);
@@ -86,6 +90,8 @@ const clearToast = (id?: string) => {
 const createdToast = (options: any) => {
 	options.clearToast = clearToast;
 
+	options = { ...defaultToastOptions, ...options };
+
 	let _id = null;
 	if (options.id) {
 		_id = options.id;
@@ -97,7 +103,6 @@ const createdToast = (options: any) => {
 		_id = new Date().getTime() + '';
 	}
 
-	options = { ...defaultToastOptions, ...options };
 	options.id = _id;
 
 	idsMap.push(options.id);
@@ -120,6 +125,9 @@ export const Toast = {
 	},
 	hideToastLoading(id?: string) {
 		return clearToast(id);
+	},
+	setGlobleToastOptions(options: any) {
+		return changedefaultToastOptions(options);
 	},
 };
 

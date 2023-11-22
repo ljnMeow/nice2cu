@@ -1,7 +1,12 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
 	<div>
-		<div v-if="state.hasMask" :class="state.hasMask ? bem.e('mask') : undefined"></div>
+		<div
+			v-if="state.hasMask"
+			:class="state.hasMask ? bem.e('mask') : undefined"
+			:style="{ backgroundColor: state.maskColor }"
+			@click="clickMaskClose ? hideToast() : undefined"
+		></div>
 		<Transition name="toast-fade" @after-leave="transitionLeave">
 			<div v-if="state.show" :class="[bem.b()]" :style="state.customStyle">
 				<div :class="bem.b('inner')">
@@ -101,7 +106,7 @@ export default defineComponent({
 			state.show = true;
 		});
 
-		return { bem, state, transitionLeave, handleUnit, handlerRenderContent, isVNode, isFunction };
+		return { bem, state, transitionLeave, handleUnit, handlerRenderContent, isVNode, isFunction, hideToast };
 	},
 });
 </script>

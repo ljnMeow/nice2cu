@@ -55,6 +55,14 @@ export const ToastProps = {
 		type: Boolean,
 		default: false,
 	},
+	maskColor: {
+		type: String,
+		default: 'transparent',
+	},
+	clickMaskClose: {
+		type: Boolean,
+		defult: false,
+	},
 	clearToast: Function,
 	onClose: Function,
 };

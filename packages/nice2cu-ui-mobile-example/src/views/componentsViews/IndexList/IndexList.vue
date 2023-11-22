@@ -6,16 +6,21 @@
 </template>
 
 <script lang="ts" setup>
+import { Toast } from 'nice2cu-ui';
 import { ref } from 'vue';
 import { cityList } from './cityList';
 
 const list = ref(JSON.parse(JSON.stringify(cityList)));
 
 const indexListChange = (index: number) => {
-	console.log(index);
+	Toast.showToast({
+		content: String(index),
+	});
 };
 
 const handlerListClick = (item: any) => {
-	console.log(item);
+	Toast.showToast({
+		content: JSON.stringify(item),
+	});
 };
 </script>
