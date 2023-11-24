@@ -17,6 +17,7 @@
 						:size="handleUnit(state.iconSize)"
 						:class-prefix="state.iconPrefix"
 						:style="{ marginBottom: state.content ? '10px' : '0px' }"
+						:color="state.customStyle.color ? state.customStyle.color : '#ffffff'"
 					></n-icon>
 					<n-loading
 						v-if="state.loading"
@@ -26,11 +27,11 @@
 						size="large"
 						:type="state.loadingType"
 					></n-loading>
-					<component :is="handlerRenderContent()" v-if="isVNode(state.content) || isFunction(state.content)" />
+					<component :is="handlerRenderContent" v-if="isVNode(state.content) || isFunction(state.content)" />
 					<div
 						v-if="state.content && !isVNode(state.content) && !isFunction(state.content)"
 						:class="bem.e('content')"
-						v-html="handlerRenderContent()"
+						v-html="handlerRenderContent"
 					></div>
 				</div>
 			</div>
@@ -39,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, createVNode, isVNode } from 'vue';
+import { defineComponent, reactive, onMounted, createVNode, isVNode, computed } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { ToastProps, ToastPropsType } from './ToastProps';
 import { handleUnit, isFunction } from '../../utils/tools';
@@ -59,7 +60,7 @@ export default defineComponent({
 		});
 		let timer: NodeJS.Timeout | null | undefined;
 
-		const handlerRenderContent = () => {
+		const handlerRenderContent = computed(() => {
 			if (isVNode(state.content)) {
 				return state.content;
 			} else if (typeof state.content === 'function') {
@@ -67,7 +68,7 @@ export default defineComponent({
 			} else {
 				return state.content;
 			}
-		};
+		});
 
 		const clearTimer = () => {
 			if (timer) {

@@ -1,0 +1,62 @@
+@import url('../../../theme-chalk/mixins/variable.less');
+
+.n-message {
+    position: relative;
+    width: var(--message-width);
+    box-sizing: border-box;
+    padding: var(--message-padding);
+    color: var(--message-color);
+    position: fixed;
+    left: 50%;
+    top: 20px;
+    transform: translate(-50%);
+    z-index: var(--message-zIndex);
+    transition: opacity .3s, transform .3s, top .3s;
+    border-radius: var(--message-border-radius);
+    display: flex;
+    align-items: center;
+    box-shadow: 0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%), 0 9px 28px 8px rgb(0 0 0 / 5%);
+    pointer-events: all;
+    font-size: var(--message-fontSize);
+
+    &-icon {
+        margin-right: 10px;
+    }
+
+    &--default {
+        background-color: var(--message-backgroundColor-default);
+    }
+
+    &--success {
+        background-color: var(--message-backgroundColor-success);
+    }
+
+    &--warning {
+        background-color: var(--message-backgroundColor-warning);
+    }
+
+    &--info {
+        background-color: var(--message-backgroundColor-info);
+    }
+
+    &--error {
+        background-color: var(--message-backgroundColor-error);
+    }
+
+    &-loading {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+    }
+
+    &__text {
+        padding-right: 16px;
+    }
+}
+
+.message-fade-enter-from,
+.message-fade-leave-to {
+    opacity: 0;
+    transform: translate(-50%, -100%);
+}

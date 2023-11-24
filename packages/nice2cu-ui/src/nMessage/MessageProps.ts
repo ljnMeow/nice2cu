@@ -5,6 +5,10 @@ const typeValidator = (position: string) => {
 };
 
 export const MessageProps = {
+	id: {
+		type: [String, Number],
+		default: '',
+	},
 	type: {
 		type: String as PropType<'default' | 'success' | 'warning' | 'info' | 'error'>,
 		default: 'default',
@@ -18,6 +22,36 @@ export const MessageProps = {
 		type: Number,
 		default: 2000,
 	},
+	customStyle: {
+		type: Object,
+		default: {},
+	},
+	offset: {
+		type: [String, Number],
+		default: 40,
+	},
+	zIndex: {
+		type: Number,
+		default: 9999,
+	},
+	icon: {
+		type: String,
+		default: '',
+	},
+	iconSize: {
+		type: [String, Number],
+		default: '18px',
+	},
+	iconPrefix: {
+		type: String,
+		default: 'nice2cu-icon',
+	},
+	loading: {
+		type: Boolean,
+		default: false,
+	},
+	clearMessage: Function,
+	onClose: Function,
 };
 
 export type MessagePropsType = ExtractPropTypes<typeof MessageProps>;

@@ -1,17 +1,19 @@
+@import url('../../../theme-chalk/mixins/variable.less');
+
 .n-toast {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     min-width: 100px;
-    background-color: rgba(0, 0, 0, .7);
+    background-color: var(--toast-background-color);
     color: #fff;
-    padding: 8px 12px;
-    border-radius: 5px;
-    z-index: 9999;
+    padding: var(--toast-padding);
+    border-radius: var(--toast-border-radius);
+    z-index: var(--toast-zIndex);
     text-align: center;
     font-size: 14px;
-    color: rgba(255, 255, 255, .87);
+    color: var(--toast-color);
     border-color: currentColor;
 
     &__mask {
