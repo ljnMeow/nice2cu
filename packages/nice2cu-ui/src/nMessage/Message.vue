@@ -1,8 +1,13 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-	<div :class="bem.b('outer')">
+	<div :class="bem.b('outer')" :style="{ ...styles, height: `${state.outerHeight}px` }">
 		<Transition name="message-fade" @after-leave="transitionLeave">
-			<div v-if="state.show" :class="[bem.b(), !state.loading ? bem.m(state.type) : bem.m('default')]" :style="{ ...styles, ...state.customStyle }">
+			<div
+				v-if="state.show"
+				ref="message"
+				:class="[bem.b(), !state.loading ? bem.m(state.type) : bem.m('default')]"
+				:style="{ ...state.customStyle }"
+			>
 				<n-icon
 					v-if="(!state.loading && state.type !== 'default') || state.icon"
 					:icon="typeStatusIcon"
@@ -31,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed, onMounted, isVNode, createVNode } from 'vue';
+import { defineComponent, reactive, computed, onMounted, isVNode, createVNode, ref, Ref, nextTick } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { MessageProps, MessagePropsType } from './MessageProps';
 import { handleUnit, isFunction } from '../../utils/tools';
@@ -45,17 +50,18 @@ export default defineComponent({
 	props: MessageProps,
 	setup(props: MessagePropsType) {
 		const bem = createNamespace('message');
-
+		const message: Ref<HTMLElement | null> = ref(null);
 		const state = reactive({
 			show: false,
 			...props,
+			outerHeight: 0,
 		});
 
 		let timer: NodeJS.Timeout | null | undefined;
 
 		const styles = computed(() => ({
-			top: handleUnit(props.offset),
-			zIndex: props.zIndex,
+			top: handleUnit(state.offset),
+			zIndex: state.zIndex,
 		}));
 
 		const typeStatusIcon = computed(() => {
@@ -125,9 +131,12 @@ export default defineComponent({
 
 		onMounted(() => {
 			state.show = true;
+			nextTick(() => {
+				state.outerHeight = message.value?.offsetHeight as number;
+			});
 		});
 
-		return { bem, state, transitionLeave, styles, typeStatusIcon, handleUnit, isFunction, isVNode, handlerRenderContent };
+		return { bem, state, message, transitionLeave, styles, typeStatusIcon, handleUnit, isFunction, isVNode, handlerRenderContent };
 	},
 });
 </script>

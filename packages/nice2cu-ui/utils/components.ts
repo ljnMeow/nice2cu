@@ -38,6 +38,7 @@ export const CreateComponent = (options: any, component: any) => {
 
 	return {
 		instance: instance.mount(div),
+		options: options,
 		unmount: () => {
 			instance.unmount();
 			elWrap.removeChild(div);
