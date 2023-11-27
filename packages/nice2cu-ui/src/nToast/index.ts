@@ -15,6 +15,7 @@ let defaultToastOptions = {
 	loading: false,
 	duration: 2000,
 	hasMask: false,
+	maskColor: 'transparent',
 	customStyle: {},
 	clearToast: null,
 	onClose: null,

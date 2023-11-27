@@ -2,7 +2,6 @@ import { toRaw, toRefs } from 'vue';
 import _message from './Message.vue';
 import { withInstall } from '../../utils/withInstall';
 import { CreateComponent } from '../../utils/components';
-import { off } from 'gulp';
 
 const nMessage = withInstall(_message);
 
@@ -15,9 +14,12 @@ let defaultMessageOptions = {
 	offset: 40,
 	zIndex: 9999,
 	icon: '',
-	iconSize: '30px',
+	iconSize: '18px',
 	iconPrefix: 'nice2cu-icon',
 	loading: false,
+	hasMask: false,
+	maskColor: 'transparent',
+	clickMaskClose: false,
 	clearMessage: null,
 	onClose: null,
 };
@@ -36,7 +38,6 @@ const changedefaultMessageOptions = (options: any) => {
 
 const updateMessage = (options: any, comp: any) => {
 	const container = document.getElementById(`NMessage-${options.id}`);
-	console.log(container, options.offset);
 	if (container) {
 		const currentOpt = optsMap.find((item) => item.id === options.id);
 		if (currentOpt) {
@@ -68,17 +69,16 @@ const clearMessage = (id?: string) => {
 		cacheComp = cacheComp.filter((item) => item.id !== id);
 
 		if (container) {
-			if (cacheOptionsData.length > 0 && cacheOptionsData[0].onClose) {
-				cacheOptionsData[0].onClose();
-			}
 			if (cacheCompData.length > 0 && cacheCompData[0].comp.instance.$el) {
 				const removeHeight = cacheCompData[0].comp.instance.$el.offsetHeight;
-
 				for (let i = 0; i < cacheComp.length; i++) {
 					const top = parseInt(cacheComp[i].comp.instance.$el.style.top);
 					const compData = toRaw(cacheComp[i].comp.instance);
 					compData.state.offset = top - removeHeight - 16;
 				}
+			}
+			if (cacheOptionsData.length > 0 && cacheOptionsData[0].onClose) {
+				cacheOptionsData[0].onClose();
 			}
 			document.body.removeChild(container);
 		}
@@ -106,12 +106,6 @@ const createdMessage = (options: any) => {
 
 	options = { ...defaultMessageOptions, ...options };
 
-	let offset = options.offset;
-	for (let i = 0; i < cacheComp.length; i++) {
-		offset += cacheComp[i].comp.instance.$el.offsetHeight + 16;
-	}
-	options.offset = offset;
-
 	let _id = null;
 	if (options.id) {
 		_id = options.id;
@@ -125,11 +119,18 @@ const createdMessage = (options: any) => {
 
 	options.id = _id;
 
+	let offset = options.offset;
+	for (let i = 0; i < cacheComp.length; i++) {
+		offset += cacheComp[i].comp.instance.$el.offsetHeight + 16;
+	}
+	options.offset = offset;
+
 	idsMap.push(options.id);
 	optsMap.push(options);
 	cacheOptions.push(options);
 
-	const comp = CreateComponent(options, { wrapper: _message, name: 'NMessage' });
+	const devStyle = 'display: flex;justify-content: center;align-items: center;';
+	const comp = CreateComponent(options, { wrapper: _message, name: 'NMessage' }, devStyle);
 
 	cacheComp.push({ id: options.id, comp });
 
@@ -141,10 +142,10 @@ export const Message = {
 		return createdMessage(options);
 	},
 	showMessageLoading(options?: any) {
-		return createdMessage({ ...{ content: '加载中...', loading: true }, ...options });
+		return createdMessage({ ...{ content: '加载中...', loading: true }, ...options, id: 'message-loading' });
 	},
 	hideMessageLoading(id?: string) {
-		return clearMessage(id);
+		return clearMessage(id || 'message-loading');
 	},
 	setGlobleMessageOptions(options: any) {
 		return changedefaultMessageOptions(options);

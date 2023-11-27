@@ -50,6 +50,18 @@ export const MessageProps = {
 		type: Boolean,
 		default: false,
 	},
+	hasMask: {
+		type: Boolean,
+		default: false,
+	},
+	maskColor: {
+		type: String,
+		default: 'transparent',
+	},
+	clickMaskClose: {
+		type: Boolean,
+		defult: false,
+	},
 	clearMessage: Function,
 	onClose: Function,
 };

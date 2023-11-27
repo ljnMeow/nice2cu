@@ -2,9 +2,7 @@
 
 .n-message-outer {
     position: fixed;
-    left: 50%;
     top: 20px;
-    transform: translateX(-50%);
     transition: all .3s;
 }
 
@@ -24,6 +22,17 @@
     box-shadow: 0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%), 0 9px 28px 8px rgb(0 0 0 / 5%);
     pointer-events: all;
     font-size: var(--message-fontSize);
+
+    &__mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9998;
+        overflow: hidden;
+        user-select: none;
+    }
 
     &-icon {
         margin-right: 10px;

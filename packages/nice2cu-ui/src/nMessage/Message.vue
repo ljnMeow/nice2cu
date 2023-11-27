@@ -1,6 +1,12 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
 	<div :class="bem.b('outer')" :style="{ ...styles, height: `${state.outerHeight}px` }">
+		<div
+			v-if="state.hasMask"
+			:class="state.hasMask ? bem.e('mask') : undefined"
+			:style="{ backgroundColor: state.maskColor }"
+			@click="clickMaskClose ? hideMessage() : undefined"
+		></div>
 		<Transition name="message-fade" @after-leave="transitionLeave">
 			<div
 				v-if="state.show"
@@ -80,7 +86,7 @@ export default defineComponent({
 					icon = 'n-error';
 					break;
 				default:
-					icon = 'default';
+					icon = state.icon;
 					break;
 			}
 			return icon;
@@ -103,7 +109,7 @@ export default defineComponent({
 			}
 		};
 
-		const hideToast = () => {
+		const hideMessage = () => {
 			state.show = false;
 
 			if (state.onClose) {
@@ -115,7 +121,7 @@ export default defineComponent({
 			clearTimer();
 			if (state.duration) {
 				timer = setTimeout(() => {
-					hideToast();
+					hideMessage();
 				}, state.duration);
 			}
 		};
@@ -136,7 +142,7 @@ export default defineComponent({
 			});
 		});
 
-		return { bem, state, message, transitionLeave, styles, typeStatusIcon, handleUnit, isFunction, isVNode, handlerRenderContent };
+		return { bem, state, message, transitionLeave, styles, typeStatusIcon, handleUnit, isFunction, isVNode, handlerRenderContent, hideMessage };
 	},
 });
 </script>

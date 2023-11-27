@@ -79,7 +79,7 @@ export default defineComponent({
 
 		const hideToast = () => {
 			state.show = false;
-
+			clearTimer();
 			if (state.onClose) {
 				state.onClose();
 			}

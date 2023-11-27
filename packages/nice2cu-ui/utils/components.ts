@@ -1,7 +1,7 @@
 import { createApp, Component } from 'vue';
 import { isString, isFunction } from './tools';
 
-export const CreateComponent = (options: any, component: any) => {
+export const CreateComponent = (options: any, component: any, style?: string) => {
 	let elWrap: HTMLElement = document.body;
 	const wrapperContainer = (options.wrapper as string) || 'body';
 
@@ -17,6 +17,7 @@ export const CreateComponent = (options: any, component: any) => {
 	const name = component.name ? component.name + '-' : '';
 	const id = options.id || new Date().getTime();
 	div.id = name + id;
+	div.setAttribute('style', style || '');
 
 	let Wrapper = {};
 
