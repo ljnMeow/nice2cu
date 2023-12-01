@@ -17,6 +17,7 @@ let defaultToastOptions = {
 	hasMask: false,
 	maskColor: 'transparent',
 	customStyle: {},
+	wrapper: 'body',
 	clearToast: null,
 	onClose: null,
 };

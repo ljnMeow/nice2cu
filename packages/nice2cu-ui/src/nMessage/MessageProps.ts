@@ -1,3 +1,11 @@
+/*
+ * @Author: linMeow linjinnan1998@sina.com
+ * @Date: 2023-11-22 15:22:49
+ * @LastEditors: linMeow linjinnan1998@sina.com
+ * @LastEditTime: 2023-12-01 15:28:05
+ * @FilePath: /nice2cu/packages/nice2cu-ui/src/nMessage/MessageProps.ts
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { ExtractPropTypes, PropType, VNode } from 'vue';
 
 const typeValidator = (position: string) => {
@@ -61,6 +69,10 @@ export const MessageProps = {
 	clickMaskClose: {
 		type: Boolean,
 		defult: false,
+	},
+	wrapper: {
+		type: String,
+		default: 'body',
 	},
 	clearMessage: Function,
 	onClose: Function,

@@ -63,6 +63,10 @@ export const ToastProps = {
 		type: Boolean,
 		defult: false,
 	},
+	wrapper: {
+		type: String,
+		default: 'body',
+	},
 	clearToast: Function,
 	onClose: Function,
 };

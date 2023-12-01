@@ -20,6 +20,7 @@ let defaultMessageOptions = {
 	hasMask: false,
 	maskColor: 'transparent',
 	clickMaskClose: false,
+	wrapper: 'body',
 	clearMessage: null,
 	onClose: null,
 };

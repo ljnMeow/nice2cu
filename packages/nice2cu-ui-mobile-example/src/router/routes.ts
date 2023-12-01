@@ -204,4 +204,20 @@ export default [
 			title: '消息提示',
 		},
 	},
+	{
+		path: '/dialog',
+		name: 'Dialog',
+		component: () => import(/* webpackChunkName: "Dialog" */ '@views/componentsViews/Dialog.vue'),
+		meta: {
+			title: '对话框',
+		},
+	},
+	{
+		path: '/popup',
+		name: 'Popup',
+		component: () => import(/* webpackChunkName: "Popup" */ '@views/componentsViews/Popup.vue'),
+		meta: {
+			title: '弹出层',
+		},
+	},
 ];

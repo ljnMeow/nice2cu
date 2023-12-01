@@ -24,3 +24,5 @@ export * from './nCard';
 export * from './nIndexList';
 export * from './nToast';
 export * from './nMessage';
+export * from './nDialog';
+export * from './nPopup';
