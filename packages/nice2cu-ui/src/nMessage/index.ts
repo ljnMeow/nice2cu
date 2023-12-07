@@ -2,6 +2,7 @@ import { toRaw, toRefs } from 'vue';
 import _message from './Message.vue';
 import { withInstall } from '../../utils/withInstall';
 import { CreateComponent } from '../../utils/components';
+import { waitingScreenRedrawn } from '../../utils/tools';
 
 const nMessage = withInstall(_message);
 
@@ -102,7 +103,7 @@ const clearMessage = (id?: string) => {
 	}
 };
 
-const createdMessage = (options: any) => {
+const createdMessage = async (options: any) => {
 	options.clearMessage = clearMessage;
 
 	options = { ...defaultMessageOptions, ...options };
@@ -120,22 +121,26 @@ const createdMessage = (options: any) => {
 
 	options.id = _id;
 
-	let offset = options.offset;
-	for (let i = 0; i < cacheComp.length; i++) {
-		offset += cacheComp[i].comp.instance.$el.offsetHeight + 16;
-	}
-	options.offset = offset;
+	let comp: any = null;
 
-	idsMap.push(options.id);
-	optsMap.push(options);
-	cacheOptions.push(options);
+	await waitingScreenRedrawn().then(() => {
+		let offset = options.offset;
+		for (let i = 0; i < cacheComp.length; i++) {
+			const eleHeight = cacheComp[i].comp.instance.$el.style.height;
+			offset += parseInt(eleHeight) + 16;
+		}
+		options.offset = offset;
 
-	const devStyle = 'display: flex;justify-content: center;align-items: center;';
-	const comp = CreateComponent(options, { wrapper: _message, name: 'NMessage' }, devStyle);
+		idsMap.push(options.id);
+		optsMap.push(options);
+		cacheOptions.push(options);
 
-	cacheComp.push({ id: options.id, comp });
+		const devStyle = 'display: flex;justify-content: center;align-items: center;';
+		comp = CreateComponent(options, { wrapper: _message, name: 'NMessage' }, devStyle);
 
-	return toRaw(comp.instance);
+		cacheComp.push({ id: options.id, comp });
+	});
+	return toRaw(comp && comp.instance);
 };
 
 export const Message = {

@@ -57,12 +57,12 @@ const showMessagewithIcon = () => {
 };
 
 let timer: NodeJS.Timeout;
-const showMessageLoading = () => {
+const showMessageLoading = async () => {
 	let times = 6;
 
 	if (timer) clearInterval(timer);
 
-	const loading = Message.showMessageLoading({
+	const loading = await Message.showMessageLoading({
 		content: `倒计时${times}秒`,
 		duration: 0,
 		onClose: () => {

@@ -46,6 +46,9 @@ export const PopupProps = {
 		type: Boolean,
 		default: true,
 	},
+	maskClickFun: {
+		type: Function,
+	},
 	maskClass: {
 		type: String,
 		default: '',
@@ -61,6 +64,10 @@ export const PopupProps = {
 	popStyle: {
 		type: Object,
 		default: {},
+	},
+	zIndex: {
+		type: Number,
+		default: 2000,
 	},
 };
 

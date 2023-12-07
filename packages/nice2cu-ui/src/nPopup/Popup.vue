@@ -1,7 +1,7 @@
 <template>
 	<teleport :to="wrapper" :disabled="wrapperDisabled">
 		<Transition name="mask-fade">
-			<div v-if="showMask && visible" :class="[bem.b('mask'), maskClass]" :style="maskStyle" @click="hanlderMaskClickClose"></div>
+			<div v-if="showMask && visible" :class="[bem.b('mask'), maskClass]" :style="{ ...maskStyle, zIndex }" @click="hanlderMaskClickClose"></div>
 		</Transition>
 		<Transition :name="transitionName" @after-enter="popupOpen" @after-leave="popupclose">
 			<div
@@ -11,6 +11,7 @@
 					width: ['left', 'right'].includes(position) ? handleUnit(width) : 'auto',
 					height: ['top', 'bottom'].includes(position) ? handleUnit(height) : 'auto',
 					...popStyle,
+					zIndex,
 				}"
 			>
 				<slot />
@@ -20,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, watch } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { PopupProps, PopupPropsType } from './PopupProps';
 import { handleUnit } from '../../utils/tools';
@@ -29,7 +30,7 @@ import './style/popup.less';
 export default defineComponent({
 	name: 'NPopup',
 	props: PopupProps,
-	emits: ['open', 'close', 'update:visible'],
+	emits: ['opened', 'closed', 'open', 'close', 'update:visible'],
 	setup(props: PopupPropsType, { emit }) {
 		const bem = createNamespace('popup');
 
@@ -37,19 +38,29 @@ export default defineComponent({
 			return props.transition ? props.transition : `n-popup-transition-${props.position}`;
 		});
 
-		const popupOpen = (el: Element) => {
+		const popupOpen = () => {
 			emit('update:visible', true);
-			emit('open', el);
+			emit('opened');
 		};
 
-		const popupclose = (el: Element) => {
+		const popupclose = () => {
 			emit('update:visible', false);
-			emit('close', el);
+			emit('closed');
 		};
 
-		const hanlderMaskClickClose = () => {
-			if (props.maskClickClose) emit('update:visible', false);
+		const hanlderMaskClickClose = async () => {
+			let status = false;
+			props.maskClickFun ? (status = await props.maskClickFun()) : (status = true);
+
+			if (props.maskClickClose && status) emit('update:visible', false);
 		};
+
+		watch(
+			() => props.visible,
+			() => {
+				props.visible ? emit('open') : emit('close');
+			}
+		);
 
 		return { bem, transitionName, popupOpen, popupclose, handleUnit, hanlderMaskClickClose };
 	},
