@@ -5,7 +5,7 @@ export const CreateComponent = (options: any, component: any, style?: string) =>
 	let elWrap: HTMLElement = document.body;
 	const wrapperContainer = (options.wrapper as string) || 'body';
 
-	if (wrapperContainer != 'body') {
+	if (wrapperContainer != 'body' && !component.teleport) {
 		if (isString(wrapperContainer)) {
 			elWrap = document.querySelector(wrapperContainer) as HTMLElement;
 		} else {
@@ -28,7 +28,6 @@ export const CreateComponent = (options: any, component: any, style?: string) =>
 	}
 
 	const instance: Component = createApp(Wrapper, options);
-
 	const componens = component.components;
 
 	componens &&

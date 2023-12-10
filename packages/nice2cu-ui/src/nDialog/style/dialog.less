@@ -1,0 +1,52 @@
+@import url('../../../theme-chalk/mixins/variable.less');
+
+.n-dialog {
+    width: var(--dialog-width);
+    background-color: var(--dialog-background-color);
+    backface-visibility: hidden;
+    font-size: var(--dialog-font-size);
+
+    &__title {
+        color: var(--dialog-text-color);
+        padding-top: var(--dialog-title-padding-top);
+        font-weight: var(--dialog-title-font-weight);
+        line-height: var(--dialog-title-line-hieght);
+        text-align: center;
+    }
+
+    &__message {
+        max-height: var(--dialog-message-mex-height);
+        padding: var(--dialog-message-padding);
+        font-size: var(--dialog-message-font-size);
+        overflow-y: auto;
+        white-space: pre-wrap;
+        text-align: center;
+        word-wrap: break-word;
+        color: var(--dialog-text-color);
+        line-height: var(--dialog-message-line-hieght);
+        -webkit-overflow-scrolling: touch;
+
+        &--has-title {
+            padding-top: var(--dialog-message-has-title-padding-top);
+            color: var(--dialog-text-has-title-color);
+        }
+    }
+
+    &__footer {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        -webkit-user-select: none;
+        user-select: none;
+        border-top: 1px solid #f3f3f3;
+    }
+
+    &__button {
+        flex: 1;
+        height: var(--dialog-button-height);
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+    }
+}

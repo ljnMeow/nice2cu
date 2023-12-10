@@ -1,4 +1,4 @@
-import { ExtractPropTypes, PropType } from 'vue';
+import { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 
 export function positionValidator(position: string): boolean {
 	return ['top', 'bottom', 'left', 'right', 'center'].includes(position);
@@ -54,7 +54,7 @@ export const PopupProps = {
 		default: '',
 	},
 	maskStyle: {
-		type: Object,
+		type: Object as PropType<CSSProperties>,
 		default: {},
 	},
 	popClass: {

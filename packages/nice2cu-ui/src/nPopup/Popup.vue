@@ -51,7 +51,6 @@ export default defineComponent({
 		const hanlderMaskClickClose = async () => {
 			let status = false;
 			props.maskClickFun ? (status = await props.maskClickFun()) : (status = true);
-
 			if (props.maskClickClose && status) emit('update:visible', false);
 		};
 

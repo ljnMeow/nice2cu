@@ -21,7 +21,7 @@
 		<n-cell title="IndexList 索引列表" link="IndexList"></n-cell>
 		<n-cell title="Toast 轻提示" link="Toast"></n-cell>
 		<n-cell title="Message 消息提示" link="Message"></n-cell>
-		<n-cell title="Dialog 对话框" link="Dialog"></n-cell>
 		<n-cell title="Popup 弹出层" link="Popup"></n-cell>
+		<n-cell title="Dialog 对话框" link="Dialog"></n-cell>
 	</div>
 </template>
