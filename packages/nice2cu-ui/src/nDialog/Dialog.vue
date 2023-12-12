@@ -16,42 +16,48 @@
 		@closed="handlerDialogClosed"
 	>
 		<div :class="[bem.b()]" :style="{ width: handleUnit(width) }">
-			<div v-if="title" :class="bem.e('title')">{{ title }}</div>
-			<div :class="[bem.e('message'), title ? bem.em('message', 'has-title') : undefined]">
-				{{ handlerRenderContent }}
+			<div v-if="title || useSlots().title" :class="bem.e('title')">
+				<slot name="title">
+					{{ title }}
+				</slot>
+			</div>
+			<div :class="[bem.e('message'), title || useSlots().title ? bem.em('message', 'has-title') : undefined]">
+				<slot>{{ handlerRenderContent }}</slot>
 			</div>
 			<div v-if="footer" :class="bem.e('footer')">
-				<n-button
-					v-if="showCancelButton"
-					:disabled="cancelButtonDisabled"
-					:class="bem.e('button')"
-					size="small"
-					:text-color="cancelButtonColor"
-					:loading="loading.cancel"
-					bg-color="transparent"
-					@click="handlerCancel"
-				>
-					{{ cancelButtonText }}
-				</n-button>
-				<n-button
-					v-if="showConfirmButton"
-					:disabled="confirmButtonDisabled"
-					:class="bem.e('button')"
-					size="small"
-					:text-color="confirmButtonColor"
-					:loading="loading.confirm"
-					bg-color="transparent"
-					@click="handlerConfirm"
-				>
-					{{ confirmButtonText }}
-				</n-button>
+				<slot name="footer">
+					<n-button
+						v-if="showCancelButton"
+						:disabled="cancelButtonDisabled"
+						:class="bem.e('button')"
+						size="small"
+						:text-color="cancelButtonColor"
+						:loading="loading.cancel"
+						bg-color="transparent"
+						@click="handlerCancel"
+					>
+						{{ cancelButtonText }}
+					</n-button>
+					<n-button
+						v-if="showConfirmButton"
+						:disabled="confirmButtonDisabled"
+						:class="bem.e('button')"
+						size="small"
+						:text-color="confirmButtonColor"
+						:loading="loading.confirm"
+						bg-color="transparent"
+						@click="handlerConfirm"
+					>
+						{{ confirmButtonText }}
+					</n-button>
+				</slot>
 			</div>
 		</div>
 	</n-popup>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed, isVNode, createVNode, toRefs, watch } from 'vue';
+import { defineComponent, reactive, computed, isVNode, createVNode, toRefs, watch, useSlots } from 'vue';
 import { createNamespace } from '../../utils/create';
 import { DialogProps, DialogPropsType, DialogActionType } from './DialogProps';
 import { handleUnit, isBoolean, isPromise } from '../../utils/tools';
@@ -66,7 +72,7 @@ export default defineComponent({
 	emits: ['cancel', 'confirm', 'update:visible', 'dialogOpen', 'dialogOpened', 'dialogClose', 'dialogClosed'],
 	setup(props: DialogPropsType, { emit }) {
 		const bem = createNamespace('dialog');
-		const state = reactive({
+		let state = reactive({
 			...props,
 			loading: {
 				cancel: false,
@@ -75,10 +81,11 @@ export default defineComponent({
 		});
 
 		watch(
-			() => props.visible,
+			() => props,
 			() => {
-				state.visible = props.visible;
-			}
+				state = Object.assign(state, props);
+			},
+			{ deep: true }
 		);
 
 		const handlerRenderContent = computed(() => {
@@ -165,6 +172,7 @@ export default defineComponent({
 			handlerDialogOpened,
 			handlerDialogClose,
 			handlerDialogClosed,
+			useSlots,
 		};
 	},
 });

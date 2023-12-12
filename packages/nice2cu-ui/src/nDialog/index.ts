@@ -5,7 +5,7 @@ import { CreateComponent } from '../../utils/components';
 
 const nDialog = withInstall(_dialog);
 
-const defaultDialogOptions = {
+let defaultDialogOptions = {
 	id: '',
 	visible: false,
 	wrapper: 'body',
@@ -46,6 +46,10 @@ let optsMap: any[] = [];
 export default nDialog;
 
 export { nDialog };
+
+const setDefaultDialogOptions = (options: any) => {
+	defaultDialogOptions = { ...defaultDialogOptions, ...options };
+};
 
 const clearDialog = (id?: string) => {
 	if (id) {
@@ -145,6 +149,9 @@ export const Dialog = {
 	},
 	closeDialog(id?: string) {
 		return clearDialog(id);
+	},
+	setGlobleDialogOptions(options: any) {
+		return setDefaultDialogOptions(options);
 	},
 };
 
