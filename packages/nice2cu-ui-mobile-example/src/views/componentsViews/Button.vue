@@ -150,7 +150,7 @@
 			</div>
 		</section>
 		<section>
-			<div class="title">自定义背景色和文件颜色（bgcColor/textColor）</div>
+			<div class="title">自定义背景色和文字颜色（bgcColor/textColor）</div>
 			<div class="content">
 				<div class="item">
 					<n-button bg-color="#e77c8e" text-color="#2e317c">背景/文字</n-button>
@@ -173,5 +173,9 @@ const startLoading = () => {
 	setTimeout(() => {
 		loading.value = false;
 	}, 2000);
+};
+
+const handleLeftClick = (): void => {
+	console.log(123);
 };
 </script>

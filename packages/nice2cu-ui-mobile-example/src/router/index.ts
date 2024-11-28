@@ -9,4 +9,9 @@ const router = createRouter({
 	},
 });
 
+router.beforeEach((to, _from, next) => {
+	window.parent.postMessage({ type: 'changePath', path: to.fullPath }, '*');
+	next();
+});
+
 export default router;

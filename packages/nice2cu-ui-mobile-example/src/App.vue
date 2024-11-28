@@ -4,6 +4,19 @@
 	</div>
 </template>
 
+<script lang="ts" setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+window.addEventListener('message', (e) => {
+	const data = e.data;
+	if (data.type === 'mobliePath') {
+		router.push({ path: data.path });
+	}
+});
+</script>
+
 <style lang="less">
 html {
 	background-color: #eff2f5;
